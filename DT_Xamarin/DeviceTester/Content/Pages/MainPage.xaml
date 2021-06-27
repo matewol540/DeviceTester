@@ -4,14 +4,16 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="DeviceTester.Content.Pages.MainPage"
-             xmlns:EmbeddedSource="clr-namespace:MobilePizzaApp.MarkupExtension"
+             xmlns:Views="clr-namespace:DeviceTester.Content.Views"
              >
     <ContentPage.Padding>
          <OnPlatform x:TypeArguments="Thickness" iOS="0,50,0,0"/>
     </ContentPage.Padding>
     <ContentPage.Content>
-        <ScrollView x:Name="ScrollPage">
-            <Grid>
+        <AbsoluteLayout >
+
+            <ScrollView x:Name="ScrollPage" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+            <Grid x:Name="MenuGrid" Padding="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -22,26 +24,43 @@
                         <RowDefinition Height="100"/>
                         <RowDefinition Height="100"/>
                         <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="120"/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Text="Test"/>
-                    <Button Grid.Row="1" Text="Test"/>
-                    <Button Grid.Row="2" Text="Test"/>
-                    <Button Grid.Row="3" Text="Test"/>
+                    <Views:MyView Grid.Row="0" />
+                    <Views:MyView Grid.Row="1" />
+                    <Views:MyView Grid.Row="2"/>
+                    <Views:MyView Grid.Row="3" />
+                    <Views:MyView Grid.Row="4" />
+                    <Views:MyView Grid.Row="5" />
+                    <Views:MyView Grid.Row="6" />
+                    <Views:MyView Grid.Row="7" />
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
                         <RowDefinition Height="100"/>
                         <RowDefinition Height="100"/>
                         <RowDefinition Height="100"/>
                         <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Text="Test"/>
-                    <Button Grid.Row="1" Text="Test"/>
-                    <Button Grid.Row="2" Text="Test"/>
-                    <Button Grid.Row="3" Text="Test"/>
+                    <Views:MyView Grid.Row="0" />
+                    <Views:MyView Grid.Row="1" />
+                    <Views:MyView Grid.Row="2" />
+                    <Views:MyView Grid.Row="3" />
+                    <Views:MyView Grid.Row="4" />
+                    <Views:MyView Grid.Row="5" />
+                    <Views:MyView Grid.Row="6" />
+                    <Views:MyView Grid.Row="7" />
                 </Grid>
-
             </Grid>
         </ScrollView>
+            <Button AnchorX="0" AnchorY="0" Clicked="ChangeToDarkMode" ImageSource=""  AbsoluteLayout.LayoutBounds="0.95,0.95,50,50" AbsoluteLayout.LayoutFlags="PositionProportional" Text="Change" BackgroundColor="White" BorderColor="Black" BorderWidth="1"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

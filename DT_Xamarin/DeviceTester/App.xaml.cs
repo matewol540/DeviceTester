@@ -10,8 +10,10 @@ namespace DeviceTester
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            var _MainPage = new MainPage();
+            NavigationPage.SetHasBackButton(_MainPage,false);
+            NavigationPage.SetHasNavigationBar(_MainPage, false);
+            MainPage = new NavigationPage(_MainPage);
         }
 
         protected override void OnStart()
