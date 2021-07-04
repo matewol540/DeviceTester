@@ -10,7 +10,7 @@
          <OnPlatform x:TypeArguments="Thickness" iOS="0,50,0,0"/>
     </ContentPage.Padding>
     <ContentPage.Content>
-        <AbsoluteLayout >
+        <AbsoluteLayout>
 
             <ScrollView x:Name="ScrollPage" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
             <Grid x:Name="MenuGrid" Padding="5">
@@ -60,7 +60,6 @@
                 </Grid>
             </Grid>
         </ScrollView>
-            <Button AnchorX="0" AnchorY="0" Clicked="ChangeToDarkMode" ImageSource=""  AbsoluteLayout.LayoutBounds="0.95,0.95,50,50" AbsoluteLayout.LayoutFlags="PositionProportional" Text="Change" BackgroundColor="White" BorderColor="Black" BorderWidth="1"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

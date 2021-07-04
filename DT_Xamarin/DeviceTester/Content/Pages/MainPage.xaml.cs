@@ -17,13 +17,5 @@ namespace DeviceTester.Content.Pages
             InitializeComponent();
         }
 
-        public void ChangeToDarkMode(object sender,EventArgs e)
-        {
-            
-            this.BackgroundColor = (this.BackgroundColor == Color.Black ? Color.White:Color.Black) ;
-            ((Button)sender).BackgroundColor = (((Button)sender).BackgroundColor == Color.Black ? Color.White:Color.Black) ;
-            ((Button)sender).BorderColor = (((Button)sender).BorderColor == Color.Black ? Color.Black:Color.White) ;
-            
-        }
     }
 }
