@@ -3,6 +3,8 @@ using DeviceTester.Content.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
+[assembly: ExportFont("EncodeSansSC-VariableFont_wdth,wght.ttf",Alias ="Sans")]
 namespace DeviceTester
 {
     public partial class App : Application

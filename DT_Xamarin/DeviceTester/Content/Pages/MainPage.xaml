@@ -5,61 +5,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="DeviceTester.Content.Pages.MainPage"
              xmlns:Views="clr-namespace:DeviceTester.Content.Views"
+             BackgroundColor="Black"
              >
     <ContentPage.Padding>
          <OnPlatform x:TypeArguments="Thickness" iOS="0,50,0,0"/>
     </ContentPage.Padding>
     <ContentPage.Content>
         <AbsoluteLayout>
-
             <ScrollView x:Name="ScrollPage" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
-            <Grid x:Name="MenuGrid" Padding="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="120"/>
-                    </Grid.RowDefinitions>
-                    <Views:MyView Grid.Row="0" />
-                    <Views:MyView Grid.Row="1" />
-                    <Views:MyView Grid.Row="2"/>
-                    <Views:MyView Grid.Row="3" />
-                    <Views:MyView Grid.Row="4" />
-                    <Views:MyView Grid.Row="5" />
-                    <Views:MyView Grid.Row="6" />
-                    <Views:MyView Grid.Row="7" />
-                </Grid>
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="120"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                    </Grid.RowDefinitions>
-                    <Views:MyView Grid.Row="0" />
-                    <Views:MyView Grid.Row="1" />
-                    <Views:MyView Grid.Row="2" />
-                    <Views:MyView Grid.Row="3" />
-                    <Views:MyView Grid.Row="4" />
-                    <Views:MyView Grid.Row="5" />
-                    <Views:MyView Grid.Row="6" />
-                    <Views:MyView Grid.Row="7" />
-                </Grid>
-            </Grid>
-        </ScrollView>
+                <Grid x:Name="MenuGrid" Padding="5" Margin="10"/>
+            </ScrollView>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
+
