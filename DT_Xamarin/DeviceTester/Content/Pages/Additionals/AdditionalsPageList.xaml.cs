@@ -12,6 +12,10 @@ namespace DeviceTester.Content.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AdditionalsPageList : ContentPage
     {
+        public String imageForView = "";
+
+
+
         public ObservableCollection<string> Items { get; set; }
 
         public AdditionalsPageList()

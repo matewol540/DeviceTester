@@ -15,7 +15,10 @@ namespace DeviceTester
             var _MainPage = new MainPage();
             NavigationPage.SetHasBackButton(_MainPage,false);
             NavigationPage.SetHasNavigationBar(_MainPage, false);
-            MainPage = new NavigationPage(_MainPage);
+            MainPage = new NavigationPage(_MainPage)
+            {
+                BarTextColor = Color.White
+            };
         }
 
         protected override void OnStart()

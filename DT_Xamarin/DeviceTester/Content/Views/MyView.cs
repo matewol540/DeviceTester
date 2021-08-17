@@ -8,16 +8,16 @@ namespace DeviceTester.Content.Views
     public class MyView : ContentView2
     {
         private Page page;
-        public MyView(Page childPage,Color StartColor,Color StopColor) => this.SetScene(childPage,StartColor,StopColor);
+        public MyView(Page childPage,Color StartColor,Color StopColor,String ImageSourceString) => this.SetScene(childPage,StartColor,StopColor,ImageSourceString);
 
-        private void SetScene(Page childPage,Color StartColor,Color StopColor)
+        private void SetScene(Page childPage,Color StartColor,Color StopColor,String ImageSourceString)
         {
             this.Content = new Frame2
             {
                 CornerRadius = 30,
                 IsClippedToBounds = true,
                 Padding = -5,
-                Content = getInsideImage(),
+                Content = getInsideImage(ImageSourceString),
                 ShadowColor = Color.DarkRed,
                 ShadowRadius = 20,
                 Background = new LinearGradientBrush {
@@ -29,25 +29,42 @@ namespace DeviceTester.Content.Views
             this.page = childPage;
         }
 
-        private Image getInsideImage()
+        private Image getInsideImage(String ImageSourceString)
         {
-            var InsideImage = new Image {
-                Source = ImageSource.FromResource("DeviceTester.Resources.Images.Satellite.png"),
-            };
-            InsideImage.Aspect = Aspect.AspectFill;
-            var gr = new TapGestureRecognizer();
-            gr.Tapped += OpenView;
-            gr.NumberOfTapsRequired = 1;
-            InsideImage.GestureRecognizers.Add(gr);
-            return InsideImage;
+            try
+            {
+                Console.Out.WriteLine($"Function enter: {nameof(getInsideImage)} with arg {ImageSourceString}");
+                var tmp_ImageSource = ImageSourceString == "" ? ImageSource.FromResource("DeviceTester.Resources.Images.Satellite.png") : ImageSource.FromResource(ImageSourceString);
+                var InsideImage = new Image
+                {
+                    //Source = ImageSource.FromResource()
+                    Source = tmp_ImageSource
+                };
+
+                InsideImage.Aspect = Aspect.AspectFit;
+                InsideImage.Margin = new Thickness(30);
+                var gr = new TapGestureRecognizer();
+                gr.Tapped += OpenView;
+                gr.NumberOfTapsRequired = 1;
+                InsideImage.GestureRecognizers.Add(gr);
+                return InsideImage;
+            } catch (Exception Er)
+            {
+                Console.Out.WriteLine($"Following exception has been thrown in {nameof(getInsideImage)}: {Er.Message}");
+            }
+            return null;
         }
 
 
         private async void OpenView(object sender,EventArgs e)
         {
-            var Navi = new NavigationPage(this.page);
-            NavigationPage.SetHasBackButton(Navi, true);
-            await Navigation.PushAsync(Navi);
+            var Navi = new NavigationPage(this.page)
+            {
+                BarTextColor = Color.White
+            };
+            NavigationPage.SetHasBackButton(Navi, false);
+            NavigationPage.SetHasNavigationBar(Navi, false);
+            await Navigation.PushModalAsync(Navi);
         }
     }
 }

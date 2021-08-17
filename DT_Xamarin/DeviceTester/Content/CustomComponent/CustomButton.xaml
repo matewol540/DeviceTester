@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DeviceTester.Content.CustomComponent.CustomButton">
+    <ContentView.Content>
+        <Button Text="Back" Clicked="Button_Clicked">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="DarkViolet"
+                                  Offset="0.1"/>
+                    <GradientStop Color="DarkSlateBlue"
+                                  Offset="1.0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.FontFamily>Sans</Button.FontFamily>
+            <Button.FontSize>25</Button.FontSize>
+        </Button>
+    </ContentView.Content>
+</ContentView>

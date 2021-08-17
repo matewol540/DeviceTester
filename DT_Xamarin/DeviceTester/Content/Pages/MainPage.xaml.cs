@@ -48,12 +48,12 @@ namespace DeviceTester.Content.Pages
                         if (functionIndex % 2 == 0)
                         {
                             functionGrid_Left.RowDefinitions.Add(RowDefinition);
-                            functionGrid_Left.Children.Add(new MyView(TupleItem.Item1,TupleItem.Item2,TupleItem.Item3),0,functionGrid_Left.RowDefinitions.IndexOf(RowDefinition));
+                            functionGrid_Left.Children.Add(new MyView(TupleItem.Item1,TupleItem.Item2,TupleItem.Item3,TupleItem.Item4),0,functionGrid_Left.RowDefinitions.IndexOf(RowDefinition));
                         }
                         else
                         {
                             functionGrid_Right.RowDefinitions.Add(RowDefinition);
-                            functionGrid_Right.Children.Add(new MyView(TupleItem.Item1, TupleItem.Item2, TupleItem.Item3), 0,functionGrid_Right.RowDefinitions.IndexOf(RowDefinition));
+                            functionGrid_Right.Children.Add(new MyView(TupleItem.Item1, TupleItem.Item2, TupleItem.Item3, TupleItem.Item4), 0,functionGrid_Right.RowDefinitions.IndexOf(RowDefinition));
                         }
                     });
                     this.MenuGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
@@ -61,7 +61,7 @@ namespace DeviceTester.Content.Pages
             );
         }
 
-        private string getName(List<Tuple<Page, Color, Color>> fuctionGroup)
+        private string getName(List<Tuple<Page, Color, Color,String>> fuctionGroup)
         {
             if (fuctionGroup == Constants.Additions)
                 return "Additions";

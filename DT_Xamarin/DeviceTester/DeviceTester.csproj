@@ -31,6 +31,7 @@
     <Folder Include="Helper\" />
     <Folder Include="Resources\Fonts\" />
     <Folder Include="Resources\Images\" />
+    <Folder Include="Content\CustomComponent\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\Pages\Pheripheries\" />
@@ -45,10 +46,15 @@
     <None Remove="Resources\Fonts\" />
     <None Remove="Resources\Images\" />
     <None Remove="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
-    <None Remove="Resources\Images\Satellite.png" />
+    <None Remove="Resources\Images\bluetooth.png" />
+    <None Remove="Resources\Images\Satellite2.png" />
+    <None Remove="Resources\Images\Satellite.png" />
+    <None Remove="Resources\Images\Gyroscope.png" />
+    <None Remove="Content\Component\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
-    <EmbeddedResource Include="Resources\Images\Satellite.png" />
+    <EmbeddedResource Include="Resources\Images\Satellite.png" />
+    <EmbeddedResource Include="Resources\Images\Gyroscope.png" />
   </ItemGroup>
 </Project>

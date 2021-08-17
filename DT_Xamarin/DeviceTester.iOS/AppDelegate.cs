@@ -4,6 +4,8 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace DeviceTester.iOS
 {
@@ -27,7 +29,7 @@ namespace DeviceTester.iOS
 #endif
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            app.StatusBarStyle = UIStatusBarStyle.DarkContent;
             return base.FinishedLaunching(app, options);
         }
     }
