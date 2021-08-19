@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 using RedCorners.Forms;
+using DeviceTester.Interfaces;
 
 namespace DeviceTester.Content.Views
 {
     public class MyView : ContentView2
     {
-        private Page page;
-        public MyView(Page childPage,Color StartColor,Color StopColor,String ImageSourceString) => this.SetScene(childPage,StartColor,StopColor,ImageSourceString);
+        private PageFactory page;
+        public MyView(PageFactory childPage,Color StartColor,Color StopColor,String ImageSourceString) => this.SetScene(childPage,StartColor,StopColor,ImageSourceString);
 
-        private void SetScene(Page childPage,Color StartColor,Color StopColor,String ImageSourceString)
+        private void SetScene(PageFactory childPage,Color StartColor,Color StopColor,String ImageSourceString)
         {
             this.Content = new Frame2
             {
@@ -58,7 +59,7 @@ namespace DeviceTester.Content.Views
 
         private async void OpenView(object sender,EventArgs e)
         {
-            var Navi = new NavigationPage(this.page)
+            var Navi = new NavigationPage(this.page.getPageObject())
             {
                 BarTextColor = Color.White
             };
@@ -66,6 +67,7 @@ namespace DeviceTester.Content.Views
             NavigationPage.SetHasNavigationBar(Navi, false);
             await Navigation.PushModalAsync(Navi);
         }
+
     }
 }
 

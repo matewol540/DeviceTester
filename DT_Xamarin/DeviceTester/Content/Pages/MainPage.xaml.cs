@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DeviceTester.Content.Views;
+using DeviceTester.Interfaces;
 using DeviceTester.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -61,7 +62,7 @@ namespace DeviceTester.Content.Pages
             );
         }
 
-        private string getName(List<Tuple<Page, Color, Color,String>> fuctionGroup)
+        private string getName(List<Tuple<PageFactory, Color, Color,String>> fuctionGroup)
         {
             if (fuctionGroup == Constants.Additions)
                 return "Additions";

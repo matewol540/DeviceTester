@@ -64,6 +64,12 @@
     <PackageReference Include="RedCorners.Forms">
       <Version>63.0.1</Version>
     </PackageReference>
+    <PackageReference Include="UrhoSharp.Forms">
+      <Version>1.9.67</Version>
+    </PackageReference>
+    <PackageReference Include="UrhoSharp">
+      <Version>1.9.67</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

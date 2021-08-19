@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-
+using DeviceTester.Interfaces;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -40,6 +40,14 @@ namespace DeviceTester.Content.Pages
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
+        }
+    }
+
+    public class PeripheryListPageFactory : PageFactory
+    {
+        public override Page getPageObject()
+        {
+            return new PeripheryListPage();
         }
     }
 }

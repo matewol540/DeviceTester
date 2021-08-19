@@ -6,6 +6,7 @@ using Xamarin.Essentials;
 using System.Threading.Tasks;
 using System.Numerics;
 using System.Collections.ObjectModel;
+using DeviceTester.Interfaces;
 
 namespace DeviceTester.Content.Pages
 {
@@ -94,6 +95,14 @@ namespace DeviceTester.Content.Pages
             Gyroscope.Stop();
             SensorSpeed sensor = (SensorSpeed)(sender as Picker).SelectedItem;
             Gyroscope.Start(sensor);
+        }
+    }
+
+    public class GyroscopePageFactory : PageFactory
+    {
+        public override Page getPageObject()
+        {
+            return new GyroscopePage();
         }
     }
 }

@@ -2621,10 +2621,13 @@ namespace DeviceTester.Droid
 			public const int abc_toolbar_collapse_description = 2131427366;
 			
 			// aapt resource value: 0x7F0B0027
-			public const int search_menu_title = 2131427367;
+			public const int app_name = 2131427367;
 			
 			// aapt resource value: 0x7F0B0028
-			public const int status_bar_notification_info_overflow = 2131427368;
+			public const int search_menu_title = 2131427368;
+			
+			// aapt resource value: 0x7F0B0029
+			public const int status_bar_notification_info_overflow = 2131427369;
 			
 			static String()
 			{

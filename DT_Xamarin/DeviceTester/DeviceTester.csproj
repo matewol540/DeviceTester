@@ -13,8 +13,9 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-    <PackageReference Include="RedCorners.Forms" Version="63.0.0" />
+    <PackageReference Include="RedCorners.Forms" Version="63.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="UrhoSharp.Forms" Version="1.9.67" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -51,6 +52,8 @@
     <None Remove="Resources\Images\Satellite.png" />
     <None Remove="Resources\Images\Gyroscope.png" />
     <None Remove="Content\Component\" />
+    <None Remove="UrhoSharp" />
+    <None Remove="UrhoSharp.Forms" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />

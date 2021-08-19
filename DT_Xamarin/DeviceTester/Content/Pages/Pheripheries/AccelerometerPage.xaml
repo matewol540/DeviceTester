@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DeviceTester.Content.Pages.Pheripheries.AccelerometerPage"
+    xmlns:Components = "clr-namespace:DeviceTester.Content.CustomComponent"
+    xmlns:urho="clr-namespace:Urho.Forms;assembly=UrhoSharp.Forms"
+    x:Name="GyroscopePageType"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="Black">
+    <ContentPage.Padding>
+         <OnPlatform x:TypeArguments="Thickness" iOS="0,50,0,0"/>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+            <ContentView >
+                <Grid x:Name="MainGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                        <urho:UrhoSurface x:Name="RotationModelSurface" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="300" WidthRequest="300"/>
+                    </StackLayout>
+                    <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame Grid.Column="0">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Track X" FontSize="Small"/>
+                            <CheckBox x:Name="Track_X"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Grid.Column="1">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Track Y" FontSize="Small"/>
+                            <CheckBox x:Name="Track_Y"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Grid.Column="2">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Track Z" FontSize="Small"/>
+                            <CheckBox x:Name="Track_Z"/>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+                    <Picker Grid.Row="3" x:Name="SpeedPicker" SelectedIndexChanged="SpeedPicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
+                    <Grid Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="coordX"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            HorizontalTextAlignment="Center"
+                            FontFamily="Sans"
+                            TextColor="WhiteSmoke"
+                            FontSize="20"/>
+                        <Label x:Name="coordY"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            HorizontalTextAlignment="Center"
+                            FontFamily="Sans"
+                            TextColor="WhiteSmoke"
+                            FontSize="20"/>
+                        <Label x:Name="coordZ"
+                            Grid.Column="2"
+                            Grid.Row="0"
+                            HorizontalTextAlignment="Center"
+                            FontFamily="Sans"
+                            TextColor="WhiteSmoke"
+                            FontSize="20"/>
+                        <Label x:Name="coordX_max"
+                            Text=""
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            HorizontalTextAlignment="Center"
+                            FontFamily="Sans"
+                            TextColor="WhiteSmoke"
+                            FontSize="20"/>
+                        <Label x:Name="coordY_max"
+                            Text=""
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            HorizontalTextAlignment="Center"
+                            FontFamily="Sans"
+                            TextColor="WhiteSmoke"
+                            FontSize="20"/>
+                        <Label x:Name="coordZ_max"
+                            Text=""
+                            HorizontalTextAlignment="Center"
+                            Grid.Column="2"
+                            Grid.Row="1"
+                            FontFamily="Sans"
+                            TextColor="WhiteSmoke"
+                            FontSize="20"/>
+                        <Label x:Name="coordX_min"
+                            Text=""
+                            HorizontalTextAlignment="Center"
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            FontFamily="Sans"
+                            TextColor="WhiteSmoke"
+                            FontSize="20"/>
+                        <Label x:Name="coordY_min"
+                            Text=""
+                            HorizontalTextAlignment="Center"
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            FontFamily="Sans"
+                            TextColor="WhiteSmoke"
+                            FontSize="20"/>
+                        <Label x:Name="coordZ_min"
+                            Text=""
+                            HorizontalTextAlignment="Center"
+                            Grid.Column="2"
+                            Grid.Row="2"
+                            FontFamily="Sans"
+                            TextColor="WhiteSmoke"
+                            FontSize="20"/>
+
+                    </Grid>
+                    <Components:CustomButton Grid.Row="5"/>
+                </Grid>
+            </ContentView>
+    </ContentPage.Content>
+
+</ContentPage>
