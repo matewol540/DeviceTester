@@ -1,6 +1,5 @@
 # DeviceTester
 
-
 Functions to be implemented:
     Camera
     Accelerometer
@@ -11,6 +10,7 @@ Functions to be implemented:
     Barometer
     Halla sensor
     Bluetooth
+    Compass
     
 Accessing system data:
     Device info
@@ -21,7 +21,9 @@ Accessing system data:
     File management
     Sharing files
     User authentification (Fingerprint, faceID)
-
+    Application Icon
+    Battery info
+    Permissions
 
 
 Additionally to show implementation of listed features:
