@@ -6,13 +6,10 @@
     xmlns:Components = "clr-namespace:DeviceTester.Content.CustomComponent"
     xmlns:urho="clr-namespace:Urho.Forms;assembly=UrhoSharp.Forms"
     x:Name="GyroscopePageType"
-    NavigationPage.HasNavigationBar="False"
-    BackgroundColor="Black">
-    <ContentPage.Padding>
-         <OnPlatform x:TypeArguments="Thickness" iOS="0,50,0,0"/>
-    </ContentPage.Padding>
+    Style="{StaticResource WindowContainer}"
+    >
     <ContentPage.Content>
-            <ContentView >
+            <ContentView>
                 <Grid x:Name="MainGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -21,7 +18,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                    <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                         <urho:UrhoSurface x:Name="RotationModelSurface" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="300" WidthRequest="300"/>
                     </StackLayout>
                     <Grid Grid.Row="2">
@@ -64,77 +61,42 @@
                         <Label x:Name="coordX"
                             Grid.Column="0"
                             Grid.Row="0"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordY"
                             Grid.Column="1"
                             Grid.Row="0"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordZ"
                             Grid.Column="2"
                             Grid.Row="0"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordX_max"
-                            Text=""
                             Grid.Column="0"
                             Grid.Row="1"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordY_max"
-                            Text=""
                             Grid.Column="1"
                             Grid.Row="1"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordZ_max"
-                            Text=""
-                            HorizontalTextAlignment="Center"
                             Grid.Column="2"
                             Grid.Row="1"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordX_min"
-                            Text=""
-                            HorizontalTextAlignment="Center"
                             Grid.Column="0"
                             Grid.Row="2"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordY_min"
-                            Text=""
-                            HorizontalTextAlignment="Center"
                             Grid.Column="1"
                             Grid.Row="2"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordZ_min"
-                            Text=""
-                            HorizontalTextAlignment="Center"
                             Grid.Column="2"
                             Grid.Row="2"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
-
+                            Style="{StaticResource CoordsStyles}"/>
                     </Grid>
                     <Components:CustomButton Grid.Row="5"/>
                 </Grid>
             </ContentView>
     </ContentPage.Content>
-
 </ContentPage>

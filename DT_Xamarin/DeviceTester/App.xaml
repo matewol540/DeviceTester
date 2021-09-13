@@ -6,6 +6,26 @@
         <Style TargetType="{x:Type NavigationPage}">
             <Setter Property="BarBackgroundColor" Value="Black" />
             <Setter Property="BarTextColor" Value="White" />
-        </Style> 
+        </Style>
+        <!-- Resources, Colors, Margin etc.-->
+        <Thickness x:Key="iOSThickness">0,50,0,0</Thickness>
+
+        <!--Container Styles-->
+        <Style x:Key="WindowContainer" TargetType="ContentPage">
+            <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
+            <Setter Property="BackgroundColor" Value="Black"/>
+            <Setter Property="Padding" Value="{OnPlatform iOS={StaticResource iOSThickness}}"/>
+        </Style>
+
+        <!-- Grid Styles-->
+        <Style x:Key="CoordsStyles" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Sans"/>
+            <Setter Property="TextColor" Value="WhiteSmoke"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+
+
     </Application.Resources>
 </Application>
