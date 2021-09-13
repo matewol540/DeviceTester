@@ -6,11 +6,7 @@
     xmlns:Views = "clr-namespace:DeviceTester.Content.Views"
     x:Name="GyroscopePageType"
     x:Class="DeviceTester.Content.Pages.GyroscopePage"
-    NavigationPage.HasNavigationBar="False"
-    BackgroundColor="Black">
-    <ContentPage.Padding>
-         <OnPlatform x:TypeArguments="Thickness" iOS="0,50,0,0"/>
-    </ContentPage.Padding>
+    Style="{StaticResource WindowContainer}">
     <ContentPage.Content>
             <ContentView >
                 <Grid x:Name="MainGrid">
@@ -62,73 +58,39 @@
                         <Label x:Name="coordX"
                             Grid.Column="0"
                             Grid.Row="0"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordY"
                             Grid.Column="1"
                             Grid.Row="0"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordZ"
                             Grid.Column="2"
                             Grid.Row="0"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordX_max"
-                            Text=""
                             Grid.Column="0"
                             Grid.Row="1"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordY_max"
-                            Text=""
                             Grid.Column="1"
                             Grid.Row="1"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordZ_max"
-                            Text=""
-                            HorizontalTextAlignment="Center"
                             Grid.Column="2"
                             Grid.Row="1"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordX_min"
-                            Text=""
-                            HorizontalTextAlignment="Center"
                             Grid.Column="0"
                             Grid.Row="2"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordY_min"
-                            Text=""
-                            HorizontalTextAlignment="Center"
                             Grid.Column="1"
                             Grid.Row="2"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
+                            Style="{StaticResource CoordsStyles}"/>
                         <Label x:Name="coordZ_min"
-                            Text=""
-                            HorizontalTextAlignment="Center"
                             Grid.Column="2"
                             Grid.Row="2"
-                            FontFamily="Sans"
-                            TextColor="WhiteSmoke"
-                            FontSize="20"/>
-
+                            Style="{StaticResource CoordsStyles}"/>
                     </Grid>
                     <Components:CustomButton Grid.Row="5"/>
                 </Grid>

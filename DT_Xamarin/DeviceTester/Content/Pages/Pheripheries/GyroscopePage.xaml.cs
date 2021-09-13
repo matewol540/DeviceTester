@@ -21,8 +21,6 @@ namespace DeviceTester.Content.Pages
             var tmpComp = new MyLabelView("Gyroscope");
             SpeedPicker.ItemsSource = coll;
             SpeedPicker.SelectedIndex = 0;
-            Gyroscope.ReadingChanged += Gyroscope_ReadingChanged;
-            EnableGyroscopeAsync(false);
             this.MainGrid.Children.Add(tmpComp, 0, 0);
         }
 
@@ -30,13 +28,14 @@ namespace DeviceTester.Content.Pages
         {
             base.OnAppearing();
             gyroView.Initialize();
-            EnableGyroscopeAsync(true);
+            _ = EnableGyroscopeAsync(true);
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            EnableGyroscopeAsync(false);
+            if (Gyroscope.IsMonitoring)
+                _ = EnableGyroscopeAsync(false);
         }
 
         private async Task EnableGyroscopeAsync(Boolean state)
@@ -45,9 +44,11 @@ namespace DeviceTester.Content.Pages
             {
                 if (!state)
                 {
+                    Gyroscope.ReadingChanged -= Gyroscope_ReadingChanged;
                     Gyroscope.Stop();
                     return;
                 }
+                Gyroscope.ReadingChanged += Gyroscope_ReadingChanged;
                 SensorSpeed sensor = (SensorSpeed)(SpeedPicker as Picker).SelectedItem;
 
                 Gyroscope.Start(sensor);
@@ -92,6 +93,8 @@ namespace DeviceTester.Content.Pages
 
         void SpeedPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
         {
+            if (!Gyroscope.IsMonitoring)
+                return;
             Gyroscope.Stop();
             SensorSpeed sensor = (SensorSpeed)(sender as Picker).SelectedItem;
             Gyroscope.Start(sensor);

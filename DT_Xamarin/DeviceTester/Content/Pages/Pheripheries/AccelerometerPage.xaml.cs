@@ -29,8 +29,6 @@ namespace DeviceTester.Content.Pages.Pheripheries
             var tmpComp = new MyLabelView("Accelerometer");
             SpeedPicker.ItemsSource = coll;
             SpeedPicker.SelectedIndex = 0;
-            Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
-            _ = EnableAccelerometerAsync(false);
             this.MainGrid.Children.Add(tmpComp, 0, 0);
         }
         protected override async void OnAppearing()
@@ -44,7 +42,8 @@ namespace DeviceTester.Content.Pages.Pheripheries
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            _ = EnableAccelerometerAsync(false);
+            if (Accelerometer.IsMonitoring)
+                _ = EnableAccelerometerAsync(false);
         }
 
         private async Task EnableAccelerometerAsync(Boolean state)
@@ -53,9 +52,11 @@ namespace DeviceTester.Content.Pages.Pheripheries
             {
                 if (!state)
                 {
+                    Accelerometer.ReadingChanged -= Accelerometer_ReadingChanged;
                     Accelerometer.Stop();
                     return;
                 }
+                Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
                 SensorSpeed sensor = (SensorSpeed)(SpeedPicker as Picker).SelectedItem;
 
                 Accelerometer.Start(sensor);
@@ -69,6 +70,8 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
         void SpeedPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
         {
+            if (!Accelerometer.IsMonitoring)
+                return;
             Accelerometer.Stop();
             SensorSpeed sensor = (SensorSpeed)(sender as Picker).SelectedItem;
             Accelerometer.Start(sensor);
