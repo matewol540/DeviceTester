@@ -15,7 +15,7 @@ namespace DeviceTester.Resources
         public static readonly List<Tuple<PageFactory, Color, Color, String>> Pheriphery = new List<Tuple<PageFactory, Color, Color, String>>() {
             new Tuple<PageFactory,Color,Color,String>(new GyroscopePageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Gyroscope.png"),
             new Tuple<PageFactory,Color,Color,String>(new AccelerometerFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Gyroscope.png"),
-            new Tuple<PageFactory,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Satellite.png"),
+            new Tuple<PageFactory,Color,Color,String>(new GPSPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Satellite.png"),
             new Tuple<PageFactory,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"")
         };
         public static readonly List<Tuple<PageFactory, Color, Color, String>> System = new List<Tuple<PageFactory, Color, Color, String>>() {

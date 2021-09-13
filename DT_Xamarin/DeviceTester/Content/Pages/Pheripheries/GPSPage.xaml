@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="gpsPage"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    x:Class="DeviceTester.Content.Pages.Pheripheries.GPSPage"
+    xmlns:Components = "clr-namespace:DeviceTester.Content.CustomComponent"
+    Style="{StaticResource WindowContainer}">
+    <ContentPage.Content>
+            <Grid x:Name="MainGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="1">
+                    <maps:Map x:Name="MainMap" />
+                </StackLayout>
+                <Picker Grid.Row="2" x:Name="MapTypePicker" BindingContext="{x:Reference gpsPage}" ItemsSource="{Binding mapTypes}" SelectedIndexChanged="MapTypePicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
+                <Components:CustomButton Grid.Row="3"/>
+            </Grid>
+    </ContentPage.Content>
+</ContentPage>

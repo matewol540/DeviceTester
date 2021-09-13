@@ -34,7 +34,7 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>Custom Property</key>
-	<string></string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To get user location.</string>
 </dict>
 </plist>
