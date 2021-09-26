@@ -9,14 +9,16 @@
     Style="{StaticResource WindowContainer}"
     >
     <ContentPage.Content>
-            <ContentView>
-                <Grid x:Name="MainGrid">
+        <StackLayout x:Name="MainContainer">
+
+        <Grid x:Name="MainGrid">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="6*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
                     <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                         <urho:UrhoSurface x:Name="RotationModelSurface" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="300" WidthRequest="300"/>
@@ -97,6 +99,6 @@
                     </Grid>
                     <Components:CustomButton Grid.Row="5"/>
                 </Grid>
-            </ContentView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -30,4 +30,5 @@ Additionally to show implementation of listed features:
     Notifications
     Webview
     Custom splashscreen
+    Dropdown description from label
     

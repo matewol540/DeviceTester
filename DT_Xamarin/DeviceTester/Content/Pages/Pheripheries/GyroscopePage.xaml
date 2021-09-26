@@ -8,14 +8,14 @@
     x:Class="DeviceTester.Content.Pages.GyroscopePage"
     Style="{StaticResource WindowContainer}">
     <ContentPage.Content>
-            <ContentView >
                 <Grid x:Name="MainGrid">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="6*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
                     <Views:GyroscopeView x:Name="gyroView" Grid.Row="1"/>
                     <Grid Grid.Row="2">
@@ -94,6 +94,5 @@
                     </Grid>
                     <Components:CustomButton Grid.Row="5"/>
                 </Grid>
-            </ContentView>
     </ContentPage.Content>
 </ContentPage>

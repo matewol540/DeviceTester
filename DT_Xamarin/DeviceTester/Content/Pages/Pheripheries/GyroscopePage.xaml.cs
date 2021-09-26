@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using System.Numerics;
 using System.Collections.ObjectModel;
 using DeviceTester.Interfaces;
+using DeviceTester.Resources;
 
 namespace DeviceTester.Content.Pages
 {
-    public partial class GyroscopePage : ContentPage
+    public partial class GyroscopePage : ContentPage, IPageWithNotifier
     {
         public Vector3 data;
         public ObservableCollection<SensorSpeed> coll = new ObservableCollection<SensorSpeed>(Enum.GetValues(typeof(SensorSpeed)) as IEnumerable<SensorSpeed>);
@@ -18,10 +19,27 @@ namespace DeviceTester.Content.Pages
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
-            var tmpComp = new MyLabelView("Gyroscope");
+            var tmpComp = new ViewTittleLabel("Gyroscope", Constants.LoremTemp,this);
             SpeedPicker.ItemsSource = coll;
             SpeedPicker.SelectedIndex = 0;
             this.MainGrid.Children.Add(tmpComp, 0, 0);
+        }
+
+        public void ChangeDescriptionState(bool State)
+        {
+            GridLength HeightValue= new GridLength(1, GridUnitType.Star);
+            switch (State)
+            {
+                case true:
+                    HeightValue = new GridLength(3, GridUnitType.Star);
+                    break;
+                case false:
+                    HeightValue = new GridLength(1, GridUnitType.Star);
+                    break;
+            }
+            var _animation = new Animation(
+                        (d) => MainGrid.RowDefinitions[0] = new RowDefinition() { Height = HeightValue });
+            _animation.Commit(this, "the animation", 16, 1000, Easing.SinIn, null, null);
         }
 
         protected override void OnAppearing()

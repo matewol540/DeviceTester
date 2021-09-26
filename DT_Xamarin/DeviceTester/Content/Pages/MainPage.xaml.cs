@@ -25,7 +25,7 @@ namespace DeviceTester.Content.Pages
                     this.MenuGrid.RowSpacing = 20;
                     this.MenuGrid.RowDefinitions.Add(new RowDefinition { Height = 50 });
 
-                    this.MenuGrid.Children.Add(new MyLabelView(getName(fuctionGroup)), 0, functionGroupIndex * 2 ); //Adding title
+                    this.MenuGrid.Children.Add(new MenuTittleLabel(getName(fuctionGroup)), 0, functionGroupIndex * 2 ); //Adding title
 
                     var functionGrid = new Grid() { ColumnSpacing = 20 };
                     var functionGrid_Left = new Grid() { RowSpacing = 20, RowDefinitions = new RowDefinitionCollection() };

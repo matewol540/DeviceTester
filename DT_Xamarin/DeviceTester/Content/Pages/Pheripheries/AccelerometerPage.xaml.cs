@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DeviceTester.Content.Views;
 using DeviceTester.Interfaces;
+using DeviceTester.Resources;
 using Urho;
 using Urho.Actions;
 using Urho.Gui;
@@ -16,21 +17,21 @@ using Xamarin.Forms;
 
 namespace DeviceTester.Content.Pages.Pheripheries
 {
-    public partial class AccelerometerPage : ContentPage
+    public partial class AccelerometerPage : ContentPage, IPageWithNotifier
     {
         public ObservableCollection<SensorSpeed> coll = new ObservableCollection<SensorSpeed>(Enum.GetValues(typeof(SensorSpeed)) as IEnumerable<SensorSpeed>);
         RotationModel urhoApp;
-        Task IsRotationCompleted;
-
+        ViewTittleLabel LabelTittle;
         public AccelerometerPage()
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
-            var tmpComp = new MyLabelView("Accelerometer");
+            LabelTittle = new ViewTittleLabel("Accelerometer",Constants.LoremTemp,this);
             SpeedPicker.ItemsSource = coll;
             SpeedPicker.SelectedIndex = 0;
-            this.MainGrid.Children.Add(tmpComp, 0, 0);
+            this.MainGrid.Children.Add(LabelTittle, 0, 0);
         }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -111,7 +112,24 @@ namespace DeviceTester.Content.Pages.Pheripheries
         private void RotateObject(System.Numerics.Vector3 data)
         {
             //if (IsRotationCompleted == null || IsRotationCompleted.IsCompleted)
-                IsRotationCompleted = urhoApp?.RotateAsync(data);
+                _ = urhoApp?.RotateAsync(data);
+        }
+
+        public void ChangeDescriptionState(Boolean State)
+        {
+           GridLength HeightValue = new GridLength(1, GridUnitType.Star);
+           switch (State)
+            {
+                case true:
+                    HeightValue = new GridLength(3,GridUnitType.Star);
+                    break;
+                case false:
+                    HeightValue = new GridLength(1, GridUnitType.Star);
+                    break;
+            }
+            var _animation = new Xamarin.Forms.Animation(
+                        (d) => MainGrid.RowDefinitions[0] = new RowDefinition() { Height = HeightValue });
+            _animation.Commit(this, "the animation", 16, 1000, Easing.SinIn, null, null);
         }
     }
 

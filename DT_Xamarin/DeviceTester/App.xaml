@@ -25,7 +25,24 @@
             <Setter Property="FontSize" Value="20"/>
         </Style>
 
-
+        <!-- Label Style -->
+        <Style x:Key="TittleLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Sans"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Honeydew"/>
+        </Style>
+        <!-- Description label-->
+        <Style x:Key="DescriptionLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Start"/>
+            <Setter Property="FontFamily" Value="Sans"/>
+            <Setter Property="TextColor" Value="Honeydew"/>
+        </Style>
+        
 
     </Application.Resources>
 </Application>

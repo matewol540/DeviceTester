@@ -8,16 +8,19 @@
     xmlns:Components = "clr-namespace:DeviceTester.Content.CustomComponent"
     Style="{StaticResource WindowContainer}">
     <ContentPage.Content>
-            <Grid x:Name="MainGrid">
+            <Grid x:Name="MainGrid" VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="1">
-                    <maps:Map x:Name="MainMap" />
-                </StackLayout>
+                <Frame CornerRadius="5">
+                    <Label TextType="Text" Text="" />
+                </Frame>
+                <Frame CornerRadius="10" IsClippedToBounds="True" Grid.Row="1" Padding="0">
+                    <maps:Map x:Name="MainMap" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                </Frame>
                 <Picker Grid.Row="2" x:Name="MapTypePicker" BindingContext="{x:Reference gpsPage}" ItemsSource="{Binding mapTypes}" SelectedIndexChanged="MapTypePicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
                 <Components:CustomButton Grid.Row="3"/>
             </Grid>

@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using RedCorners.Forms;
 using Xamarin.Forms;
 
 namespace DeviceTester.Content.Views
 {
-    public class MyLabelView : ContentView
+    public class MenuTittleLabel : ContentView
     {
-        public MyLabelView(String TittleText)
+        public MenuTittleLabel(String TittleText)
         {
             this.Content = new Frame2
             {
@@ -34,4 +35,3 @@ namespace DeviceTester.Content.Views
         }
     }
 }
-

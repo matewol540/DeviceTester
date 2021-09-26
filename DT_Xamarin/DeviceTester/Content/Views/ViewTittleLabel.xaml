@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="CustomLabelView"
+    xmlns:forms="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
+    x:Class="DeviceTester.Content.Views.ViewTittleLabel"
+    BackgroundColor="Black">
+    
+    <ContentView.Content>
+        <Frame x:Name="MainContainer" CornerRadius="10" IsClippedToBounds="True" Padding="0">
+
+            <Frame.Background>
+                <LinearGradientBrush EndPoint="1,0">
+                    <GradientStop Color="DarkBlue" Offset="0.1"/>
+                    <GradientStop Color="DarkViolet" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Frame.Background>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ChangeVisibilityOfDescription" NumberOfTapsRequired="1" />
+            </Frame.GestureRecognizers>
+
+            <Frame.Content>
+                <StackLayout>
+                    <ScrollView
+                        BindingContext="{x:Reference CustomLabelView}" IsVisible="{Binding ShowDescription}"
+                        VerticalOptions="Fill"
+                        >
+                        <Label Margin="20"
+                            BindingContext="{x:Reference CustomLabelView}" Text="{Binding Description}" IsVisible="{Binding ShowDescription}" Style="{x:StaticResource DescriptionLabelStyle}"/>
+                    </ScrollView>
+                    <forms:HorizontalLine  BindingContext="{x:Reference CustomLabelView}" IsVisible="{Binding ShowDescription}" />
+                    <Label 
+                        BindingContext="{x:Reference CustomLabelView}" Text="{Binding LabelTitle}" Style="{x:StaticResource TittleLabelStyle}"/>
+                </StackLayout>
+            </Frame.Content>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
