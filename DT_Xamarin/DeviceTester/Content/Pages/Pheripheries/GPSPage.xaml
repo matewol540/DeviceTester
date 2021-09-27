@@ -13,16 +13,28 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
                 <Frame CornerRadius="5">
                     <Label TextType="Text" Text="" />
                 </Frame>
                 <Frame CornerRadius="10" IsClippedToBounds="True" Grid.Row="1" Padding="0">
-                    <maps:Map x:Name="MainMap" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <maps:Map x:Name="MainMap" MoveToLastRegionOnLayoutChange="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BindingContext="{x:Reference Enable_Traffic}" TrafficEnabled="{Binding IsChecked}"/>
                 </Frame>
-                <Picker Grid.Row="2" x:Name="MapTypePicker" BindingContext="{x:Reference gpsPage}" ItemsSource="{Binding mapTypes}" SelectedIndexChanged="MapTypePicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
-                <Components:CustomButton Grid.Row="3"/>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame Grid.Column="0">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Traffic" FontSize="Small"/>
+                            <CheckBox x:Name="Enable_Traffic" IsChecked="True" />
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+                <Picker Grid.Row="3" x:Name="MapTypePicker" BindingContext="{x:Reference gpsPage}" ItemsSource="{Binding mapTypes}" SelectedIndexChanged="MapTypePicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
+                <Components:CustomButton Grid.Row="4"/>
             </Grid>
     </ContentPage.Content>
 </ContentPage>
