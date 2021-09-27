@@ -14,6 +14,7 @@ namespace DeviceTester.Content.Pages
     public partial class GyroscopePage : ContentPage, IPageWithNotifier
     {
         public Vector3 data;
+        private Animation _animation;
         public ObservableCollection<SensorSpeed> coll = new ObservableCollection<SensorSpeed>(Enum.GetValues(typeof(SensorSpeed)) as IEnumerable<SensorSpeed>);
         public GyroscopePage()
         {
@@ -27,19 +28,19 @@ namespace DeviceTester.Content.Pages
 
         public void ChangeDescriptionState(bool State)
         {
-            GridLength HeightValue= new GridLength(1, GridUnitType.Star);
+            GridLength HeightValue = new GridLength(50, GridUnitType.Absolute);
             switch (State)
             {
                 case true:
-                    HeightValue = new GridLength(3, GridUnitType.Star);
+                    HeightValue = new GridLength(50, GridUnitType.Absolute);
                     break;
                 case false:
-                    HeightValue = new GridLength(1, GridUnitType.Star);
+                    HeightValue = new GridLength(230, GridUnitType.Absolute);
                     break;
             }
-            var _animation = new Animation(
+            _animation = new Animation(
                         (d) => MainGrid.RowDefinitions[0] = new RowDefinition() { Height = HeightValue });
-            _animation.Commit(this, "the animation", 16, 1000, Easing.SinIn, null, null);
+            _animation.Commit(this, "GPS Animation", 16, 1000000, Easing.BounceIn, null, null);
         }
 
         protected override void OnAppearing()
@@ -92,18 +93,18 @@ namespace DeviceTester.Content.Pages
             coordY.Text = String.Format("y: {0:0.00}", data.Y);
             coordZ.Text = String.Format("z: {0:0.00}", data.Z);
 
-            if (coordX_max.Text == String.Empty || Double.Parse(coordX_max.Text.Split(':')[1]) < data.X)
+            if (String.IsNullOrEmpty(coordX_max.Text) || Double.Parse(coordX_max.Text.Split(':')[1]) < data.X)
                 coordX_max.Text = String.Format("Max X: {0:0.00}", data.X);
-            if (coordY_max.Text == String.Empty || Double.Parse(coordY_max.Text.Split(':')[1]) < data.Y)
+            if (String.IsNullOrEmpty(coordY_max.Text) || Double.Parse(coordY_max.Text.Split(':')[1]) < data.Y)
                 coordY_max.Text = String.Format("Max y: {0:0.00}", data.Y);
-            if (coordZ_max.Text == String.Empty || Double.Parse(coordZ_max.Text.Split(':')[1]) < data.Z)
+            if (String.IsNullOrEmpty(coordZ_max.Text) || Double.Parse(coordZ_max.Text.Split(':')[1]) < data.Z)
                 coordZ_max.Text = String.Format("Max z: {0:0.00}", data.Z);
 
-            if (coordX_min.Text == String.Empty || Double.Parse(coordX_min.Text.Split(':')[1]) > data.X)
+            if (String.IsNullOrEmpty(coordX_min.Text) || Double.Parse(coordX_min.Text.Split(':')[1]) > data.X)
                 coordX_min.Text = String.Format("Min X: {0:0.00}", data.X);
-            if (coordY_min.Text == String.Empty || Double.Parse(coordY_min.Text.Split(':')[1]) > data.Y)
+            if (String.IsNullOrEmpty(coordY_min.Text) || Double.Parse(coordY_min.Text.Split(':')[1]) > data.Y)
                 coordY_min.Text = String.Format("Min y: {0:0.00}", data.Y);
-            if (coordZ_min.Text == String.Empty || Double.Parse(coordZ_min.Text.Split(':')[1]) > data.Z)
+            if (String.IsNullOrEmpty(coordZ_min.Text) || Double.Parse(coordZ_min.Text.Split(':')[1]) > data.Z)
                 coordZ_min.Text = String.Format("Min z: {0:0.00}", data.Z);
 
             gyroView.MovePointer(data.X, data.Y, data.Z);
