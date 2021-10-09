@@ -40,9 +40,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
             {
                 var location = await Geolocation.GetLastKnownLocationAsync();
                 if (location != null)
-                {
                     MainMap.MoveToRegion(new MapSpan(GPSHelper.getPositionOnLocation(location), 0.1,0.1));
-                }
             }
             catch (FeatureNotSupportedException fnsEx)
             {

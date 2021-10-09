@@ -26,7 +26,6 @@
     <Folder Include="Content\Views\" />
     <Folder Include="Content\Pages\" />
     <Folder Include="Content\Pages\Pheripheries\" />
-    <Folder Include="Content\Pages\Settings\" />
     <Folder Include="Content\Pages\System\" />
     <Folder Include="Content\Pages\Additionals\" />
     <Folder Include="MarkupExtension\" />
@@ -37,7 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\Pages\Pheripheries\" />
-    <None Remove="Content\Pages\Settings\" />
     <None Remove="Content\Pages\System\" />
     <None Remove="Content\Pages\Additionals\" />
     <None Remove="RedCorners" />
@@ -56,10 +54,35 @@
     <None Remove="UrhoSharp" />
     <None Remove="UrhoSharp.Forms" />
     <None Remove="Xamarin.Forms.Maps" />
+    <None Remove="Resources\Images\Barometer.png" />
+    <None Remove="Resources\Images\Barometer.png" />
+    <None Remove="Resources\Images\Bluetooth.png" />
+    <None Remove="Resources\Images\Camera.png" />
+    <None Remove="Resources\Images\Compass.png" />
+    <None Remove="Resources\Images\compass-icon.png" />
+    <None Remove="Resources\Images\Haptic.png" />
+    <None Remove="Resources\Images\Magnetometer.png" />
+    <None Remove="Resources\Images\Haptic.png" />
+    <None Remove="Resources\Images\Magnetometer.png" />
+    <None Remove="Resources\Images\Settings.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
     <EmbeddedResource Include="Resources\Images\Satellite.png" />
     <EmbeddedResource Include="Resources\Images\Gyroscope.png" />
+    <EmbeddedResource Include="Resources\Images\Barometer.png" />
+    <EmbeddedResource Include="Resources\Images\Bluetooth.png" />
+    <EmbeddedResource Include="Resources\Images\Camera.png" />
+    <EmbeddedResource Include="Resources\Images\Compass.png" />
+    <EmbeddedResource Include="Resources\Images\Compass2.png" />
+    <EmbeddedResource Include="Resources\Images\Haptic.png" />
+    <EmbeddedResource Include="Resources\Images\Magnetometer.png" />
+    <EmbeddedResource Include="Resources\Images\Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Content\Pages\Pheripheries\SettingsListPage.xaml.cs">
+      <DependentUpon>SettingsListPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

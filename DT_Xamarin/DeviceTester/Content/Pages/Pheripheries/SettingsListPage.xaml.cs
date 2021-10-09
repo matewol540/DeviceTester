@@ -3,21 +3,21 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-
+using DeviceTester.Interfaces;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace DeviceTester.Content.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SystemListPage : ContentPage
+    public partial class SettingsListPage : ContentPage
     {
         public ObservableCollection<string> Items { get; set; }
 
-        public SystemListPage()
+        public SettingsListPage()
         {
             InitializeComponent();
-            Title = "System";
+            Title = "Settings";
             Items = new ObservableCollection<string>
             {
                 "Item 1",
@@ -39,6 +39,13 @@ namespace DeviceTester.Content.Pages
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
+        }
+    }
+    public class SettingsPageFactory : PageFactory
+    {
+        public override Page getPageObject()
+        {
+            return new SettingsListPage();
         }
     }
 }
