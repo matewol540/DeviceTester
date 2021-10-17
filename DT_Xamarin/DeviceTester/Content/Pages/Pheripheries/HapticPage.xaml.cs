@@ -14,6 +14,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
     }
     public class HapticPageFactory : PageFactory
     {
+        public override string getPageName() => "Haptics";
         public override Page getPageObject()
         {
             return new HapticPage();

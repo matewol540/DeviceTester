@@ -14,6 +14,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
     }
     public class PhonePageFactory : PageFactory
     {
+        public override string getPageName() => "Phone";
         public override Page getPageObject()
         {
             return new PhonePage();

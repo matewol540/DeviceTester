@@ -43,6 +43,7 @@ namespace DeviceTester.Content.Pages
     }
     public class SettingsPageFactory : PageFactory
     {
+        public override string getPageName() => "Settings";
         public override Page getPageObject()
         {
             return new SettingsListPage();

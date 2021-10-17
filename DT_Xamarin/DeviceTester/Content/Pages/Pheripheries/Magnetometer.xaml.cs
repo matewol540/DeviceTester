@@ -14,6 +14,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
     }
     public class MagnetometerPageFactory : PageFactory
     {
+        public override string getPageName() => "Magnetometer";
         public override Page getPageObject()
         {
             return new MagnetometerPage();

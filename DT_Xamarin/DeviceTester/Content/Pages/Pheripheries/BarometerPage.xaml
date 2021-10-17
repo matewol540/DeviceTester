@@ -3,11 +3,11 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="DeviceTester.Content.Pages.Pheripheries.BarometerPage"
-    xmlns:urho="clr-namespace:Urho.Forms;assembly=UrhoSharp.Forms"
+    xmlns:Chart="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
     Style="{StaticResource WindowContainer}"
     >
-    <ContentPage.Content>
+    <ContentPage.Content >
         <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -17,9 +17,11 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <urho:UrhoSurface x:Name="BarValueDisplayer" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="300" WidthRequest="300"/>
-            </StackLayout>
+            <Frame CornerRadius="10" Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" Padding="0">
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Chart:ChartView x:Name="ChartDisplayer" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </Frame>
             <Picker Grid.Row="3" x:Name="SpeedPicker" SelectedIndexChanged="SpeedPicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
             <Components:CustomButton Grid.Row="5"/>
         </Grid>

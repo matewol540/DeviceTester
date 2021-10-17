@@ -14,6 +14,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
     }
     public class SharingPageFactory : PageFactory
     {
+        public override string getPageName() => "Sharing";
         public override Page getPageObject()
         {
             return new SharingPage();

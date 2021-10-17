@@ -14,6 +14,8 @@ namespace DeviceTester.Content.Pages.Pheripheries
     }
     public class CompasPageFactory : PageFactory
     {
+
+        public override string getPageName() => "Compass";
         public override Page getPageObject()
         {
             return new CompasPage();

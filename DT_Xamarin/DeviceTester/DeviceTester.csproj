@@ -17,6 +17,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="UrhoSharp.Forms" Version="1.9.67" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2125" />
+    <PackageReference Include="Microcharts" Version="0.9.5.9" />
+    <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="19.3.0.45" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -65,6 +68,13 @@
     <None Remove="Resources\Images\Haptic.png" />
     <None Remove="Resources\Images\Magnetometer.png" />
     <None Remove="Resources\Images\Settings.png" />
+    <None Remove="LiveCharts" />
+    <None Remove="Microcharts" />
+    <None Remove="Microcharts.Forms" />
+    <None Remove="Syncfusion.Xamarin.SfChart" />
+    <None Remove="OxyPlot.Core" />
+    <None Remove="OxyPlot.Xamarin.Forms" />
+    <None Remove="SciChart" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />

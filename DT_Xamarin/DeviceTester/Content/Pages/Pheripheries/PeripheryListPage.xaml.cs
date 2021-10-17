@@ -45,6 +45,11 @@ namespace DeviceTester.Content.Pages
 
     public class PeripheryListPageFactory : PageFactory
     {
+        public override string getPageName()
+        {
+            return "Placeholder";
+        }
+
         public override Page getPageObject()
         {
             return new PeripheryListPage();

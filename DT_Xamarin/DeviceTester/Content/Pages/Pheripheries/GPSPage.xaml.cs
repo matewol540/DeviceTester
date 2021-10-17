@@ -92,6 +92,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
     public class GPSPageFactory : PageFactory
     {
+        public override string getPageName() => "GPS";
         public override Page getPageObject()
         {
             return new GPSPage();

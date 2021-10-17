@@ -122,6 +122,7 @@ namespace DeviceTester.Content.Pages
 
     public class GyroscopePageFactory : PageFactory
     {
+        public override string getPageName() => "Gyroscope";
         public override Page getPageObject()
         {
             return new GyroscopePage();

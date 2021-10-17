@@ -136,6 +136,8 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
     public class AccelerometerFactory : PageFactory
     {
+        public override string getPageName() => "Accelorometer";
+
         public override Page getPageObject()
         {
             return new AccelerometerPage();
@@ -284,12 +286,13 @@ namespace DeviceTester.Content.Pages.Pheripheries
             var delta_X = plotNode.Rotation.X - v.X;
             var delta_Y = plotNode.Rotation.Y - v.Y;
             var delta_Z = plotNode.Rotation.Z - v.Z;
-
-            System.Console.WriteLine($"[X] CV:{plotNode.Rotation.X} |Delta:{delta_X} |NV:{v.X}");
-            System.Console.WriteLine($"[Y] CV:{plotNode.Rotation.Y} |Delta:{delta_Y} |NV:{v.Y}");
-            System.Console.WriteLine($"[Z] CV:{plotNode.Rotation.Z} |Delta:{delta_Z} |NV:{v.Z}");
-
-            System.Console.WriteLine("----------------------");
+            if (Debugger.IsAttached)
+            {
+                System.Console.WriteLine($"[X] CV:{plotNode.Rotation.X} |Delta:{delta_X} |NV:{v.X}");
+                System.Console.WriteLine($"[Y] CV:{plotNode.Rotation.Y} |Delta:{delta_Y} |NV:{v.Y}");
+                System.Console.WriteLine($"[Z] CV:{plotNode.Rotation.Z} |Delta:{delta_Z} |NV:{v.Z}");
+                System.Console.WriteLine("----------------------");
+            }
             await plotNode.RunActionsAsync(new RotateBy(1F, v.X, v.Y, v.Z));
             //plotNode.RunActions(new RotateTo(1F, (v.X+1) * 180, (v.Y+1) * 180, (v.Z+1) * 180));
 

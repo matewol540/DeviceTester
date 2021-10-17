@@ -14,6 +14,8 @@ namespace DeviceTester.Content.Pages.Pheripheries
     }
     public class CameraPageFactory : PageFactory
     {
+
+        public override string getPageName() => "Camera";
         public override Page getPageObject()
         {
             return new CameraPage();
