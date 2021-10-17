@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using DeviceTester.Content.Views;
 using DeviceTester.Interfaces;
 using DeviceTester.Resources;
-using Microcharts;
-using SkiaSharp;
+using Syncfusion.SfChart.XForms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -18,58 +18,14 @@ namespace DeviceTester.Content.Pages.Pheripheries
         public ObservableCollection<SensorSpeed> coll = new ObservableCollection<SensorSpeed>(Enum.GetValues(typeof(SensorSpeed)) as IEnumerable<SensorSpeed>);
         private Animation _animation;
 
-        public ObservableCollection<ChartEntry> Values { get; set; }
+        public ObservableCollection<DataItem> Values { get; set; }
 
-        private readonly ChartEntry[] entries = new[]
-        {
-            new ChartEntry(100)
-            {
-                Label="T100",
-                ValueLabel="100",
-                Color = SKColors.AliceBlue
-            },
-            new ChartEntry(150)
-            {
-                Label="T150",
-                ValueLabel="150",
-                Color = SKColors.IndianRed
-            },
-            new ChartEntry(200)
-            {
-                Label="T200",
-                ValueLabel="200",
-                Color = SKColors.AliceBlue
-            },
-            new ChartEntry(250)
-            {
-                Label="T250",
-                ValueLabel="250",
-                Color = SKColors.IndianRed
-            }
-
-        };
-
-
-
-        private BarChart _barChart;
-        public BarChart barChart { get => _barChart;
-            set
-            {
-                _barChart = value;
-                OnPropertyChanged(nameof(barChart));
-            } }
+        
         public BarometerPage()
         {
             InitializeComponent();
-            Values = new ObservableCollection<ChartEntry>();
-
-            barChart = new BarChart();
-            barChart.Entries = Values;
-            barChart.MaxValue = 1086;
-            barChart.MinValue = 870;
-            barChart.PointMode = PointMode.Circle;
-
-            ChartDisplayer.Chart = barChart;
+            Values = new ObservableCollection<DataItem>();
+            LineSeries.ItemsSource = Values;
 
             NavigationPage.SetHasBackButton(this, false);
             var tmpComp = new ViewTittleLabel("Barometer", Constants.LoremTemp, this);
@@ -124,16 +80,13 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
         private void AddChartEntry(float pressureInHectopascals)
         {
-            var tempDataPoint = new ChartEntry(pressureInHectopascals);
-            tempDataPoint.Color = SKColor.Parse("#8F00FF");
-            tempDataPoint.Label = DateTime.Now.ToString("HH:mm");
-            tempDataPoint.ValueLabel = pressureInHectopascals.ToString();
-            Values.Add(tempDataPoint);
-            if (Values.Count > 15)
+            Values.Add(new DataItem()
+            {
+                DateTime = DateTime.Now.ToString("HH:mm"),
+                Value = pressureInHectopascals
+            });
+            if (Values.Count > 25)
                 Values.RemoveAt(0);
-
-            if (!barChart.IsAnimating)
-                barChart.AnimateAsync(false);
         }
 
         void SpeedPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
@@ -162,6 +115,8 @@ namespace DeviceTester.Content.Pages.Pheripheries
             _animation.Commit(this, "Barometer Animation", 16, 1000000, Easing.BounceIn, null, null);
         }
     }
+
+
     public class BarometerPageFactory : PageFactory
     {
         public override string getPageName() => "Barometer";
@@ -171,4 +126,29 @@ namespace DeviceTester.Content.Pages.Pheripheries
         }
     }
 
+    public class DataItem : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private String _DateTime;
+        private float _Value;
+
+        public String DateTime
+        {
+            get => _DateTime;
+            set
+            {
+                this._DateTime = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DateTime"));
+            }
+        }
+        public float Value
+        {
+            get => _Value;
+            set
+            {
+                this._Value = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
+            }
+        }
+    }
 }

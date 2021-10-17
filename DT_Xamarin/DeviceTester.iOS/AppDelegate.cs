@@ -29,6 +29,7 @@ namespace DeviceTester.iOS
 #endif
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
+            Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
             LoadApplication(new App());
             app.StatusBarStyle = UIStatusBarStyle.DarkContent;
             return base.FinishedLaunching(app, options);
