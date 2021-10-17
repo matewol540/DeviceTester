@@ -124,27 +124,16 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
         private void AddChartEntry(float pressureInHectopascals)
         {
-            if (Values.Count < 15)
-            {
             var tempDataPoint = new ChartEntry(pressureInHectopascals);
             tempDataPoint.Color = SKColor.Parse("#8F00FF");
             tempDataPoint.Label = DateTime.Now.ToString("HH:mm");
             tempDataPoint.ValueLabel = pressureInHectopascals.ToString();
             Values.Add(tempDataPoint);
-                barChart.AnimateAsync(false);
-                barChart.AnimationDuration = new TimeSpan(100);
-            }
             if (Values.Count > 15)
                 Values.RemoveAt(0);
 
-            var value = false;
-            if (value)
-            {
-                barChart.Entries = entries;
+            if (!barChart.IsAnimating)
                 barChart.AnimateAsync(false);
-            }
-            //if (!barChart.IsAnimating)
-            //    barChart.AnimateAsync(false);
         }
 
         void SpeedPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
