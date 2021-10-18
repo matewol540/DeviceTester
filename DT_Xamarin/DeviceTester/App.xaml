@@ -42,7 +42,17 @@
             <Setter Property="FontFamily" Value="Sans"/>
             <Setter Property="TextColor" Value="Honeydew"/>
         </Style>
-        
 
+        <!--Display Values label-->
+        <Style x:Key="ValueLabelStyle" TargetType="Label">
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Sans"/>
+            <Setter Property="TextColor" Value="Honeydew"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
     </Application.Resources>
 </Application>

@@ -20,12 +20,40 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
         public ObservableCollection<DataItem> Values { get; set; }
 
-        
+        private double _MinValue;
+        private double _MaxValue;
+        private double _CurrentValue;
+        public double MaxValue { get =>_MaxValue; set {
+                _MaxValue = value;
+                OnPropertyChanged(nameof(MaxValue));
+            }}
+        public double MinValue
+        {
+            get => _MinValue; set
+            {
+                _MinValue = value;
+                OnPropertyChanged(nameof(MinValue));
+            }
+        }
+        public double CurrentValue
+        {
+            get => _CurrentValue; set
+            {
+                _CurrentValue = value;
+                OnPropertyChanged(nameof(CurrentValue));
+            }
+        }
+
+
         public BarometerPage()
         {
             InitializeComponent();
             Values = new ObservableCollection<DataItem>();
             LineSeries.ItemsSource = Values;
+
+            MaxValue = 0;
+            MinValue = 0;
+            CurrentValue = 0;
 
             NavigationPage.SetHasBackButton(this, false);
             var tmpComp = new ViewTittleLabel("Barometer", Constants.LoremTemp, this);
@@ -87,6 +115,12 @@ namespace DeviceTester.Content.Pages.Pheripheries
             });
             if (Values.Count > 25)
                 Values.RemoveAt(0);
+            if (Values.Count == 1)
+                MaxValue = pressureInHectopascals;
+                MinValue = pressureInHectopascals;
+            MinValue = MinValue > pressureInHectopascals ? pressureInHectopascals : MinValue;
+            MaxValue = MaxValue > pressureInHectopascals ? MaxValue : pressureInHectopascals;
+            CurrentValue = pressureInHectopascals;
         }
 
         void SpeedPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
