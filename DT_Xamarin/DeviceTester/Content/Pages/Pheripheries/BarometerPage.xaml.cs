@@ -20,14 +20,14 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
         public ObservableCollection<DataItem> Values { get; set; }
 
-        private double _MinValue;
-        private double _MaxValue;
-        private double _CurrentValue;
-        public double MaxValue { get =>_MaxValue; set {
+        private decimal _MinValue;
+        private decimal _MaxValue;
+        private decimal _CurrentValue;
+        public decimal MaxValue { get =>_MaxValue; set {
                 _MaxValue = value;
                 OnPropertyChanged(nameof(MaxValue));
             }}
-        public double MinValue
+        public decimal MinValue
         {
             get => _MinValue; set
             {
@@ -35,7 +35,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
                 OnPropertyChanged(nameof(MinValue));
             }
         }
-        public double CurrentValue
+        public decimal CurrentValue
         {
             get => _CurrentValue; set
             {
@@ -103,10 +103,10 @@ namespace DeviceTester.Content.Pages.Pheripheries
         void Barometer_ReadingChanged(object sender, BarometerChangedEventArgs e)
         {
             var data = e.Reading;
-            AddChartEntry((float)data.PressureInHectopascals);
+            AddChartEntry((decimal)data.PressureInHectopascals);
         }
 
-        private void AddChartEntry(float pressureInHectopascals)
+        private void AddChartEntry(decimal pressureInHectopascals)
         {
             Values.Add(new DataItem()
             {
@@ -116,9 +116,11 @@ namespace DeviceTester.Content.Pages.Pheripheries
             if (Values.Count > 25)
                 Values.RemoveAt(0);
             if (Values.Count == 1)
+            {
                 MaxValue = pressureInHectopascals;
                 MinValue = pressureInHectopascals;
-            MinValue = MinValue > pressureInHectopascals ? pressureInHectopascals : MinValue;
+            }
+            MinValue = MinValue < pressureInHectopascals ? MinValue : pressureInHectopascals;
             MaxValue = MaxValue > pressureInHectopascals ? MaxValue : pressureInHectopascals;
             CurrentValue = pressureInHectopascals;
         }
@@ -164,7 +166,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private String _DateTime;
-        private float _Value;
+        private decimal _Value;
 
         public String DateTime
         {
@@ -175,7 +177,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DateTime"));
             }
         }
-        public float Value
+        public decimal Value
         {
             get => _Value;
             set
