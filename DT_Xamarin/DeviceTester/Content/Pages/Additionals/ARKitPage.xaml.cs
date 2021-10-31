@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using DeviceTester.Interfaces;
 using Xamarin.Forms;
 
 namespace DeviceTester.Content.Pages.Additionals
@@ -12,4 +12,14 @@ namespace DeviceTester.Content.Pages.Additionals
             InitializeComponent();
         }
     }
+    public class ARKitPageFactory : PageFactory
+    {
+        public override string getPageName() => "Steps";
+
+        public override Page getPageObject()
+        {
+            return new ARKitPage();
+        }
+    }
+
 }

@@ -20,6 +20,7 @@
     <PackageReference Include="Microcharts" Version="0.9.5.9" />
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="19.3.0.45" />
+    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -75,6 +76,10 @@
     <None Remove="OxyPlot.Core" />
     <None Remove="OxyPlot.Xamarin.Forms" />
     <None Remove="SciChart" />
+    <None Remove="Resources\Images\Steps.png" />
+    <None Remove="Resources\Images\Steps.png" />
+    <None Remove="Xamarin.iOS" />
+    <None Remove="Xam.Plugin.Media" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
@@ -88,6 +93,7 @@
     <EmbeddedResource Include="Resources\Images\Haptic.png" />
     <EmbeddedResource Include="Resources\Images\Magnetometer.png" />
     <EmbeddedResource Include="Resources\Images\Settings.png" />
+    <EmbeddedResource Include="Resources\Images\Steps.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Content\Pages\Pheripheries\SettingsListPage.xaml.cs">
