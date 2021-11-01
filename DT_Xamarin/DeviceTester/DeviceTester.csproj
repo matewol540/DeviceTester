@@ -21,6 +21,7 @@
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="19.3.0.45" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+    <PackageReference Include="Plugin.SegmentedControl.Netstandard" Version="5.4.5" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -80,6 +81,7 @@
     <None Remove="Resources\Images\Steps.png" />
     <None Remove="Xamarin.iOS" />
     <None Remove="Xam.Plugin.Media" />
+    <None Remove="Plugin.SegmentedControl.Netstandard" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />

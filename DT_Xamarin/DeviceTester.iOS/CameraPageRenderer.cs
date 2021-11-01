@@ -48,7 +48,7 @@ namespace CustomRenderer.iOS
             {
 				CameraBasePage = (Element as CameraPage);
 				mainGrid = CameraBasePage.MainGrid;
-
+				cs = new CameraSettings();
 				try
                 {
 					SetupControls();
@@ -191,7 +191,7 @@ namespace CustomRenderer.iOS
 			};
 			DisplaySettingsButton.Clicked += (object sender, EventArgs e) =>
 			{
-				CameraBasePage.Navigation.PushModalAsync(new Camera_Settings(cs));
+				CameraBasePage.Navigation.PushModalAsync(new Camera_Settings(ref cs));
 			};
 		}
 

@@ -6,7 +6,7 @@ using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-
+using Plugin.Segmented.Control.iOS;
 
 namespace DeviceTester.iOS
 {
@@ -23,6 +23,7 @@ namespace DeviceTester.iOS
             Xamarin.Calabash.Start();
 #endif
             global::Xamarin.Forms.Forms.Init();
+            SegmentedControlRenderer.Initialize();
             Xamarin.FormsMaps.Init();
             Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
             LoadApplication(new App());
