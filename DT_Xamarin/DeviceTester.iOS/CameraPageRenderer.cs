@@ -14,6 +14,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using System.IO;
+using DeviceTester.Helper;
 
 [assembly: ExportRenderer(typeof(CameraPage), typeof(CameraPageRenderer))]
 namespace CustomRenderer.iOS
@@ -25,11 +26,14 @@ namespace CustomRenderer.iOS
 		AVCaptureStillImageOutput stillImageOutput;
 		CameraPage CameraBasePage;
 
+		private CameraSettings cs;
+
 		#region Controls
 		UIView liveCameraStream;
 		ImageButton takePhotoButton;
 		ImageButton toggleCameraButton;
 		ImageButton toggleFlashButton;
+		Button DisplaySettingsButton;
 		UIImageView lastPictureBox;
 		Grid mainGrid;
 		ViewTittleLabel headerLabel;
@@ -42,8 +46,8 @@ namespace CustomRenderer.iOS
 
             if (e.OldElement == null && Element != null)
             {
-				mainGrid = (Element as CameraPage).MainGrid;
 				CameraBasePage = (Element as CameraPage);
+				mainGrid = CameraBasePage.MainGrid;
 
 				try
                 {
@@ -68,6 +72,7 @@ namespace CustomRenderer.iOS
 			takePhotoButton = new ImageButton();
 			toggleFlashButton = new ImageButton();
 			toggleCameraButton = new ImageButton();
+			DisplaySettingsButton = new Button() { Text = "More Settings", TextColor = Color.AntiqueWhite };
 			lastPictureBox = new UIImageView() { BackgroundColor = UIColor.LightGray };
 
 
@@ -108,6 +113,24 @@ namespace CustomRenderer.iOS
 			{
 				var gridNative = Platform.CreateRenderer(mainGrid).NativeView;
 
+				var tempGrid = new Grid()
+				{
+					RowDefinitions = new RowDefinitionCollection()
+					{
+						new RowDefinition() {Height = new GridLength(30,GridUnitType.Absolute)},
+						new RowDefinition() {Height = new GridLength(120,GridUnitType.Absolute)}
+					},
+					ColumnDefinitions = new ColumnDefinitionCollection()
+                    {
+						new ColumnDefinition() {Width = new GridLength(30,GridUnitType.Absolute) },
+						new ColumnDefinition(),
+						new ColumnDefinition() {Width = new GridLength(30,GridUnitType.Absolute) },
+						new ColumnDefinition(),
+						new ColumnDefinition() {Width = new GridLength(30,GridUnitType.Absolute) }
+					}
+				};
+
+
 				//Header Lable
                 mainGrid.Children.Add(headerLabel);
                 Grid.SetColumnSpan(headerLabel, 5);
@@ -118,20 +141,28 @@ namespace CustomRenderer.iOS
 
 				//Photo control
 				var liveCameraStreamView = liveCameraStream.ToView();
-				this.mainGrid.Children.Add(liveCameraStreamView, 0, 1);
+				this.mainGrid.Children.Add(liveCameraStreamView, 0, 2);
 				Grid.SetColumnSpan(liveCameraStreamView, 5);
 
 				//Take photo button
 				takePhotoButton.Source = ImageSource.FromFile("TakePhotoButton.png");
-				this.mainGrid.Children.Add(takePhotoButton, 2, 2);
+				this.mainGrid.Children.Add(takePhotoButton, 2, 3);
+
 
 				//Turn on/off flashlight button
 				toggleFlashButton.Source = ImageSource.FromFile("NoFlashButton.png");
-				this.mainGrid.Children.Add(toggleFlashButton, 0, 2);
+				tempGrid.Children.Add(toggleFlashButton, 0, 0);
 
 				//Change camera button
 				toggleCameraButton.Source = ImageSource.FromFile("ToggleCameraButton.png");
-				this.mainGrid.Children.Add(toggleCameraButton, 4, 2);
+				tempGrid.Children.Add(toggleCameraButton, 4, 0);
+
+				//More Settings Button
+				tempGrid.Children.Add(DisplaySettingsButton, 0, 1);
+				Grid.SetColumnSpan(DisplaySettingsButton, 4);
+
+				mainGrid.Children.Add(tempGrid, 0, 1);
+				Grid.SetColumnSpan(tempGrid, 4);
 
 				//Last picture box
 				var lastPictureBoxView = lastPictureBox.ToView();
@@ -157,6 +188,10 @@ namespace CustomRenderer.iOS
 
 			toggleFlashButton.Clicked += (object sender, EventArgs e) => {
 				ToggleFlash();
+			};
+			DisplaySettingsButton.Clicked += (object sender, EventArgs e) =>
+			{
+				CameraBasePage.Navigation.PushModalAsync(new Camera_Settings(cs));
 			};
 		}
 
