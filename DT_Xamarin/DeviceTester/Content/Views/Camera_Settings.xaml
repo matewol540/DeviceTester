@@ -12,9 +12,9 @@
     <ContentPage x:Name="FocusPage" HeightRequest="300" BackgroundColor="Transparent" >
         <Frame CornerRadius="10" VerticalOptions="End" BackgroundColor="AntiqueWhite">
             <StackLayout>
-                <Label Text="FocusLbl" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
-                <control:SegmentedControl x:Name="FocusMode" HorizontalOptions="CenterAndExpand" OnSegmentSelected="FocusValue_ValueChanged"/>
-                <Slider x:Name="Focus" HorizontalOptions="FillAndExpand" Margin="0,5,0,5" ValueChanged="FocusValue_ValueChanged" Minimum="0" Maximum="1"/>
+                <Label Text="Focus" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
+                <control:SegmentedControl x:Name="Focus" HorizontalOptions="CenterAndExpand"/>
+                <Slider x:Name="FocusValue" HorizontalOptions="FillAndExpand" Margin="0,5,0,5" ValueChanged="FocusValue_ValueChanged"/>
             </StackLayout>
         </Frame>
 
@@ -22,8 +22,8 @@
     <ContentPage x:Name="ExposurePage" HeightRequest="300" BackgroundColor="Transparent">
         <Frame CornerRadius="10" VerticalOptions="End" BackgroundColor="AntiqueWhite">
             <StackLayout>
-                <Label Text="ExposureLbl" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
-                <control:SegmentedControl x:Name="ExposureMode" HorizontalOptions="Center"/>
+                <Label Text="Exposure" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
+                <control:SegmentedControl x:Name="Exposure" HorizontalOptions="Center"/>
                 <Slider x:Name="Offset" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
                 <Slider x:Name="Duration" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
                 <Slider x:Name="ISO" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
@@ -34,7 +34,7 @@
     <ContentPage x:Name="WhiteBalancePage" HeightRequest="300" BackgroundColor="Transparent">
         <Frame CornerRadius="10" VerticalOptions="End" BackgroundColor="AntiqueWhite">
             <StackLayout VerticalOptions="End">
-                <Label Text="WhiteBalanceLbl" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
+                <Label Text="WhiteBalance" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
                 <control:SegmentedControl x:Name="WhiteBalance" HorizontalOptions="Center"/>
                 <Frame CornerRadius="10" VerticalOptions="StartAndExpand" BackgroundColor="GhostWhite">
                     <Slider x:Name="Temp" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>

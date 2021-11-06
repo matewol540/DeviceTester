@@ -23,13 +23,8 @@ using System.Timers;
 namespace CustomRenderer.iOS
 {
     public class CameraPageRenderer : PageRenderer,ICameraService
-	{
-		AVCaptureSession captureSession;
-		AVCaptureDeviceInput captureDeviceInput;
-		AVCaptureStillImageOutput stillImageOutput;
-		CameraPage CameraBasePage;
-		Camera_Settings cameraSettingsModal;
-		public AVCaptureDevice captureDevice { get; set; }
+	{ 
+		public CameraPage CameraBasePage { get; set; }
 
 		#region Controls
 		UIView liveCameraStream;
@@ -44,42 +39,41 @@ namespace CustomRenderer.iOS
 		#endregion
 
 		#region Computed Properties
-		public CameraPageRenderer ThisApp
+		public AppDelegate ThisApp
 		{
-			get { return (CameraPageRenderer)UIApplication.SharedApplication.Delegate; }
+			get { return (AppDelegate)UIApplication.SharedApplication.Delegate; }
 		}
 		public Timer SampleTimer { get; set; }
 		#endregion
 
 		#region Private Variables
 		private NSError Error;
-		private bool Automatic = true;
 		#endregion
 
 		protected override void Dispose(bool disposing)
 		{
-			if (captureDeviceInput != null && captureSession != null)
+			if (ThisApp.captureDeviceInput != null && ThisApp.captureSession != null)
 			{
-				captureSession.RemoveInput(captureDeviceInput);
+				ThisApp.captureSession.RemoveInput(ThisApp.captureDeviceInput);
 			}
 
-			if (captureDeviceInput != null)
+			if (ThisApp.captureDeviceInput != null)
 			{
-				captureDeviceInput.Dispose();
-				captureDeviceInput = null;
+				ThisApp.captureDeviceInput.Dispose();
+				ThisApp.captureDeviceInput = null;
 			}
 
-			if (captureSession != null)
+			if (ThisApp.captureSession != null)
 			{
-				captureSession.StopRunning();
-				captureSession.Dispose();
-				captureSession = null;
+				ThisApp.captureSession.StopRunning();
+				ThisApp.captureSession.Dispose();
+				ThisApp.captureSession = null;
 			}
 
-			if (stillImageOutput != null)
+			if (ThisApp.stillImageOutput != null)
 			{
-				stillImageOutput.Dispose();
-				stillImageOutput = null;
+				ThisApp.stillImageOutput.Dispose();
+				ThisApp.stillImageOutput = null;
 			}
 
 			base.Dispose(disposing);
@@ -118,7 +112,7 @@ namespace CustomRenderer.iOS
 			toggleCameraButton = new ImageButton();
 			DisplaySettingsButton = new Button() { Text = "More Settings", TextColor = Color.AntiqueWhite };
 			lastPictureBox = new UIImageView() { BackgroundColor = UIColor.LightGray };
-			cameraSettingsModal = new Camera_Settings();
+			ThisApp.cameraSettingsModal = new Camera_Settings();
 		}
 
 		void SetupUserInterfaceAsync()
@@ -204,14 +198,14 @@ namespace CustomRenderer.iOS
 			};
 			DisplaySettingsButton.Clicked += (object sender, EventArgs e) =>
 			{
-				CameraBasePage.Navigation.PushModalAsync(cameraSettingsModal);
+                _ = CameraBasePage.Navigation.PushModalAsync(ThisApp.cameraSettingsModal);
 			};
 		}
 
 		async void CapturePhoto()
 		{
-			var videoConnection = stillImageOutput.ConnectionFromMediaType(AVMediaType.Video);
-			var sampleBuffer = await stillImageOutput.CaptureStillImageTaskAsync(videoConnection);
+			var videoConnection = ThisApp.stillImageOutput.ConnectionFromMediaType(AVMediaType.Video);
+			var sampleBuffer = await ThisApp.stillImageOutput.CaptureStillImageTaskAsync(videoConnection);
 			var jpegImage = AVCaptureStillImageOutput.JpegStillToNSData(sampleBuffer);
 
 			var photo = new UIImage(jpegImage);
@@ -227,7 +221,7 @@ namespace CustomRenderer.iOS
 
 		void ToggleFrontBackCamera()
 		{
-			var devicePosition = captureDeviceInput.Device.Position;
+			var devicePosition = ThisApp.captureDeviceInput.Device.Position;
 			if (devicePosition == AVCaptureDevicePosition.Front)
 			{
 				devicePosition = AVCaptureDevicePosition.Back;
@@ -240,30 +234,29 @@ namespace CustomRenderer.iOS
 			GetCameraForOrientation(devicePosition);
 			ConfigureCameraForDevice();
 
-			captureSession.BeginConfiguration();
-			captureSession.RemoveInput(captureDeviceInput);
-			captureDeviceInput = AVCaptureDeviceInput.FromDevice(captureDevice);
-			captureSession.AddInput(captureDeviceInput);
-			captureSession.CommitConfiguration();
+			ThisApp.captureSession.BeginConfiguration();
+			ThisApp.captureSession.RemoveInput(ThisApp.captureDeviceInput);
+			ThisApp.captureDeviceInput = AVCaptureDeviceInput.FromDevice(ThisApp.captureDevice);
+			ThisApp.captureSession.AddInput(ThisApp.captureDeviceInput);
+			ThisApp.captureSession.CommitConfiguration();
 		}
 
 		void ToggleFlash()
 		{
-			var device = captureDeviceInput.Device;
+			var device = ThisApp.captureDeviceInput.Device;
 
-			var error = new NSError();
 			if (device.HasFlash)
 			{
 				if (device.FlashMode == AVCaptureFlashMode.On)
 				{
-					device.LockForConfiguration(out error);
+					device.LockForConfiguration(out Error);
 					device.FlashMode = AVCaptureFlashMode.Off;
 					device.UnlockForConfiguration();
 					toggleFlashButton.Source = ImageSource.FromFile("NoFlashButton.png");
 				}
 				else
 				{
-					device.LockForConfiguration(out error);
+					device.LockForConfiguration(out Error);
 					device.FlashMode = AVCaptureFlashMode.On;
 					device.UnlockForConfiguration();
 					toggleFlashButton.Source = ImageSource.FromFile("FlashButton.png");
@@ -275,54 +268,54 @@ namespace CustomRenderer.iOS
 		{
 			foreach (var device in AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video))
 				if (device.Position == orientation)
-					captureDevice =  device;
+					ThisApp.captureDevice =  device;
 		}
 
 		void SetupLiveCameraStream()
 		{
-			captureSession = new AVCaptureSession();
+			ThisApp.captureSession = new AVCaptureSession();
 
-			var videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
+			var videoPreviewLayer = new AVCaptureVideoPreviewLayer(ThisApp.captureSession)
 			{
 				Frame = new CGRect(0f, 0f,View.Bounds.Width, View.Bounds.Height - 500)
 			};
 			liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
 
-			captureDevice = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
+			ThisApp.captureDevice = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
 			ConfigureCameraForDevice();
-			captureDeviceInput = AVCaptureDeviceInput.FromDevice(captureDevice);
+			ThisApp.captureDeviceInput = AVCaptureDeviceInput.FromDevice(ThisApp.captureDevice);
 
 			var dictionary = new NSMutableDictionary();
 			dictionary[AVVideo.CodecKey] = new NSNumber((int)AVVideoCodec.JPEG);
-			stillImageOutput = new AVCaptureStillImageOutput()
+			ThisApp.stillImageOutput = new AVCaptureStillImageOutput()
 			{
 				OutputSettings = new NSDictionary()
 			};
 
-			captureSession.AddOutput(stillImageOutput);
-			captureSession.AddInput(captureDeviceInput);
-			captureSession.StartRunning();
+			ThisApp.captureSession.AddOutput(ThisApp.stillImageOutput);
+			ThisApp.captureSession.AddInput(ThisApp.captureDeviceInput);
+			ThisApp.captureSession.StartRunning();
 		}
 
 		void ConfigureCameraForDevice()
 		{
-			if (captureDevice.IsFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus))
+			if (ThisApp.captureDevice.IsFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus))
 			{
-				captureDevice.LockForConfiguration(out Error);
-				captureDevice.FocusMode = AVCaptureFocusMode.ContinuousAutoFocus;
-				captureDevice.UnlockForConfiguration();
+				ThisApp.captureDevice.LockForConfiguration(out Error);
+				ThisApp.captureDevice.FocusMode = AVCaptureFocusMode.ContinuousAutoFocus;
+				ThisApp.captureDevice.UnlockForConfiguration();
 			}
-			else if (captureDevice.IsExposureModeSupported(AVCaptureExposureMode.ContinuousAutoExposure))
+			else if (ThisApp.captureDevice.IsExposureModeSupported(AVCaptureExposureMode.ContinuousAutoExposure))
 			{
-				captureDevice.LockForConfiguration(out Error);
-				captureDevice.ExposureMode = AVCaptureExposureMode.ContinuousAutoExposure;
-				captureDevice.UnlockForConfiguration();
+				ThisApp.captureDevice.LockForConfiguration(out Error);
+				ThisApp.captureDevice.ExposureMode = AVCaptureExposureMode.ContinuousAutoExposure;
+				ThisApp.captureDevice.UnlockForConfiguration();
 			}
-			else if (captureDevice.IsWhiteBalanceModeSupported(AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance))
+			else if (ThisApp.captureDevice.IsWhiteBalanceModeSupported(AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance))
 			{
-				captureDevice.LockForConfiguration(out Error);
-				captureDevice.WhiteBalanceMode = AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance;
-				captureDevice.UnlockForConfiguration();
+				ThisApp.captureDevice.LockForConfiguration(out Error);
+				ThisApp.captureDevice.WhiteBalanceMode = AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance;
+				ThisApp.captureDevice.UnlockForConfiguration();
 			}
 		}
 
@@ -344,7 +337,7 @@ namespace CustomRenderer.iOS
 			ThisApp.captureDevice.LockForConfiguration(out Error);
 
 			// Take action based on the segment selected
-			switch (this.cameraSettingsModal.focusTypes)
+			switch (ThisApp.cameraSettingsModal.focusTypes)
 			{
 				case FocusTypes.Auto:
 					// Activate auto focus and start monitoring position
@@ -361,9 +354,8 @@ namespace CustomRenderer.iOS
 
         public void FocusValue_ValueChanged()
         {
-
 			ThisApp.captureDevice.LockForConfiguration(out Error);
-			ThisApp.captureDevice.SetFocusModeLocked((float)this.cameraSettingsModal.FocusValue, null);
+			ThisApp.captureDevice.SetFocusModeLocked((float)(ThisApp.cameraSettingsModal?.FocusValueGet), null);
 			ThisApp.captureDevice.UnlockForConfiguration();
 		}
 

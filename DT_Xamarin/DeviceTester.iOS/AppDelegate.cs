@@ -7,6 +7,8 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Plugin.Segmented.Control.iOS;
+using AVFoundation;
+using DeviceTester.Content.Views;
 
 namespace DeviceTester.iOS
 {
@@ -16,6 +18,15 @@ namespace DeviceTester.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
+
+        //Camera properties
+        public AVCaptureSession captureSession { get; set; }
+        public AVCaptureDevice captureDevice { get; set; }
+        public AVCaptureDeviceInput captureDeviceInput { get; set; }
+        public AVCaptureStillImageOutput stillImageOutput { get; set; }
+        public Camera_Settings cameraSettingsModal { get; set; }
+
+
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {

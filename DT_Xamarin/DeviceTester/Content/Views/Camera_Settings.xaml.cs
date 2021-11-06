@@ -12,9 +12,9 @@ namespace DeviceTester.Content.Views
     public partial class Camera_Settings : CarouselPage
     {
 
-        public FocusTypes focusTypes { get => ((FocusTypes)FocusMode.SelectedItem); }
-        public double FocusValue { get => Focus.Value; }
-        public Exposureypes exposureMode { get => ((Exposureypes)FocusMode.SelectedItem); }
+        public FocusTypes focusTypes { get => ((FocusTypes)Focus.SelectedItem); }
+        public double FocusValueGet { get => FocusValue.Value; }
+        public Exposureypes exposureMode { get => ((Exposureypes)Exposure.SelectedItem); }
         public double OffsetValue { get => Offset.Value; }
         public double DurationValue { get => Duration.Value; }
         public double ISOValue { get => ISO.Value; }
@@ -29,9 +29,9 @@ namespace DeviceTester.Content.Views
             InitializeComponent();
             On<iOS>().SetModalPresentationStyle(UIModalPresentationStyle.Automatic);
             foreach (var enumType in Enum.GetValues(typeof(FocusTypes)) as IEnumerable<FocusTypes>)
-                FocusMode.Children.Add(new Plugin.Segmented.Control.SegmentedControlOption() { Text = enumType.ToString() });
+                Focus.Children.Add(new Plugin.Segmented.Control.SegmentedControlOption() { Text = enumType.ToString() });
             foreach (var enumType in Enum.GetValues(typeof(Exposureypes)) as IEnumerable<Exposureypes>)
-                ExposureMode.Children.Add(new Plugin.Segmented.Control.SegmentedControlOption() { Text = enumType.ToString() });
+                Exposure.Children.Add(new Plugin.Segmented.Control.SegmentedControlOption() { Text = enumType.ToString() });
             foreach (var enumType in Enum.GetValues(typeof(WhiteTypes)) as IEnumerable<WhiteTypes>)
                 WhiteBalance.Children.Add(new Plugin.Segmented.Control.SegmentedControlOption() { Text = enumType.ToString() });
         }
