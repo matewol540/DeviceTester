@@ -8,15 +8,18 @@ namespace DeviceTester.Helper
     {
 
         //Focus
+        public FocusTypes focusTypes { get; set; }
         public double FocusValue { get; set; }
 
         //Exposure
+        public Exposureypes exposureypes { get; set; }
         public double Offset { get; set; }
         public double Duration { get; set; }
         public double ISO { get; set; }
         public double Bias { get; set; }
 
         //White balance
+        public WhiteTypes WhiteTypes { get; set; }
         public double Temp { get; set; }
         public double Tint { get; set; }
 

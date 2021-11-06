@@ -15,18 +15,21 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using System.IO;
 using DeviceTester.Helper;
+using DeviceTester.iOS;
+using System.Timers;
 
 [assembly: ExportRenderer(typeof(CameraPage), typeof(CameraPageRenderer))]
+[assembly: Dependency(typeof(CameraPageRenderer))]
 namespace CustomRenderer.iOS
 {
-    public class CameraPageRenderer : PageRenderer
+    public class CameraPageRenderer : PageRenderer,ICameraService
 	{
 		AVCaptureSession captureSession;
 		AVCaptureDeviceInput captureDeviceInput;
 		AVCaptureStillImageOutput stillImageOutput;
 		CameraPage CameraBasePage;
-
-		private CameraSettings cs;
+		Camera_Settings cameraSettingsModal;
+		public AVCaptureDevice captureDevice { get; set; }
 
 		#region Controls
 		UIView liveCameraStream;
@@ -40,43 +43,18 @@ namespace CustomRenderer.iOS
 		CustomButton custButton;
 		#endregion
 
-		protected override void OnElementChanged(VisualElementChangedEventArgs e)
-        {
-            base.OnElementChanged(e);
-
-            if (e.OldElement == null && Element != null)
-            {
-				CameraBasePage = (Element as CameraPage);
-				mainGrid = CameraBasePage.MainGrid;
-				cs = new CameraSettings();
-				try
-                {
-					SetupControls();
-                    SetupEventHandlers();
-                    SetupUserInterfaceAsync();
-                    SetupLiveCameraStream();
-                    AuthorizeCameraUse();
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"\t\t\tERROR: {ex.Message}");
-                }
-            }
-        }
-
-        private void SetupControls()
-        {
-			headerLabel = new ViewTittleLabel("Camera", Constants.LoremTemp, CameraBasePage);
-			custButton = new CustomButton();
-			liveCameraStream = new UIView();
-			takePhotoButton = new ImageButton();
-			toggleFlashButton = new ImageButton();
-			toggleCameraButton = new ImageButton();
-			DisplaySettingsButton = new Button() { Text = "More Settings", TextColor = Color.AntiqueWhite };
-			lastPictureBox = new UIImageView() { BackgroundColor = UIColor.LightGray };
-
-
+		#region Computed Properties
+		public CameraPageRenderer ThisApp
+		{
+			get { return (CameraPageRenderer)UIApplication.SharedApplication.Delegate; }
 		}
+		public Timer SampleTimer { get; set; }
+		#endregion
+
+		#region Private Variables
+		private NSError Error;
+		private bool Automatic = true;
+		#endregion
 
 		protected override void Dispose(bool disposing)
 		{
@@ -107,6 +85,42 @@ namespace CustomRenderer.iOS
 			base.Dispose(disposing);
 		}
 
+		protected override void OnElementChanged(VisualElementChangedEventArgs e)
+        {
+            base.OnElementChanged(e);
+
+            if (e.OldElement == null && Element != null)
+            {
+				CameraBasePage = (Element as CameraPage);
+				mainGrid = CameraBasePage.MainGrid;
+				try
+                {
+					SetupControls();
+                    SetupEventHandlers();
+                    SetupUserInterfaceAsync();
+                    SetupLiveCameraStream();
+                    AuthorizeCameraUse();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"\t\t\tERROR: {ex.Message}");
+                }
+            }
+        }
+
+        private void SetupControls()
+        {
+			headerLabel = new ViewTittleLabel("Camera", Constants.LoremTemp, CameraBasePage);
+			custButton = new CustomButton();
+			liveCameraStream = new UIView();
+			takePhotoButton = new ImageButton();
+			toggleFlashButton = new ImageButton();
+			toggleCameraButton = new ImageButton();
+			DisplaySettingsButton = new Button() { Text = "More Settings", TextColor = Color.AntiqueWhite };
+			lastPictureBox = new UIImageView() { BackgroundColor = UIColor.LightGray };
+			cameraSettingsModal = new Camera_Settings();
+		}
+
 		void SetupUserInterfaceAsync()
 		{
 			try
@@ -130,9 +144,8 @@ namespace CustomRenderer.iOS
 					}
 				};
 
-
 				//Header Lable
-                mainGrid.Children.Add(headerLabel);
+				mainGrid.Children.Add(headerLabel);
                 Grid.SetColumnSpan(headerLabel, 5);
 
 				//Back button
@@ -191,7 +204,7 @@ namespace CustomRenderer.iOS
 			};
 			DisplaySettingsButton.Clicked += (object sender, EventArgs e) =>
 			{
-				CameraBasePage.Navigation.PushModalAsync(new Camera_Settings(ref cs));
+				CameraBasePage.Navigation.PushModalAsync(cameraSettingsModal);
 			};
 		}
 
@@ -224,12 +237,12 @@ namespace CustomRenderer.iOS
 				devicePosition = AVCaptureDevicePosition.Front;
 			}
 
-			var device = GetCameraForOrientation(devicePosition);
-			ConfigureCameraForDevice(device);
+			GetCameraForOrientation(devicePosition);
+			ConfigureCameraForDevice();
 
 			captureSession.BeginConfiguration();
 			captureSession.RemoveInput(captureDeviceInput);
-			captureDeviceInput = AVCaptureDeviceInput.FromDevice(device);
+			captureDeviceInput = AVCaptureDeviceInput.FromDevice(captureDevice);
 			captureSession.AddInput(captureDeviceInput);
 			captureSession.CommitConfiguration();
 		}
@@ -258,33 +271,25 @@ namespace CustomRenderer.iOS
 			}
 		}
 
-		AVCaptureDevice GetCameraForOrientation(AVCaptureDevicePosition orientation)
+		void GetCameraForOrientation(AVCaptureDevicePosition orientation)
 		{
-			var devices = AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video);
-
-			foreach (var device in devices)
-			{
+			foreach (var device in AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video))
 				if (device.Position == orientation)
-				{
-					return device;
-				}
-			}
-			return null;
+					captureDevice =  device;
 		}
 
 		void SetupLiveCameraStream()
 		{
 			captureSession = new AVCaptureSession();
 
-			var viewLayer = liveCameraStream.Layer;
 			var videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
 			{
 				Frame = new CGRect(0f, 0f,View.Bounds.Width, View.Bounds.Height - 500)
 			};
 			liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
 
-			var captureDevice = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
-			ConfigureCameraForDevice(captureDevice);
+			captureDevice = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
+			ConfigureCameraForDevice();
 			captureDeviceInput = AVCaptureDeviceInput.FromDevice(captureDevice);
 
 			var dictionary = new NSMutableDictionary();
@@ -299,26 +304,25 @@ namespace CustomRenderer.iOS
 			captureSession.StartRunning();
 		}
 
-		void ConfigureCameraForDevice(AVCaptureDevice device)
+		void ConfigureCameraForDevice()
 		{
-			var error = new NSError();
-			if (device.IsFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus))
+			if (captureDevice.IsFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus))
 			{
-				device.LockForConfiguration(out error);
-				device.FocusMode = AVCaptureFocusMode.ContinuousAutoFocus;
-				device.UnlockForConfiguration();
+				captureDevice.LockForConfiguration(out Error);
+				captureDevice.FocusMode = AVCaptureFocusMode.ContinuousAutoFocus;
+				captureDevice.UnlockForConfiguration();
 			}
-			else if (device.IsExposureModeSupported(AVCaptureExposureMode.ContinuousAutoExposure))
+			else if (captureDevice.IsExposureModeSupported(AVCaptureExposureMode.ContinuousAutoExposure))
 			{
-				device.LockForConfiguration(out error);
-				device.ExposureMode = AVCaptureExposureMode.ContinuousAutoExposure;
-				device.UnlockForConfiguration();
+				captureDevice.LockForConfiguration(out Error);
+				captureDevice.ExposureMode = AVCaptureExposureMode.ContinuousAutoExposure;
+				captureDevice.UnlockForConfiguration();
 			}
-			else if (device.IsWhiteBalanceModeSupported(AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance))
+			else if (captureDevice.IsWhiteBalanceModeSupported(AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance))
 			{
-				device.LockForConfiguration(out error);
-				device.WhiteBalanceMode = AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance;
-				device.UnlockForConfiguration();
+				captureDevice.LockForConfiguration(out Error);
+				captureDevice.WhiteBalanceMode = AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance;
+				captureDevice.UnlockForConfiguration();
 			}
 		}
 
@@ -330,5 +334,79 @@ namespace CustomRenderer.iOS
 				await AVCaptureDevice.RequestAccessForMediaTypeAsync(AVMediaType.Video);
 			}
 		}
+
+
+
+
+
+        public void FocusMode_ValueChanged()
+        {
+			ThisApp.captureDevice.LockForConfiguration(out Error);
+
+			// Take action based on the segment selected
+			switch (this.cameraSettingsModal.focusTypes)
+			{
+				case FocusTypes.Auto:
+					// Activate auto focus and start monitoring position
+					ThisApp.captureDevice.FocusMode = AVCaptureFocusMode.ContinuousAutoFocus;
+					break;
+				case FocusTypes.Locked:
+					ThisApp.captureDevice.FocusMode = AVCaptureFocusMode.Locked;
+					break;
+			}
+
+			// Unlock device
+			ThisApp.captureDevice.UnlockForConfiguration();
+		}
+
+        public void FocusValue_ValueChanged()
+        {
+
+			ThisApp.captureDevice.LockForConfiguration(out Error);
+			ThisApp.captureDevice.SetFocusModeLocked((float)this.cameraSettingsModal.FocusValue, null);
+			ThisApp.captureDevice.UnlockForConfiguration();
+		}
+
+
+
+        public void ExposureMode_ValueChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OffsetValue_ValueChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DurationValue_ValueChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ISOValue_ValueChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BiasValue_ValueChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WhiteBalanceMode_ValueChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TempValue_ValueChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TintValue_ValueChanged()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
