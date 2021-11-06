@@ -17,6 +17,7 @@ using System.IO;
 using DeviceTester.Helper;
 using DeviceTester.iOS;
 using System.Timers;
+using CoreMedia;
 
 [assembly: ExportRenderer(typeof(CameraPage), typeof(CameraPageRenderer))]
 [assembly: Dependency(typeof(CameraPageRenderer))]
@@ -43,11 +44,17 @@ namespace CustomRenderer.iOS
 		{
 			get { return (AppDelegate)UIApplication.SharedApplication.Delegate; }
 		}
-		public Timer SampleTimer { get; set; }
-		#endregion
 
-		#region Private Variables
-		private NSError Error;
+        public double DurationMinValue { get => ThisApp.captureDevice.ActiveFormat.MinExposureDuration.Seconds; }
+        public double DurationMaxValue { get => ThisApp.captureDevice.ActiveFormat.MaxExposureDuration.Seconds; }
+        public double ISOMinValue { get => ThisApp.captureDevice.ActiveFormat.MinISO;  }
+        public double ISOMaxValue { get => ThisApp.captureDevice.ActiveFormat.MaxISO; }
+        public double BiasMinValue { get => ThisApp.captureDevice.MinExposureTargetBias; }
+        public double BiasMaxValue { get => ThisApp.captureDevice.MaxExposureTargetBias; }
+        #endregion
+
+        #region Private Variables
+        private NSError Error;
 		#endregion
 
 		protected override void Dispose(bool disposing)
@@ -196,9 +203,18 @@ namespace CustomRenderer.iOS
 			toggleFlashButton.Clicked += (object sender, EventArgs e) => {
 				ToggleFlash();
 			};
-			DisplaySettingsButton.Clicked += (object sender, EventArgs e) =>
+			DisplaySettingsButton.Clicked += async (object sender, EventArgs e) =>
 			{
-                _ = CameraBasePage.Navigation.PushModalAsync(ThisApp.cameraSettingsModal);
+				try
+                {
+					if (ThisApp.cameraSettingsModal.Parent == null)
+						await CameraBasePage.Navigation.PushModalAsync(ThisApp.cameraSettingsModal);
+					else
+						await CameraBasePage.Navigation.PopToRootAsync();
+				} catch (Exception err)
+                {
+					Console.Out.WriteLine($"{nameof(DisplaySettingsButton)} - {err.Message}");
+                }
 			};
 		}
 
@@ -328,10 +344,7 @@ namespace CustomRenderer.iOS
 			}
 		}
 
-
-
-
-
+		//Focus
         public void FocusMode_ValueChanged()
         {
 			ThisApp.captureDevice.LockForConfiguration(out Error);
@@ -345,13 +358,13 @@ namespace CustomRenderer.iOS
 					break;
 				case FocusTypes.Locked:
 					ThisApp.captureDevice.FocusMode = AVCaptureFocusMode.Locked;
+					FocusValue_ValueChanged();
 					break;
 			}
 
 			// Unlock device
 			ThisApp.captureDevice.UnlockForConfiguration();
 		}
-
         public void FocusValue_ValueChanged()
         {
 			ThisApp.captureDevice.LockForConfiguration(out Error);
@@ -359,33 +372,59 @@ namespace CustomRenderer.iOS
 			ThisApp.captureDevice.UnlockForConfiguration();
 		}
 
-
+		//Exposure
 
         public void ExposureMode_ValueChanged()
         {
-            throw new NotImplementedException();
-        }
-
-        public void OffsetValue_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
+			ThisApp.captureDevice.LockForConfiguration(out Error);
+			// Take action based on the segment selected
+			switch (ThisApp.cameraSettingsModal.exposureMode)
+			{
+				case Exposureypes.Auto:
+					// Activate auto focus and start monitoring position
+					ThisApp.captureDevice.ExposureMode = AVCaptureExposureMode.ContinuousAutoExposure;
+					break;
+				case Exposureypes.Locked:
+					ThisApp.captureDevice.ExposureMode = AVCaptureExposureMode.Locked;
+					break;
+				case Exposureypes.Custom:
+					ThisApp.captureDevice.ExposureMode = AVCaptureExposureMode.Custom;
+					break;
+			}
+			// Unlock device
+			ThisApp.captureDevice.UnlockForConfiguration();
+		}
 
         public void DurationValue_ValueChanged()
         {
-            throw new NotImplementedException();
-        }
+			// Calculate value
+			var DurationTemp = CMTime.FromSeconds(ThisApp.cameraSettingsModal.DurationValue, 1000 * 1000 * 1000);
+			if (ThisApp.captureDevice.ActiveFormat.MinExposureDuration.Seconds > DurationTemp.Seconds || ThisApp.captureDevice.ActiveFormat.MaxExposureDuration.Seconds < DurationTemp.Seconds)
+				return;
+
+
+			var Iso = ThisApp.captureDevice.ISO;
+			// Update Focus position
+			ThisApp.captureDevice.LockForConfiguration(out Error);
+			ThisApp.captureDevice.LockExposure(DurationTemp, Iso, null);
+			ThisApp.captureDevice.UnlockForConfiguration();
+		}
 
         public void ISOValue_ValueChanged()
         {
-            throw new NotImplementedException();
-        }
+			ThisApp.captureDevice.LockForConfiguration(out Error);
+			ThisApp.captureDevice.LockExposure(ThisApp.captureDevice.ExposureDuration, (float)ThisApp.cameraSettingsModal.ISOValue, null);
+			ThisApp.captureDevice.UnlockForConfiguration();
+		}
 
         public void BiasValue_ValueChanged()
         {
-            throw new NotImplementedException();
-        }
+			ThisApp.captureDevice.LockForConfiguration(out Error);
+			ThisApp.captureDevice.SetExposureTargetBias((float)ThisApp.cameraSettingsModal.BiasValue, null);
+			ThisApp.captureDevice.UnlockForConfiguration();
+		}
 
+		//White balance
         public void WhiteBalanceMode_ValueChanged()
         {
             throw new NotImplementedException();

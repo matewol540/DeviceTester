@@ -24,10 +24,10 @@
             <StackLayout>
                 <Label Text="Exposure" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
                 <control:SegmentedControl x:Name="Exposure" HorizontalOptions="Center"/>
-                <Slider x:Name="Offset" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
-                <Slider x:Name="Duration" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
-                <Slider x:Name="ISO" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
-                <Slider x:Name="Bias" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
+                <!--<Slider x:Name="Offset" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>-->
+                <Slider x:Name="Duration" HorizontalOptions="FillAndExpand" Margin="0,5,0,5" ValueChanged="DurationValue_ValueChanged"/>
+                <Slider x:Name="ISO" HorizontalOptions="FillAndExpand" Margin="0,5,0,5" ValueChanged="ISOValue_ValueChanged"/>
+                <Slider x:Name="Bias" HorizontalOptions="FillAndExpand" Margin="0,5,0,5" ValueChanged="BiasValue_ValueChanged"/>
             </StackLayout>
         </Frame>
     </ContentPage>

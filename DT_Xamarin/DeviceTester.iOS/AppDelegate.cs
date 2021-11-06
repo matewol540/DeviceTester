@@ -26,6 +26,8 @@ namespace DeviceTester.iOS
         public AVCaptureStillImageOutput stillImageOutput { get; set; }
         public Camera_Settings cameraSettingsModal { get; set; }
 
+        public nfloat ExposureDurationPower = 5;
+        public nfloat ExposureMinimumDuration = 1.0f / 1000.0f;
 
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
