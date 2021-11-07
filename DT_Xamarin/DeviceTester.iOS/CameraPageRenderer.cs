@@ -32,7 +32,7 @@ namespace CustomRenderer.iOS
 		ImageButton takePhotoButton;
 		ImageButton toggleCameraButton;
 		ImageButton toggleFlashButton;
-		Button DisplaySettingsButton;
+		ImageButton DisplaySettingsButton;
 		UIImageView lastPictureBox;
 		Grid mainGrid;
 		ViewTittleLabel headerLabel;
@@ -117,7 +117,7 @@ namespace CustomRenderer.iOS
 			takePhotoButton = new ImageButton();
 			toggleFlashButton = new ImageButton();
 			toggleCameraButton = new ImageButton();
-			DisplaySettingsButton = new Button() { Text = "More Settings", TextColor = Color.AntiqueWhite };
+			DisplaySettingsButton = new ImageButton();
 			lastPictureBox = new UIImageView() { BackgroundColor = UIColor.LightGray };
 			ThisApp.cameraSettingsModal = new Camera_Settings();
 		}
@@ -132,16 +132,13 @@ namespace CustomRenderer.iOS
 				{
 					RowDefinitions = new RowDefinitionCollection()
 					{
-						new RowDefinition() {Height = new GridLength(30,GridUnitType.Absolute)},
-						new RowDefinition() {Height = new GridLength(120,GridUnitType.Absolute)}
+						new RowDefinition() {Height = new GridLength(70,GridUnitType.Absolute)},
 					},
 					ColumnDefinitions = new ColumnDefinitionCollection()
                     {
-						new ColumnDefinition() {Width = new GridLength(30,GridUnitType.Absolute) },
+						new ColumnDefinition() {Width = new GridLength(70,GridUnitType.Absolute) },
 						new ColumnDefinition(),
-						new ColumnDefinition() {Width = new GridLength(30,GridUnitType.Absolute) },
-						new ColumnDefinition(),
-						new ColumnDefinition() {Width = new GridLength(30,GridUnitType.Absolute) }
+						new ColumnDefinition() {Width = new GridLength(70,GridUnitType.Absolute) }
 					}
 				};
 
@@ -149,38 +146,38 @@ namespace CustomRenderer.iOS
 				mainGrid.Children.Add(headerLabel);
                 Grid.SetColumnSpan(headerLabel, 5);
 
-				//Back button
-                mainGrid.Children.Add(custButton, 0, 4);
-                Grid.SetColumnSpan(custButton, 5);
+
+				//More Settings Button
+				DisplaySettingsButton.Source = ImageSource.FromFile("SettingIcon.png");
+				tempGrid.Children.Add(DisplaySettingsButton, 2, 0);
+				//Turn on/off flashlight button
+				toggleFlashButton.Source = ImageSource.FromFile("NoFlashButton.png");
+				tempGrid.Children.Add(toggleFlashButton, 0, 0);
+				//Change camera button
+				toggleCameraButton.Source = ImageSource.FromFile("ToggleCameraButton.png");
+				tempGrid.Children.Add(toggleCameraButton, 4, 0);
+
+				mainGrid.Children.Add(tempGrid, 0, 1);
+				Grid.SetColumnSpan(tempGrid, 5);
+
 
 				//Photo control
 				var liveCameraStreamView = liveCameraStream.ToView();
 				this.mainGrid.Children.Add(liveCameraStreamView, 0, 2);
 				Grid.SetColumnSpan(liveCameraStreamView, 5);
 
-				//Take photo button
-				takePhotoButton.Source = ImageSource.FromFile("TakePhotoButton.png");
-				this.mainGrid.Children.Add(takePhotoButton, 2, 3);
-
-
-				//Turn on/off flashlight button
-				toggleFlashButton.Source = ImageSource.FromFile("NoFlashButton.png");
-				tempGrid.Children.Add(toggleFlashButton, 0, 0);
-
-				//Change camera button
-				toggleCameraButton.Source = ImageSource.FromFile("ToggleCameraButton.png");
-				tempGrid.Children.Add(toggleCameraButton, 4, 0);
-
-				//More Settings Button
-				tempGrid.Children.Add(DisplaySettingsButton, 0, 1);
-				Grid.SetColumnSpan(DisplaySettingsButton, 4);
-
-				mainGrid.Children.Add(tempGrid, 0, 1);
-				Grid.SetColumnSpan(tempGrid, 4);
-
 				//Last picture box
 				var lastPictureBoxView = lastPictureBox.ToView();
 				this.mainGrid.Children.Add(lastPictureBoxView, 0,3);
+
+				//Take photo button
+				takePhotoButton.Source = ImageSource.FromFile("TakePhotoButton.png");
+				this.mainGrid.Children.Add(takePhotoButton, 2, 3);
+				
+
+				//Back button
+				mainGrid.Children.Add(custButton, 0, 4);
+				Grid.SetColumnSpan(custButton, 5);
 
 				View.Add(gridNative);
 			}
@@ -207,10 +204,9 @@ namespace CustomRenderer.iOS
 			{
 				try
                 {
-					if (ThisApp.cameraSettingsModal.Parent == null)
-						await CameraBasePage.Navigation.PushModalAsync(ThisApp.cameraSettingsModal);
-					else
+					if (ThisApp.cameraSettingsModal.Parent != null && CameraBasePage.Navigation.ModalStack[CameraBasePage.Navigation.ModalStack.Count - 1] == ThisApp.cameraSettingsModal)
 						await CameraBasePage.Navigation.PopToRootAsync();
+					await CameraBasePage.Navigation.PushModalAsync(ThisApp.cameraSettingsModal);
 				} catch (Exception err)
                 {
 					Console.Out.WriteLine($"{nameof(DisplaySettingsButton)} - {err.Message}");
@@ -302,7 +298,7 @@ namespace CustomRenderer.iOS
 			ThisApp.captureDeviceInput = AVCaptureDeviceInput.FromDevice(ThisApp.captureDevice);
 
 			var dictionary = new NSMutableDictionary();
-			dictionary[AVVideo.CodecKey] = new NSNumber((int)AVVideoCodec.JPEG);
+			dictionary[AVVideo.CodecKey] = new NSNumber((int)AVVideoCodec.H264);
 			ThisApp.stillImageOutput = new AVCaptureStillImageOutput()
 			{
 				OutputSettings = new NSDictionary()
@@ -399,11 +395,12 @@ namespace CustomRenderer.iOS
         {
 			// Calculate value
 			var DurationTemp = CMTime.FromSeconds(ThisApp.cameraSettingsModal.DurationValue, 1000 * 1000 * 1000);
+			var Iso = ThisApp.captureDevice.ISO;
 			if (ThisApp.captureDevice.ActiveFormat.MinExposureDuration.Seconds > DurationTemp.Seconds || ThisApp.captureDevice.ActiveFormat.MaxExposureDuration.Seconds < DurationTemp.Seconds)
 				return;
+			if (ThisApp.captureDevice.ActiveFormat.MinISO > Iso || ThisApp.captureDevice.ActiveFormat.MaxISO < Iso)
+				return;
 
-
-			var Iso = ThisApp.captureDevice.ISO;
 			// Update Focus position
 			ThisApp.captureDevice.LockForConfiguration(out Error);
 			ThisApp.captureDevice.LockExposure(DurationTemp, Iso, null);
