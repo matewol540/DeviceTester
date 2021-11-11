@@ -22,6 +22,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="19.3.0.45" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Plugin.SegmentedControl.Netstandard" Version="5.4.5" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -83,6 +84,7 @@
     <None Remove="Xam.Plugin.Media" />
     <None Remove="Plugin.SegmentedControl.Netstandard" />
     <None Remove="Resources\Images\MissingFunctionIcon.png" />
+    <None Remove="Xam.Plugin.Geolocator" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
