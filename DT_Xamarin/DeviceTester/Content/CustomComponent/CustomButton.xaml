@@ -6,7 +6,7 @@
     <ContentView.Content>
         <Button Text="Back" Clicked="Button_Clicked">
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <LinearGradientBrush x:Name="LinearGradientBck" StartPoint="0,1" EndPoint="1,0">
                     <GradientStop Color="DarkViolet"
                                   Offset="0.1"/>
                     <GradientStop Color="DarkSlateBlue"
@@ -15,6 +15,7 @@
             </Button.Background>
             <Button.FontFamily>Sans</Button.FontFamily>
             <Button.FontSize>25</Button.FontSize>
+            <Button.TextColor>Honeydew</Button.TextColor>
         </Button>
     </ContentView.Content>
 </ContentView>

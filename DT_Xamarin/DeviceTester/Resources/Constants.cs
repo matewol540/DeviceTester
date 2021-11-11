@@ -14,20 +14,20 @@ namespace DeviceTester.Resources
         public delegate Action<Page> CreatePage(Page page);
 
         public static readonly List<Tuple<PageFactory, Color, Color, String>> Pheriphery = new List<Tuple<PageFactory, Color, Color, String>>() {
-            new Tuple<PageFactory,Color,Color,String>(new AccelerometerFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Gyroscope.png"),
-            new Tuple<PageFactory,Color,Color,String>(new BarometerPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Barometer.png"),
-            new Tuple<PageFactory,Color,Color,String>(new CameraPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Camera.png"),
-            new Tuple<PageFactory,Color,Color,String>(new CompasPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Compass2.png"),
-            new Tuple<PageFactory,Color,Color,String>(new GPSPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Satellite.png"),
-            new Tuple<PageFactory,Color,Color,String>(new GyroscopePageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Gyroscope.png"),
-            new Tuple<PageFactory,Color,Color,String>(new HapticPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Haptic.png"),
-            new Tuple<PageFactory,Color,Color,String>(new MagnetometerPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Magnetometer.png"),
-            new Tuple<PageFactory,Color,Color,String>(new PhonePageFactory(),Color.MediumVioletRed,Color.DodgerBlue,""),
-            new Tuple<PageFactory,Color,Color,String>(new SettingsPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Settings.png"),
-            new Tuple<PageFactory,Color,Color,String>(new SharingPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"")
+            new Tuple<PageFactory,Color,Color,String>(new AccelerometerFactory(),Color.DarkOliveGreen,Color.Lime,"DeviceTester.Resources.Images.Gyroscope.png"),
+            new Tuple<PageFactory,Color,Color,String>(new BarometerPageFactory(),Color.Indigo,Color.DodgerBlue,"DeviceTester.Resources.Images.Barometer.png"),
+            new Tuple<PageFactory,Color,Color,String>(new CameraPageFactory(),Color.Sienna,Color.Coral,"DeviceTester.Resources.Images.Camera.png"),
+            new Tuple<PageFactory,Color,Color,String>(new CompasPageFactory(),Color.Indigo,Color.Lavender,"DeviceTester.Resources.Images.Compass2.png"),
+            new Tuple<PageFactory,Color,Color,String>(new GPSPageFactory(),Color.RoyalBlue,Color.LavenderBlush,"DeviceTester.Resources.Images.Satellite.png"),
+            new Tuple<PageFactory,Color,Color,String>(new GyroscopePageFactory(),Color.DarkOliveGreen,Color.Lime,"DeviceTester.Resources.Images.Gyroscope.png"),
+            new Tuple<PageFactory,Color,Color,String>(new HapticPageFactory(),Color.MidnightBlue,Color.SkyBlue,"DeviceTester.Resources.Images.Haptic.png"),
+            new Tuple<PageFactory,Color,Color,String>(new MagnetometerPageFactory(),Color.Navy,Color.PowderBlue,"DeviceTester.Resources.Images.Magnetometer.png"),
+            new Tuple<PageFactory,Color,Color,String>(new PhonePageFactory(),Color.Silver,Color.Silver,"DeviceTester.Resources.Images.MissingFunctionIcon.png"),
+            new Tuple<PageFactory,Color,Color,String>(new SettingsPageFactory(),Color.DimGray,Color.Gainsboro,"DeviceTester.Resources.Images.Settings.png"),
+            new Tuple<PageFactory,Color,Color,String>(new SharingPageFactory(),Color.Silver,Color.Silver,"DeviceTester.Resources.Images.MissingFunctionIcon.png")
         };
         public static readonly List<Tuple<PageFactory, Color, Color, String>> System = new List<Tuple<PageFactory, Color, Color, String>>() {
-            new Tuple<PageFactory,Color,Color,String>(new StepsPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"DeviceTester.Resources.Images.Steps.png")
+            new Tuple<PageFactory,Color,Color,String>(new StepsPageFactory(),Color.DarkViolet,Color.Plum,"DeviceTester.Resources.Images.Steps.png")
             //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,""),
             //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,""),
             //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"")

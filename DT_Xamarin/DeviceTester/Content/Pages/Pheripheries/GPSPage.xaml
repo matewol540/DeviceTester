@@ -34,7 +34,7 @@
                     </Frame>
                 </Grid>
                 <Picker Grid.Row="3" x:Name="MapTypePicker" BindingContext="{x:Reference gpsPage}" ItemsSource="{Binding mapTypes}" SelectedIndexChanged="MapTypePicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
-                <Components:CustomButton Grid.Row="4"/>
+                <Components:CustomButton x:Name="BackButton" Grid.Row="4"/>
             </Grid>
     </ContentPage.Content>
 </ContentPage>

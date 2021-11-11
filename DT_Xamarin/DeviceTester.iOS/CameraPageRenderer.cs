@@ -118,7 +118,7 @@ namespace CustomRenderer.iOS
 			toggleFlashButton = new ImageButton();
 			toggleCameraButton = new ImageButton();
 			DisplaySettingsButton = new ImageButton();
-			lastPictureBox = new UIImageView() { BackgroundColor = UIColor.LightGray };
+			lastPictureBox = new UIImageView() { BackgroundColor = UIColor.FromRGBA(0,0,0,1) };
 			ThisApp.cameraSettingsModal = new Camera_Settings();
 		}
 
@@ -141,6 +141,8 @@ namespace CustomRenderer.iOS
 						new ColumnDefinition() {Width = new GridLength(70,GridUnitType.Absolute) }
 					}
 				};
+				
+
 
 				//Header Lable
 				mainGrid.Children.Add(headerLabel);
@@ -162,6 +164,8 @@ namespace CustomRenderer.iOS
 
 
 				//Photo control
+				liveCameraStream.Layer.CornerRadius = 10;
+				liveCameraStream.Layer.MasksToBounds = true;
 				var liveCameraStreamView = liveCameraStream.ToView();
 				this.mainGrid.Children.Add(liveCameraStreamView, 0, 2);
 				Grid.SetColumnSpan(liveCameraStreamView, 5);
@@ -178,6 +182,14 @@ namespace CustomRenderer.iOS
 				//Back button
 				mainGrid.Children.Add(custButton, 0, 4);
 				Grid.SetColumnSpan(custButton, 5);
+
+				var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(CameraPageFactory));
+
+				headerLabel.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
+				headerLabel.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
+				custButton.LinearGradientBrush.GradientStops[0].Color = tempTuple.Item2;
+				custButton.LinearGradientBrush.GradientStops[1].Color = tempTuple.Item3;
+
 
 				View.Add(gridNative);
 			}
@@ -202,10 +214,33 @@ namespace CustomRenderer.iOS
 			};
 			DisplaySettingsButton.Clicked += async (object sender, EventArgs e) =>
 			{
+				switch (ThisApp.cameraSettingsModal.focusTypes)
+				{
+					case FocusTypes.Auto:
+						if (!ThisApp.captureDevice.IsFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus))
+						{
+							var okCancelAlertController = UIAlertController.Create("Feature not supported", "Sorry, but selected camera does not support custom focus", UIAlertControllerStyle.Alert);
+							okCancelAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, alert => { }));
+							PresentViewController(okCancelAlertController, true, null);
+							return;
+						}
+						break;
+					case FocusTypes.Locked:
+						if (!ThisApp.captureDevice.IsFocusModeSupported(AVCaptureFocusMode.Locked))
+						{
+							var okCancelAlertController = UIAlertController.Create("Feature not supported", "Sorry, but selected camera does not support custom focus", UIAlertControllerStyle.Alert);
+							okCancelAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, alert => { }));
+							PresentViewController(okCancelAlertController, true, null);
+							return;
+						}
+						break;
+                }
+
+				
 				try
                 {
-					if (ThisApp.cameraSettingsModal.Parent != null && CameraBasePage.Navigation.ModalStack[CameraBasePage.Navigation.ModalStack.Count - 1] == ThisApp.cameraSettingsModal)
-						await CameraBasePage.Navigation.PopToRootAsync();
+					if (ThisApp.cameraSettingsModal.Parent != null )
+						await CameraBasePage.Navigation.PopModalAsync();
 					await CameraBasePage.Navigation.PushModalAsync(ThisApp.cameraSettingsModal);
 				} catch (Exception err)
                 {
@@ -229,6 +264,7 @@ namespace CustomRenderer.iOS
 				}
 			});
 			lastPictureBox.Image = photo;
+			lastPictureBox.ContentMode = UIViewContentMode.ScaleAspectFit;
 		}
 
 		void ToggleFrontBackCamera()
@@ -286,11 +322,12 @@ namespace CustomRenderer.iOS
 		void SetupLiveCameraStream()
 		{
 			ThisApp.captureSession = new AVCaptureSession();
-
 			var videoPreviewLayer = new AVCaptureVideoPreviewLayer(ThisApp.captureSession)
 			{
-				Frame = new CGRect(0f, 0f,View.Bounds.Width, View.Bounds.Height - 500)
+				Frame = new CGRect(-100f, 0f, View.Bounds.Width + 200f, View.Bounds.Height - 390f)
 			};
+
+
 			liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
 
 			ThisApp.captureDevice = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
@@ -357,7 +394,6 @@ namespace CustomRenderer.iOS
 					FocusValue_ValueChanged();
 					break;
 			}
-
 			// Unlock device
 			ThisApp.captureDevice.UnlockForConfiguration();
 		}
@@ -368,73 +404,5 @@ namespace CustomRenderer.iOS
 			ThisApp.captureDevice.UnlockForConfiguration();
 		}
 
-		//Exposure
-
-        public void ExposureMode_ValueChanged()
-        {
-			ThisApp.captureDevice.LockForConfiguration(out Error);
-			// Take action based on the segment selected
-			switch (ThisApp.cameraSettingsModal.exposureMode)
-			{
-				case Exposureypes.Auto:
-					// Activate auto focus and start monitoring position
-					ThisApp.captureDevice.ExposureMode = AVCaptureExposureMode.ContinuousAutoExposure;
-					break;
-				case Exposureypes.Locked:
-					ThisApp.captureDevice.ExposureMode = AVCaptureExposureMode.Locked;
-					break;
-				case Exposureypes.Custom:
-					ThisApp.captureDevice.ExposureMode = AVCaptureExposureMode.Custom;
-					break;
-			}
-			// Unlock device
-			ThisApp.captureDevice.UnlockForConfiguration();
-		}
-
-        public void DurationValue_ValueChanged()
-        {
-			// Calculate value
-			var DurationTemp = CMTime.FromSeconds(ThisApp.cameraSettingsModal.DurationValue, 1000 * 1000 * 1000);
-			var Iso = ThisApp.captureDevice.ISO;
-			if (ThisApp.captureDevice.ActiveFormat.MinExposureDuration.Seconds > DurationTemp.Seconds || ThisApp.captureDevice.ActiveFormat.MaxExposureDuration.Seconds < DurationTemp.Seconds)
-				return;
-			if (ThisApp.captureDevice.ActiveFormat.MinISO > Iso || ThisApp.captureDevice.ActiveFormat.MaxISO < Iso)
-				return;
-
-			// Update Focus position
-			ThisApp.captureDevice.LockForConfiguration(out Error);
-			ThisApp.captureDevice.LockExposure(DurationTemp, Iso, null);
-			ThisApp.captureDevice.UnlockForConfiguration();
-		}
-
-        public void ISOValue_ValueChanged()
-        {
-			ThisApp.captureDevice.LockForConfiguration(out Error);
-			ThisApp.captureDevice.LockExposure(ThisApp.captureDevice.ExposureDuration, (float)ThisApp.cameraSettingsModal.ISOValue, null);
-			ThisApp.captureDevice.UnlockForConfiguration();
-		}
-
-        public void BiasValue_ValueChanged()
-        {
-			ThisApp.captureDevice.LockForConfiguration(out Error);
-			ThisApp.captureDevice.SetExposureTargetBias((float)ThisApp.cameraSettingsModal.BiasValue, null);
-			ThisApp.captureDevice.UnlockForConfiguration();
-		}
-
-		//White balance
-        public void WhiteBalanceMode_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void TempValue_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void TintValue_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

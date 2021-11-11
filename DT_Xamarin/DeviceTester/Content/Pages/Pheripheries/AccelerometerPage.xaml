@@ -97,7 +97,7 @@
                             Grid.Row="2"
                             Style="{StaticResource CoordsStyles}"/>
                     </Grid>
-                    <Components:CustomButton Grid.Row="5"/>
+                    <Components:CustomButton x:Name="BackButton" Grid.Row="5"/>
                 </Grid>
         </StackLayout>
     </ContentPage.Content>

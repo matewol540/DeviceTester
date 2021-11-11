@@ -82,6 +82,7 @@
     <None Remove="Xamarin.iOS" />
     <None Remove="Xam.Plugin.Media" />
     <None Remove="Plugin.SegmentedControl.Netstandard" />
+    <None Remove="Resources\Images\MissingFunctionIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
@@ -96,6 +97,7 @@
     <EmbeddedResource Include="Resources\Images\Magnetometer.png" />
     <EmbeddedResource Include="Resources\Images\Settings.png" />
     <EmbeddedResource Include="Resources\Images\Steps.png" />
+    <EmbeddedResource Include="Resources\Images\MissingFunctionIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Content\Pages\Pheripheries\SettingsListPage.xaml.cs">

@@ -28,6 +28,14 @@ namespace DeviceTester.Content.Pages.Pheripheries
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
             LabelTittle = new ViewTittleLabel("Accelerometer",Constants.LoremTemp,this);
+            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(AccelerometerFactory));
+
+            LabelTittle.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
+            LabelTittle.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
+            BackButton.LinearGradientBrush.GradientStops[0].Color = tempTuple.Item2;
+            BackButton.LinearGradientBrush.GradientStops[1].Color = tempTuple.Item3;
+
+
             SpeedPicker.ItemsSource = coll;
             SpeedPicker.SelectedIndex = 0;
             this.MainGrid.Children.Add(LabelTittle, 0, 0);
