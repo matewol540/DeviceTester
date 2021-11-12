@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 
-namespace DeviceTester.Content.Pages.System
+namespace DeviceTester.Content.Views
 {
-    public partial class Networking : ContentPage
+    public partial class BluetoothDeviceView : ContentView
     {
-        public Networking()
+        public BluetoothDeviceView()
         {
             InitializeComponent();
         }

@@ -16,6 +16,7 @@ namespace DeviceTester.Resources
         public static readonly List<Tuple<PageFactory, Color, Color, String>> Pheriphery = new List<Tuple<PageFactory, Color, Color, String>>() {
             new Tuple<PageFactory,Color,Color,String>(new AccelerometerFactory(),Color.DarkOliveGreen,Color.Lime,"DeviceTester.Resources.Images.Gyroscope.png"),
             new Tuple<PageFactory,Color,Color,String>(new BarometerPageFactory(),Color.Indigo,Color.DodgerBlue,"DeviceTester.Resources.Images.Barometer.png"),
+            new Tuple<PageFactory,Color,Color,String>(new BluetoothPageFactory(),Color.Indigo,Color.DodgerBlue,"DeviceTester.Resources.Images.Bluetooth.png"),
             new Tuple<PageFactory,Color,Color,String>(new CameraPageFactory(),Color.Sienna,Color.Coral,"DeviceTester.Resources.Images.Camera.png"),
             new Tuple<PageFactory,Color,Color,String>(new CompasPageFactory(),Color.Indigo,Color.Lavender,"DeviceTester.Resources.Images.Compass2.png"),
             new Tuple<PageFactory,Color,Color,String>(new GPSPageFactory(),Color.RoyalBlue,Color.LavenderBlush,"DeviceTester.Resources.Images.Satellite.png"),

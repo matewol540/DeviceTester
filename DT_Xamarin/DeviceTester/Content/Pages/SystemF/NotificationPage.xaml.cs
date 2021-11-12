@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace DeviceTester.Content.Pages.System
+namespace DeviceTester.Content.Pages.SystemF
 {
     public partial class NotificationPage : ContentPage
     {

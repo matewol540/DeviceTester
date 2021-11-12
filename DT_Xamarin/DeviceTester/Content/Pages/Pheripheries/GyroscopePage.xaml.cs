@@ -117,7 +117,7 @@ namespace DeviceTester.Content.Pages
             gyroView.MovePointer(data.X, data.Y, data.Z);
         }
 
-        void SpeedPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        void SpeedPicker_SelectedIndexChanged(Object sender, EventArgs e)
         {
             if (!Gyroscope.IsMonitoring)
                 return;

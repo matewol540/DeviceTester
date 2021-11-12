@@ -133,7 +133,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
             CurrentValue = pressureInHectopascals;
         }
 
-        void SpeedPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        void SpeedPicker_SelectedIndexChanged(Object sender, EventArgs e)
         {
             if (!Barometer.IsMonitoring)
                 return;
