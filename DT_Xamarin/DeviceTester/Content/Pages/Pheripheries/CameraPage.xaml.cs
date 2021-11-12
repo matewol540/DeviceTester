@@ -24,15 +24,15 @@ namespace DeviceTester.Content.Pages.Pheripheries
         public void ChangeDescriptionState(bool State)
         {
             GridLength HeightValue1 = new GridLength(50, GridUnitType.Absolute);
-            GridLength HeightValue2 = new GridLength(150, GridUnitType.Absolute);
+            GridLength HeightValue2 = new GridLength(100, GridUnitType.Absolute);
             switch (State)
             {
                 case true:
                     HeightValue1 = new GridLength(50, GridUnitType.Absolute);
-                    HeightValue2 = new GridLength(150, GridUnitType.Absolute);
+                    HeightValue2 = new GridLength(100, GridUnitType.Absolute);
                     break;
                 case false:
-                    HeightValue1 = new GridLength(230, GridUnitType.Absolute);
+                    HeightValue1 = new GridLength(150, GridUnitType.Absolute);
                     HeightValue2 = new GridLength(0, GridUnitType.Absolute);
                     break;
             }

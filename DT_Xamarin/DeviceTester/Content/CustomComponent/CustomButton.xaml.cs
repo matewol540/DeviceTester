@@ -6,6 +6,8 @@ namespace DeviceTester.Content.CustomComponent
 {
     public partial class CustomButton : ContentView
     {
+
+        public LinearGradientBrush LinearGradientBrush { get => LinearGradientBck; }
         public CustomButton()
         {
             InitializeComponent();

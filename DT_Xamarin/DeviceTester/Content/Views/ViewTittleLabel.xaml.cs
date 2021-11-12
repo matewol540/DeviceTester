@@ -36,6 +36,11 @@ namespace DeviceTester.Content.Views
             }
         }
 
+        public LinearGradientBrush LineraGradientBck
+        {
+            get => BackgroundGradient;
+        }
+
         public ViewTittleLabel(string TittleText, String Description,ContentPage parent)
         {
             this.ShowDescription = false;

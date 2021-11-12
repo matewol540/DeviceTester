@@ -14,27 +14,21 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
-                <Frame CornerRadius="5">
-                    <Label TextType="Text" Text="" />
-                </Frame>
                 <Frame CornerRadius="10" IsClippedToBounds="True" Grid.Row="1" Padding="0">
                     <maps:Map x:Name="MainMap" MoveToLastRegionOnLayoutChange="false" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BindingContext="{x:Reference Enable_Traffic}" TrafficEnabled="{Binding IsChecked}"/>
                 </Frame>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Frame Grid.Column="0">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Traffic" FontSize="Small"/>
-                            <CheckBox x:Name="Enable_Traffic" IsChecked="True" />
-                        </StackLayout>
-                    </Frame>
-                </Grid>
-                <Picker Grid.Row="3" x:Name="MapTypePicker" BindingContext="{x:Reference gpsPage}" ItemsSource="{Binding mapTypes}" SelectedIndexChanged="MapTypePicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
-                <Components:CustomButton Grid.Row="4"/>
+                <Frame Grid.Row="2">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Text="Show Traffic" FontSize="Small" HorizontalOptions="EndAndExpand"/>
+                        <CheckBox x:Name="Enable_Traffic" IsChecked="True" HorizontalOptions="StartAndExpand"/>
+                    </StackLayout>
+                </Frame>
+                <Label Grid.Row="3" x:Name="CoordsLabel" HorizontalTextAlignment="Center" BindingContext="{x:Reference gpsPage}" Text="{Binding Coords,StringFormat='Position: {0}'}" TextColor="AntiqueWhite" FontSize="Micro"/>
+                <Picker Grid.Row="4" x:Name="MapTypePicker" BindingContext="{x:Reference gpsPage}" ItemsSource="{Binding mapTypes}" SelectedIndexChanged="MapTypePicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
+                <Components:CustomButton x:Name="BackButton" Grid.Row="5"/>
             </Grid>
     </ContentPage.Content>
 </ContentPage>

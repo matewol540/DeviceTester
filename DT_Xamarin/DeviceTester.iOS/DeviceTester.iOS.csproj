@@ -180,5 +180,6 @@
     <BundleResource Include="Resources\NoFlashButton.png" />
     <BundleResource Include="Resources\TakePhotoButton.png" />
     <BundleResource Include="Resources\ToggleCameraButton.png" />
+    <BundleResource Include="Resources\SettingIcon.png" />
   </ItemGroup>
 </Project>

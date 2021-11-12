@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<CarouselPage
+<ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:control="clr-namespace:Plugin.Segmented.Control;assembly=Plugin.Segmented"
@@ -9,41 +9,15 @@
     BackgroundColor="Transparent"
     HeightRequest="300"
     >
-    <ContentPage x:Name="FocusPage" HeightRequest="300" BackgroundColor="Transparent" >
+    <ContentPage.Content>
         <Frame CornerRadius="10" VerticalOptions="End" BackgroundColor="AntiqueWhite">
             <StackLayout>
                 <Label Text="Focus" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
                 <control:SegmentedControl x:Name="Focus" HorizontalOptions="CenterAndExpand"/>
-                <Slider x:Name="FocusValue" HorizontalOptions="FillAndExpand" Margin="0,5,0,5" ValueChanged="FocusValue_ValueChanged"/>
-            </StackLayout>
-        </Frame>
-
-    </ContentPage>
-    <ContentPage x:Name="ExposurePage" HeightRequest="300" BackgroundColor="Transparent">
-        <Frame CornerRadius="10" VerticalOptions="End" BackgroundColor="AntiqueWhite">
-            <StackLayout>
-                <Label Text="Exposure" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
-                <control:SegmentedControl x:Name="Exposure" HorizontalOptions="Center"/>
-                <Slider x:Name="Offset" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
-                <Slider x:Name="Duration" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
-                <Slider x:Name="ISO" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
-                <Slider x:Name="Bias" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
-            </StackLayout>
-        </Frame>
-    </ContentPage>
-    <ContentPage x:Name="WhiteBalancePage" HeightRequest="300" BackgroundColor="Transparent">
-        <Frame CornerRadius="10" VerticalOptions="End" BackgroundColor="AntiqueWhite">
-            <StackLayout VerticalOptions="End">
-                <Label Text="WhiteBalance" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="Black"/>
-                <control:SegmentedControl x:Name="WhiteBalance" HorizontalOptions="Center"/>
                 <Frame CornerRadius="10" VerticalOptions="StartAndExpand" BackgroundColor="GhostWhite">
-                    <Slider x:Name="Temp" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
-                </Frame>
-                <Frame CornerRadius="10" VerticalOptions="StartAndExpand" BackgroundColor="GhostWhite">
-                    <Slider x:Name="Tint" HorizontalOptions="FillAndExpand" Margin="0,5,0,5"/>
+                    <Slider x:Name="FocusValue" HorizontalOptions="FillAndExpand" Margin="0,5,0,5" ValueChanged="FocusValue_ValueChanged" IsEnabled="False"/>
                 </Frame>
             </StackLayout>
         </Frame>
-    </ContentPage>
-    <ContentPage x:Name="BracketPage" HeightRequest="300" BackgroundColor="Transparent"/>
-</CarouselPage>
+    </ContentPage.Content>
+</ContentPage>

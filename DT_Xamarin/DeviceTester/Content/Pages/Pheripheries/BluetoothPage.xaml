@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
+    xmlns:Views="clr-namespace:DeviceTester.Content.Views"
+    x:Class="DeviceTester.Content.Pages.Pheripheries.BluetoothPage"
+    Style="{StaticResource WindowContainer}">
+
+    <ContentPage.Content>
+         <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+             <ListView x:Name="DeviceListView" IsPullToRefreshEnabled="True" SeparatorColor="WhiteSmoke">
+                 <ListView.ItemTemplate>
+                     <DataTemplate>
+                         <Views:BluetoothDeviceView BindingContext="{Binding .}" Padding="5"/>
+                    </DataTemplate>
+                 </ListView.ItemTemplate>
+             </ListView>
+             
+            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+         </Grid>
+    </ContentPage.Content>
+</ContentPage>

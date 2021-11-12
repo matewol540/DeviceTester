@@ -54,7 +54,7 @@
             </Grid>
             <Label Grid.Row="3" BindingContext="{x:Reference barometerPage}" Style="{StaticResource ValueLabelStyle}" Text="{Binding CurrentValue, StringFormat='Current Value: {0:#.#####}'}"/>
             <Picker Grid.Row="4" x:Name="SpeedPicker" SelectedIndexChanged="SpeedPicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
-            <Components:CustomButton Grid.Row="5"/>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="5"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

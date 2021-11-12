@@ -11,7 +11,7 @@
         <Frame x:Name="MainContainer" CornerRadius="10" IsClippedToBounds="True" Padding="0">
 
             <Frame.Background>
-                <LinearGradientBrush EndPoint="1,0">
+                <LinearGradientBrush EndPoint="1,0" x:Name="BackgroundGradient">
                     <GradientStop Color="DarkBlue" Offset="0.1"/>
                     <GradientStop Color="DarkViolet" Offset="1.0"/>
                 </LinearGradientBrush>

@@ -57,6 +57,14 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
             NavigationPage.SetHasBackButton(this, false);
             var tmpComp = new ViewTittleLabel("Barometer", Constants.LoremTemp, this);
+
+            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(BarometerPageFactory));
+
+            tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
+            tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
+            BackButton.LinearGradientBrush.GradientStops[0].Color = tempTuple.Item2;
+            BackButton.LinearGradientBrush.GradientStops[1].Color = tempTuple.Item3;
+
             this.MainGrid.Children.Add(tmpComp, 0, 0);
             SpeedPicker.ItemsSource = coll;
             SpeedPicker.SelectedIndex = 0;
@@ -125,7 +133,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
             CurrentValue = pressureInHectopascals;
         }
 
-        void SpeedPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        void SpeedPicker_SelectedIndexChanged(Object sender, EventArgs e)
         {
             if (!Barometer.IsMonitoring)
                 return;

@@ -17,6 +17,7 @@ using System.IO;
 using DeviceTester.Helper;
 using DeviceTester.iOS;
 using System.Timers;
+using CoreMedia;
 
 [assembly: ExportRenderer(typeof(CameraPage), typeof(CameraPageRenderer))]
 [assembly: Dependency(typeof(CameraPageRenderer))]
@@ -31,7 +32,7 @@ namespace CustomRenderer.iOS
 		ImageButton takePhotoButton;
 		ImageButton toggleCameraButton;
 		ImageButton toggleFlashButton;
-		Button DisplaySettingsButton;
+		ImageButton DisplaySettingsButton;
 		UIImageView lastPictureBox;
 		Grid mainGrid;
 		ViewTittleLabel headerLabel;
@@ -43,11 +44,17 @@ namespace CustomRenderer.iOS
 		{
 			get { return (AppDelegate)UIApplication.SharedApplication.Delegate; }
 		}
-		public Timer SampleTimer { get; set; }
-		#endregion
 
-		#region Private Variables
-		private NSError Error;
+        public double DurationMinValue { get => ThisApp.captureDevice.ActiveFormat.MinExposureDuration.Seconds; }
+        public double DurationMaxValue { get => ThisApp.captureDevice.ActiveFormat.MaxExposureDuration.Seconds; }
+        public double ISOMinValue { get => ThisApp.captureDevice.ActiveFormat.MinISO;  }
+        public double ISOMaxValue { get => ThisApp.captureDevice.ActiveFormat.MaxISO; }
+        public double BiasMinValue { get => ThisApp.captureDevice.MinExposureTargetBias; }
+        public double BiasMaxValue { get => ThisApp.captureDevice.MaxExposureTargetBias; }
+        #endregion
+
+        #region Private Variables
+        private NSError Error;
 		#endregion
 
 		protected override void Dispose(bool disposing)
@@ -110,8 +117,8 @@ namespace CustomRenderer.iOS
 			takePhotoButton = new ImageButton();
 			toggleFlashButton = new ImageButton();
 			toggleCameraButton = new ImageButton();
-			DisplaySettingsButton = new Button() { Text = "More Settings", TextColor = Color.AntiqueWhite };
-			lastPictureBox = new UIImageView() { BackgroundColor = UIColor.LightGray };
+			DisplaySettingsButton = new ImageButton();
+			lastPictureBox = new UIImageView() { BackgroundColor = UIColor.FromRGBA(0,0,0,1) };
 			ThisApp.cameraSettingsModal = new Camera_Settings();
 		}
 
@@ -125,55 +132,64 @@ namespace CustomRenderer.iOS
 				{
 					RowDefinitions = new RowDefinitionCollection()
 					{
-						new RowDefinition() {Height = new GridLength(30,GridUnitType.Absolute)},
-						new RowDefinition() {Height = new GridLength(120,GridUnitType.Absolute)}
+						new RowDefinition() {Height = new GridLength(70,GridUnitType.Absolute)},
 					},
 					ColumnDefinitions = new ColumnDefinitionCollection()
                     {
-						new ColumnDefinition() {Width = new GridLength(30,GridUnitType.Absolute) },
+						new ColumnDefinition() {Width = new GridLength(70,GridUnitType.Absolute) },
 						new ColumnDefinition(),
-						new ColumnDefinition() {Width = new GridLength(30,GridUnitType.Absolute) },
-						new ColumnDefinition(),
-						new ColumnDefinition() {Width = new GridLength(30,GridUnitType.Absolute) }
+						new ColumnDefinition() {Width = new GridLength(70,GridUnitType.Absolute) }
 					}
 				};
+				
+
 
 				//Header Lable
 				mainGrid.Children.Add(headerLabel);
                 Grid.SetColumnSpan(headerLabel, 5);
 
-				//Back button
-                mainGrid.Children.Add(custButton, 0, 4);
-                Grid.SetColumnSpan(custButton, 5);
 
-				//Photo control
-				var liveCameraStreamView = liveCameraStream.ToView();
-				this.mainGrid.Children.Add(liveCameraStreamView, 0, 2);
-				Grid.SetColumnSpan(liveCameraStreamView, 5);
-
-				//Take photo button
-				takePhotoButton.Source = ImageSource.FromFile("TakePhotoButton.png");
-				this.mainGrid.Children.Add(takePhotoButton, 2, 3);
-
-
+				//More Settings Button
+				DisplaySettingsButton.Source = ImageSource.FromFile("SettingIcon.png");
+				tempGrid.Children.Add(DisplaySettingsButton, 2, 0);
 				//Turn on/off flashlight button
 				toggleFlashButton.Source = ImageSource.FromFile("NoFlashButton.png");
 				tempGrid.Children.Add(toggleFlashButton, 0, 0);
-
 				//Change camera button
 				toggleCameraButton.Source = ImageSource.FromFile("ToggleCameraButton.png");
 				tempGrid.Children.Add(toggleCameraButton, 4, 0);
 
-				//More Settings Button
-				tempGrid.Children.Add(DisplaySettingsButton, 0, 1);
-				Grid.SetColumnSpan(DisplaySettingsButton, 4);
-
 				mainGrid.Children.Add(tempGrid, 0, 1);
-				Grid.SetColumnSpan(tempGrid, 4);
+				Grid.SetColumnSpan(tempGrid, 5);
+
+
+				//Photo control
+				liveCameraStream.Layer.CornerRadius = 10;
+				liveCameraStream.Layer.MasksToBounds = true;
+				var liveCameraStreamView = liveCameraStream.ToView();
+				this.mainGrid.Children.Add(liveCameraStreamView, 0, 2);
+				Grid.SetColumnSpan(liveCameraStreamView, 5);
 
 				//Last picture box
 				var lastPictureBoxView = lastPictureBox.ToView();
 				this.mainGrid.Children.Add(lastPictureBoxView, 0,3);
+
+				//Take photo button
+				takePhotoButton.Source = ImageSource.FromFile("TakePhotoButton.png");
+				this.mainGrid.Children.Add(takePhotoButton, 2, 3);
+				
+
+				//Back button
+				mainGrid.Children.Add(custButton, 0, 4);
+				Grid.SetColumnSpan(custButton, 5);
+
+				var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(CameraPageFactory));
+
+				headerLabel.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
+				headerLabel.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
+				custButton.LinearGradientBrush.GradientStops[0].Color = tempTuple.Item2;
+				custButton.LinearGradientBrush.GradientStops[1].Color = tempTuple.Item3;
+
 
 				View.Add(gridNative);
 			}
@@ -196,9 +212,40 @@ namespace CustomRenderer.iOS
 			toggleFlashButton.Clicked += (object sender, EventArgs e) => {
 				ToggleFlash();
 			};
-			DisplaySettingsButton.Clicked += (object sender, EventArgs e) =>
+			DisplaySettingsButton.Clicked += async (object sender, EventArgs e) =>
 			{
-                _ = CameraBasePage.Navigation.PushModalAsync(ThisApp.cameraSettingsModal);
+				switch (ThisApp.cameraSettingsModal.focusTypes)
+				{
+					case FocusTypes.Auto:
+						if (!ThisApp.captureDevice.IsFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus))
+						{
+							var okCancelAlertController = UIAlertController.Create("Feature not supported", "Sorry, but selected camera does not support custom focus", UIAlertControllerStyle.Alert);
+							okCancelAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, alert => { }));
+							PresentViewController(okCancelAlertController, true, null);
+							return;
+						}
+						break;
+					case FocusTypes.Locked:
+						if (!ThisApp.captureDevice.IsFocusModeSupported(AVCaptureFocusMode.Locked))
+						{
+							var okCancelAlertController = UIAlertController.Create("Feature not supported", "Sorry, but selected camera does not support custom focus", UIAlertControllerStyle.Alert);
+							okCancelAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, alert => { }));
+							PresentViewController(okCancelAlertController, true, null);
+							return;
+						}
+						break;
+                }
+
+				
+				try
+                {
+					if (ThisApp.cameraSettingsModal.Parent != null )
+						await CameraBasePage.Navigation.PopModalAsync();
+					await CameraBasePage.Navigation.PushModalAsync(ThisApp.cameraSettingsModal);
+				} catch (Exception err)
+                {
+					Console.Out.WriteLine($"{nameof(DisplaySettingsButton)} - {err.Message}");
+                }
 			};
 		}
 
@@ -217,6 +264,7 @@ namespace CustomRenderer.iOS
 				}
 			});
 			lastPictureBox.Image = photo;
+			lastPictureBox.ContentMode = UIViewContentMode.ScaleAspectFit;
 		}
 
 		void ToggleFrontBackCamera()
@@ -274,11 +322,12 @@ namespace CustomRenderer.iOS
 		void SetupLiveCameraStream()
 		{
 			ThisApp.captureSession = new AVCaptureSession();
-
 			var videoPreviewLayer = new AVCaptureVideoPreviewLayer(ThisApp.captureSession)
 			{
-				Frame = new CGRect(0f, 0f,View.Bounds.Width, View.Bounds.Height - 500)
+				Frame = new CGRect(-100f, 0f, View.Bounds.Width + 200f, View.Bounds.Height - 390f)
 			};
+
+
 			liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
 
 			ThisApp.captureDevice = AVCaptureDevice.GetDefaultDevice(AVMediaType.Video);
@@ -286,7 +335,7 @@ namespace CustomRenderer.iOS
 			ThisApp.captureDeviceInput = AVCaptureDeviceInput.FromDevice(ThisApp.captureDevice);
 
 			var dictionary = new NSMutableDictionary();
-			dictionary[AVVideo.CodecKey] = new NSNumber((int)AVVideoCodec.JPEG);
+			dictionary[AVVideo.CodecKey] = new NSNumber((int)AVVideoCodec.H264);
 			ThisApp.stillImageOutput = new AVCaptureStillImageOutput()
 			{
 				OutputSettings = new NSDictionary()
@@ -328,10 +377,7 @@ namespace CustomRenderer.iOS
 			}
 		}
 
-
-
-
-
+		//Focus
         public void FocusMode_ValueChanged()
         {
 			ThisApp.captureDevice.LockForConfiguration(out Error);
@@ -345,13 +391,12 @@ namespace CustomRenderer.iOS
 					break;
 				case FocusTypes.Locked:
 					ThisApp.captureDevice.FocusMode = AVCaptureFocusMode.Locked;
+					FocusValue_ValueChanged();
 					break;
 			}
-
 			// Unlock device
 			ThisApp.captureDevice.UnlockForConfiguration();
 		}
-
         public void FocusValue_ValueChanged()
         {
 			ThisApp.captureDevice.LockForConfiguration(out Error);
@@ -359,46 +404,5 @@ namespace CustomRenderer.iOS
 			ThisApp.captureDevice.UnlockForConfiguration();
 		}
 
-
-
-        public void ExposureMode_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OffsetValue_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DurationValue_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ISOValue_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void BiasValue_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WhiteBalanceMode_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void TempValue_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void TintValue_ValueChanged()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
