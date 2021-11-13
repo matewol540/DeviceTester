@@ -11,20 +11,38 @@
          <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="10"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-             <Label Grid.Row="1" x:Name="tempLabel" TextColor="White" BackgroundColor="Orange" Text="DUPA_TEMP"/>
-             <ListView Grid.Row="2" x:Name="DeviceListView" IsPullToRefreshEnabled="False" IsEnabled="False" SeparatorColor="WhiteSmoke"  >
+             <ListView Grid.Row="1" x:Name="DeviceListView" IsPullToRefreshEnabled="False" IsEnabled="False" HasUnevenRows="True">
                  <ListView.ItemTemplate>
                      <DataTemplate>
-                         <Views:BluetoothDeviceView BindingContext="{Binding .}" Padding="5"/>
+                         <ViewCell >
+                            <Frame CornerRadius="5" BackgroundColor="#EEECEC" Padding="5">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Label Text="{Binding DeviceName}" TextColor="Black" FontSize="Header"/>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <StackLayout>
+                                            <Label Text="GUID :" TextColor="Black" FontSize="Caption"/>
+                                            <Label Text="{Binding DeviceId}" TextColor="Black" HorizontalOptions="Start" FontSize="Caption"/>
+                                        </StackLayout>
+                                        <StackLayout>
+                                            <Label Text="State :" TextColor="Black" FontSize="Caption"/>
+                                            <Label Text="{Binding State}" TextColor="Black" HorizontalOptions="Center" FontSize="Caption"/>
+                                        </StackLayout>
+                                        <StackLayout>
+                                            <Label Text="Distance :" TextColor="Black" FontSize="Caption"/>
+                                            <Label Text="{Binding Distance}" TextColor="Black" HorizontalOptions="End" FontSize="Caption"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                         </ViewCell>
                     </DataTemplate>
                  </ListView.ItemTemplate>
              </ListView>
              
-            <Components:CustomButton x:Name="BackButton" Grid.Row="3"/>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
          </Grid>
     </ContentPage.Content>
 </ContentPage>

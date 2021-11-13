@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using DeviceTester.Content.Views;
 using DeviceTester.Interfaces;
@@ -34,7 +35,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
             this.ble = CrossBluetoothLE.Current;
             this.adapter = CrossBluetoothLE.Current.Adapter;
-            //this.DeviceListView.ItemsSource = models;
+            this.DeviceListView.ItemsSource = models;
 
             AddBluetoothEventHandlers();
         }
@@ -48,9 +49,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
                     DeviceListView.IsEnabled = true;
                     DeviceListView.IsPullToRefreshEnabled = true;
                     DeviceListView.RefreshCommand = new Command(() => {
-                        DeviceListView.IsRefreshing = true;
                         ScanForDevicesAsync();
-                        DeviceListView.IsRefreshing = false;
                         });
                 }
                 else if (args.OldState == BluetoothState.On)
@@ -71,21 +70,19 @@ namespace DeviceTester.Content.Pages.Pheripheries
                     RSSI = tempDevice.Rssi,
                     State = tempDevice.State
                 };
-                models.Add(tempModel);
+                if (!models.Select(x => x.DeviceId).Contains(tempModel.DeviceId))
+                    models.Add(tempModel);
             };
         }
 
         private async void ScanForDevicesAsync()
         {
             if (adapter.IsScanning == false)
+            {
                 await adapter.StartScanningForDevicesAsync();
-
+                DeviceListView.IsRefreshing = false;
+            }
         }
-
-        
-        
-
-
 
         public void ChangeDescriptionState(bool State)
         {
@@ -99,9 +96,9 @@ namespace DeviceTester.Content.Pages.Pheripheries
                     HeightValue = new GridLength(230, GridUnitType.Absolute);
                     break;
             }
-            _animation = new Xamarin.Forms.Animation(
+            _animation = new Animation(
                         (d) => MainGrid.RowDefinitions[0] = new RowDefinition() { Height = HeightValue });
-            _animation.Commit(this, "GPS Animation", 16, 1000000, Easing.BounceIn, null, null);
+            _animation.Commit(this, "Bluetooth Animation", 16, 1000000, Easing.BounceIn, null, null);
         }
 
         void DeviceListView_Refreshing(System.Object sender, System.EventArgs e)
@@ -109,9 +106,6 @@ namespace DeviceTester.Content.Pages.Pheripheries
             
         }
     }
-
-
-
 
     public class BluetoothPageFactory : PageFactory
     {
