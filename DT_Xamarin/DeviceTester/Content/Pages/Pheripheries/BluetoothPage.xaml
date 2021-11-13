@@ -11,11 +11,12 @@
          <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-
-             <ListView x:Name="DeviceListView" IsPullToRefreshEnabled="True" SeparatorColor="WhiteSmoke">
+             <Label Grid.Row="1" x:Name="tempLabel" TextColor="White" BackgroundColor="Orange" Text="DUPA_TEMP"/>
+             <ListView Grid.Row="2" x:Name="DeviceListView" IsPullToRefreshEnabled="False" IsEnabled="False" SeparatorColor="WhiteSmoke"  >
                  <ListView.ItemTemplate>
                      <DataTemplate>
                          <Views:BluetoothDeviceView BindingContext="{Binding .}" Padding="5"/>
@@ -23,7 +24,7 @@
                  </ListView.ItemTemplate>
              </ListView>
              
-            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="3"/>
          </Grid>
     </ContentPage.Content>
 </ContentPage>

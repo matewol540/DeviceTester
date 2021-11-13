@@ -48,10 +48,18 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
+		<string>bluetooth-central</string>
+		<string>bluetooth-peripheral</string>
 	</array>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>This app requires access to track your location.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app requires access to track your location.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Usage of bluetooth peripheral</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Always usage of bluetooth</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>FaceID aproval</string>
 </dict>
 </plist>
