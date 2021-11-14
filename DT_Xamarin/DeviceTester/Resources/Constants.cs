@@ -22,23 +22,14 @@ namespace DeviceTester.Resources
             new Tuple<PageFactory,Color,Color,String>(new GyroscopePageFactory(),Color.DarkOliveGreen,Color.Lime,"DeviceTester.Resources.Images.Gyroscope.png"),
             new Tuple<PageFactory,Color,Color,String>(new HapticPageFactory(),Color.MidnightBlue,Color.SkyBlue,"DeviceTester.Resources.Images.Haptic.png"),
             new Tuple<PageFactory,Color,Color,String>(new MagnetometerPageFactory(),Color.Navy,Color.PowderBlue,"DeviceTester.Resources.Images.Magnetometer.png"),
-            new Tuple<PageFactory,Color,Color,String>(new PhonePageFactory(),Color.Silver,Color.Silver,"DeviceTester.Resources.Images.MissingFunctionIcon.png"),
-            new Tuple<PageFactory,Color,Color,String>(new SettingsPageFactory(),Color.DimGray,Color.Gainsboro,"DeviceTester.Resources.Images.Settings.png"),
-            new Tuple<PageFactory,Color,Color,String>(new SharingPageFactory(),Color.Silver,Color.Silver,"DeviceTester.Resources.Images.MissingFunctionIcon.png")
         };
         public static readonly List<Tuple<PageFactory, Color, Color, String>> System = new List<Tuple<PageFactory, Color, Color, String>>() {
-            new Tuple<PageFactory,Color,Color,String>(new StepsPageFactory(),Color.DarkViolet,Color.Plum,"DeviceTester.Resources.Images.Steps.png")
+            new Tuple<PageFactory,Color,Color,String>(new SettingsPageFactory(),Color.DimGray,Color.Gainsboro,"DeviceTester.Resources.Images.Settings.png"),
+            new Tuple<PageFactory,Color,Color,String>(new StepsPageFactory(),Color.DarkViolet,Color.Plum,"DeviceTester.Resources.Images.Steps.png"),
+            new Tuple<PageFactory,Color,Color,String>(new SharingPageFactory(),Color.Silver,Color.Silver,""),
+            new Tuple<PageFactory,Color,Color,String>(new PhonePageFactory(),Color.Silver,Color.Silver,"")
+
             //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,""),
-            //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,""),
-            //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"")
-        };
-        public static readonly List<Tuple<PageFactory, Color, Color, String>> Additions = new List<Tuple<PageFactory, Color, Color, String>>() {
-            //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,""),
-            //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,""),
-            //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,""),
-            //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"")
-        };
-        public static readonly List<Tuple<PageFactory, Color, Color, String>> Settings = new List<Tuple<PageFactory, Color, Color, String>>() {
             //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,""),
             //new Tuple<Page,Color,Color,String>(new PeripheryListPageFactory(),Color.MediumVioletRed,Color.DodgerBlue,"")
         };
@@ -46,8 +37,6 @@ namespace DeviceTester.Resources
                 return new List<List<Tuple<PageFactory, Color, Color, String>>> {
                     Pheriphery,
                     System,
-                    Additions,
-                    Settings
                 };
             }
         }

@@ -64,12 +64,8 @@ namespace DeviceTester.Content.Pages
 
         private string getName(List<Tuple<PageFactory, Color, Color,String>> fuctionGroup)
         {
-            if (fuctionGroup == Constants.Additions)
-                return "Additions";
             if (fuctionGroup == Constants.Pheriphery)
                 return "Pheriphery";
-            if (fuctionGroup == Constants.Settings)
-                return "Settings";
             if (fuctionGroup == Constants.System)
                 return "System";
             return "";

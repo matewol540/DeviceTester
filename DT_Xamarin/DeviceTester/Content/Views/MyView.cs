@@ -48,10 +48,9 @@ namespace DeviceTester.Content.Views
             try
             {
                 Console.Out.WriteLine($"Function enter: {nameof(getInsideImage)} with arg {ImageSourceString}");
-                var tmp_ImageSource = ImageSourceString == "" ? ImageSource.FromResource("DeviceTester.Resources.Images.Satellite.png") : ImageSource.FromResource(ImageSourceString);
+                var tmp_ImageSource = ImageSourceString == "" ? ImageSource.FromResource("DeviceTester.Resources.Images.MissingFunctionIcon.png") : ImageSource.FromResource(ImageSourceString);
                 var InsideImage = new Image
                 {
-                    //Source = ImageSource.FromResource()
                     Source = tmp_ImageSource
                 };
 
