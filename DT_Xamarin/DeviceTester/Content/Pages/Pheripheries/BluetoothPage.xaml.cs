@@ -51,6 +51,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
                     DeviceListView.RefreshCommand = new Command(() => {
                         ScanForDevicesAsync();
                         });
+                    DeviceListView.BeginRefresh();
                 }
                 else if (args.OldState == BluetoothState.On)
                 {
@@ -73,14 +74,21 @@ namespace DeviceTester.Content.Pages.Pheripheries
                 if (!models.Select(x => x.DeviceId).Contains(tempModel.DeviceId))
                     models.Add(tempModel);
             };
+            DeviceListView.ItemTapped += (object sender, ItemTappedEventArgs e) => {
+                if (e.Item == null) return;
+                Task.Delay(500);
+                if (sender is ListView lv) lv.SelectedItem = null;
+            };
         }
 
         private async void ScanForDevicesAsync()
         {
             if (adapter.IsScanning == false)
             {
+                RefreshLabel.IsVisible = false;
                 await adapter.StartScanningForDevicesAsync();
                 DeviceListView.IsRefreshing = false;
+                RefreshLabel.IsVisible = true;
             }
         }
 
@@ -99,11 +107,6 @@ namespace DeviceTester.Content.Pages.Pheripheries
             _animation = new Animation(
                         (d) => MainGrid.RowDefinitions[0] = new RowDefinition() { Height = HeightValue });
             _animation.Commit(this, "Bluetooth Animation", 16, 1000000, Easing.BounceIn, null, null);
-        }
-
-        void DeviceListView_Refreshing(System.Object sender, System.EventArgs e)
-        {
-            
         }
     }
 

@@ -3,7 +3,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
-    xmlns:Views="clr-namespace:DeviceTester.Content.Views"
     x:Class="DeviceTester.Content.Pages.Pheripheries.BluetoothPage"
     Style="{StaticResource WindowContainer}">
 
@@ -11,38 +10,46 @@
          <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-             <ListView Grid.Row="1" x:Name="DeviceListView" IsPullToRefreshEnabled="False" IsEnabled="False" HasUnevenRows="True">
+             <Label Grid.Row="1" x:Name="RefreshLabel" Text="Pull to refresh" TextColor="White" HorizontalTextAlignment="Center" FontSize="Caption" FontFamily="Sans" />
+             <ListView Grid.Row="2" x:Name="DeviceListView" IsPullToRefreshEnabled="False" IsEnabled="False" HasUnevenRows="True"  BackgroundColor="Transparent">
                  <ListView.ItemTemplate>
                      <DataTemplate>
-                         <ViewCell >
-                            <Frame CornerRadius="5" BackgroundColor="#EEECEC" Padding="5">
-                                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                    <Label Text="{Binding DeviceName}" TextColor="Black" FontSize="Header"/>
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                        <StackLayout>
-                                            <Label Text="GUID :" TextColor="Black" FontSize="Caption"/>
-                                            <Label Text="{Binding DeviceId}" TextColor="Black" HorizontalOptions="Start" FontSize="Caption"/>
-                                        </StackLayout>
-                                        <StackLayout>
-                                            <Label Text="State :" TextColor="Black" FontSize="Caption"/>
-                                            <Label Text="{Binding State}" TextColor="Black" HorizontalOptions="Center" FontSize="Caption"/>
-                                        </StackLayout>
-                                        <StackLayout>
-                                            <Label Text="Distance :" TextColor="Black" FontSize="Caption"/>
-                                            <Label Text="{Binding Distance}" TextColor="Black" HorizontalOptions="End" FontSize="Caption"/>
+                         <ViewCell>
+                             <Grid Padding="0">
+                                 <Grid.RowDefinitions>
+                                     <RowDefinition Height="*"/>
+                                     <RowDefinition Height="5"/>
+                                 </Grid.RowDefinitions>
+                                <Frame Grid.Row="0" CornerRadius="5" BackgroundColor="#EEECEC" Padding="4">
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Label Text="{Binding DeviceName}" TextColor="Black" FontSize="Header"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <StackLayout>
+                                                <Label Text="GUID :" TextColor="Black" FontSize="Caption"/>
+                                                <Label Text="{Binding DeviceId}" TextColor="Black" HorizontalOptions="Start" FontSize="Caption"/>
+                                            </StackLayout>
+                                            <StackLayout>
+                                                <Label Text="State :" TextColor="Black" FontSize="Caption"/>
+                                                <Label Text="{Binding State}" TextColor="Black" HorizontalOptions="Center" FontSize="Caption"/>
+                                            </StackLayout>
+                                            <StackLayout>
+                                                <Label Text="Distance :" TextColor="Black" FontSize="Caption"/>
+                                                <Label Text="{Binding Distance}" TextColor="Black" HorizontalOptions="End" FontSize="Caption"/>
+                                            </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
-                                </StackLayout>
-                            </Frame>
+                                </Frame>
+                             </Grid>
                          </ViewCell>
                     </DataTemplate>
                  </ListView.ItemTemplate>
              </ListView>
              
-            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="3"/>
          </Grid>
     </ContentPage.Content>
 </ContentPage>

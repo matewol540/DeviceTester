@@ -27,6 +27,14 @@ namespace DeviceTester.Content.Pages.Pheripheries
                 OnPropertyChanged(nameof(Coords));
             }
         }
+        private Double _CompassHeading;
+        public Double CompassHeading { get => _CompassHeading; set
+            {
+                this._CompassHeading = value;
+                OnPropertyChanged(nameof(CompassHeading));
+            }
+        }
+
 
         public GPSPage()
         {
@@ -43,21 +51,45 @@ namespace DeviceTester.Content.Pages.Pheripheries
             BackButton.LinearGradientBrush.GradientStops[0].Color = tempTuple.Item2;
             BackButton.LinearGradientBrush.GradientStops[1].Color = tempTuple.Item3;
 
-
             this.MainGrid.Children.Add(tmpComp, 0, 0);
-            _ = SetupUserLocationAsync();
+            Compass.ReadingChanged += Compass_ReadingChanged;
 
             if (MapTypePicker.Items.Count != 0)
                 MapTypePicker.SelectedIndex = 0;
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            try
+            {
+                if (!Compass.IsMonitoring)
+                    Compass.Start(SensorSpeed.Default);
+                _ = SetupUserLocationAsync();
 
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+            }
+            catch (Exception ex)
+            {
+            }
+        }
 
         protected override void OnDisappearing()
         {
             if (CrossGeolocator.Current.IsListening == true)
                 CrossGeolocator.Current.StopListeningAsync();
+            if (Compass.IsMonitoring)
+                Compass.Stop();
+
             base.OnDisappearing();
         }
+        void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
+        {
+            var data = e.Reading;
+            CompassHeading = data.HeadingMagneticNorth;
+        }
+
         public async Task SetupUserLocationAsync()
         {
             try
