@@ -23,7 +23,6 @@
                  </ImageButton.Behaviors>
              </ImageButton>
 
-
             <Components:CustomButton x:Name="BackButton" Grid.Row="4"/>
          </Grid>
     </ContentPage.Content>

@@ -27,7 +27,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
 
             NavigationPage.SetHasBackButton(this, false);
             var tmpComp = new ViewTittleLabel("Bluetooth", Constants.LoremTemp, this);
-            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(BarometerPageFactory));
+            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(BluetoothPageFactory));
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
             this.MainGrid.Children.Add(tmpComp, 0, 0);
@@ -38,8 +38,13 @@ namespace DeviceTester.Content.Pages.Pheripheries
             this.DeviceListView.ItemsSource = models;
 
             AddBluetoothEventHandlers();
+            if (this.ble.IsOn)
+            {
+                DeviceListView.BeginRefresh();
+                DeviceListView.IsEnabled = true;
+                DeviceListView.IsPullToRefreshEnabled = true;
+            }
         }
-
         private void AddBluetoothEventHandlers()
         {
             ble.StateChanged += (sender, args) =>
@@ -48,19 +53,17 @@ namespace DeviceTester.Content.Pages.Pheripheries
                 {
                     DeviceListView.IsEnabled = true;
                     DeviceListView.IsPullToRefreshEnabled = true;
-                    DeviceListView.RefreshCommand = new Command(() => {
-                        ScanForDevicesAsync();
-                        });
-                    DeviceListView.BeginRefresh();
                 }
                 else if (args.OldState == BluetoothState.On)
                 {
                     models.Clear();
                     DeviceListView.IsEnabled = false;
                     DeviceListView.IsPullToRefreshEnabled = false;
-                    DeviceListView.RefreshCommand = null;
                 }
             };
+            DeviceListView.RefreshCommand = new Command(() => {
+                ScanForDevicesAsync();
+            });
             adapter.DeviceDiscovered += (sender, args) =>
             {
                 var tempDevice = args.Device;
@@ -73,6 +76,12 @@ namespace DeviceTester.Content.Pages.Pheripheries
                 };
                 if (!models.Select(x => x.DeviceId).Contains(tempModel.DeviceId))
                     models.Add(tempModel);
+                else
+                {
+                    var tempID = models.IndexOf(models.First<BluetoothDeviceModel>(x => x.DeviceId == tempModel.DeviceId));
+                    models.RemoveAt(tempID);
+                    models.Insert(tempID, tempModel);
+                }
             };
             DeviceListView.ItemTapped += (object sender, ItemTappedEventArgs e) => {
                 if (e.Item == null) return;

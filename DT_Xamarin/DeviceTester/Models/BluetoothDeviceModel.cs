@@ -26,6 +26,12 @@ namespace DeviceTester.Models
                 return "> 5m";
             }
         }
+
+        internal void UpdateProps(BluetoothDeviceModel tempModel)
+        {
+            this.RSSI = tempModel.RSSI;
+            this.State = tempModel.State;
+        }
     }
 }
 

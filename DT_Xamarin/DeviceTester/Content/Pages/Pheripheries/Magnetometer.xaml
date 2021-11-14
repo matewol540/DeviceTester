@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
     x:Class="DeviceTester.Content.Pages.Pheripheries.MagnetometerPage">
     <ContentPage.Content>
-        
+         <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+
+            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+         </Grid>
     </ContentPage.Content>
 </ContentPage>
