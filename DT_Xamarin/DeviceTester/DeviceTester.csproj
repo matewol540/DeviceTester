@@ -26,6 +26,7 @@
     <PackageReference Include="Plugin.BluetoothLE" Version="6.3.0.19" />
     <PackageReference Include="Plugin.BLE" Version="2.1.2" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.3.0.53" />
+    <PackageReference Include="Plugin.Fingerprint" Version="2.1.4" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -91,6 +92,9 @@
     <None Remove="Plugin.BluetoothLE" />
     <None Remove="Plugin.BLE" />
     <None Remove="Syncfusion.Xamarin.SfListView" />
+    <None Remove="Plugin.Fingerprint" />
+    <None Remove="Resources\Images\Fingerprint.png" />
+    <None Remove="Resources\Images\Fingerprint2.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
@@ -106,6 +110,8 @@
     <EmbeddedResource Include="Resources\Images\Settings.png" />
     <EmbeddedResource Include="Resources\Images\Steps.png" />
     <EmbeddedResource Include="Resources\Images\MissingFunctionIcon.png" />
+    <EmbeddedResource Include="Resources\Images\Fingerprint.png" />
+    <EmbeddedResource Include="Resources\Images\Fingerprint2.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Content\Pages\Pheripheries\SettingsListPage.xaml.cs">

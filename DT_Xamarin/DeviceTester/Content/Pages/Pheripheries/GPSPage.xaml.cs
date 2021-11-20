@@ -172,7 +172,6 @@ namespace DeviceTester.Content.Pages.Pheripheries
             _animation = new Animation(
                         (d) => MainGrid.RowDefinitions[0] = new RowDefinition() { Height = HeightValue });
             _animation.Commit(this, "GPS Animation", 16, 1000000, Easing.BounceIn, null, null);
-            Thread.Sleep(10);
         }
     }
 

@@ -60,6 +60,6 @@
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Always usage of bluetooth</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>FaceID aproval</string>
+	<string>FaceID usage</string>
 </dict>
 </plist>

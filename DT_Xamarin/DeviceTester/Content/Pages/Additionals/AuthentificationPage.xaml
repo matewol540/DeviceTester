@@ -2,8 +2,37 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="DeviceTester.Content.Pages.Additionals.AuthentificationPage">
+    x:Class="DeviceTester.Content.Pages.Additionals.AuthentificationPage"
+    xmlns:Components = "clr-namespace:DeviceTester.Content.CustomComponent"
+    x:Name="AuthPageObj"
+    Style="{StaticResource WindowContainer}">
     <ContentPage.Content>
-        
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                 <RowDefinition Height="50"/>
+                 <RowDefinition Height="*"/>
+                 <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Frame Grid.Row="0" CornerRadius="10" BackgroundColor="Silver" Opacity="0.8" BorderColor="White">
+                        <StackLayout>
+                            <Label x:Name="SHA" BindingContext="{x:Reference AuthPageObj}" Text="{Binding sha,StringFormat='SHA: {0}'}"/>
+                            <Label x:Name="Auth_State" BindingContext="{x:Reference AuthPageObj}" Text="{Binding authState,StringFormat='Auth state: {0}'}"/>
+                            <Label x:Name="Avaible_Auth_Methods" BindingContext="{x:Reference AuthPageObj}" Text="{Binding avaible_Auth_Methods,StringFormat='Auth method: {0}'}"/>
+                            <Label x:Name="Auth_Result" BindingContext="{x:Reference AuthPageObj}" Text="{Binding authResult,StringFormat='Last authentification result: {0}'}"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Grid.Row="1" CornerRadius="25" BackgroundColor="Silver" Opacity="0.8">
+                        <Button x:Name="Auth" Clicked="Auth_Clicked" BindingContext="{x:Reference AuthPageObj}" IsEnabled="{Binding authEnabled}" Text="Authentificate" TextColor="Black" FontSize="Subtitle" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                    </Frame>
+                </Grid>
+            </StackLayout>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+         </Grid>
     </ContentPage.Content>
 </ContentPage>
