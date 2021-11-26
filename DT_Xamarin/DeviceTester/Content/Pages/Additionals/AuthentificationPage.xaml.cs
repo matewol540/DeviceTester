@@ -24,16 +24,6 @@ namespace DeviceTester.Content.Pages.Additionals
             }
         }
 
-        private String _sha = "";
-        public String sha
-        {
-            get => _sha; set
-            {
-                this._sha = value;
-                OnPropertyChanged(nameof(sha));
-            }
-        }
-
         private String _authState = "";
         public String authState
         {
@@ -86,7 +76,6 @@ namespace DeviceTester.Content.Pages.Additionals
             authEnabled = await CrossFingerprint.Current.IsAvailableAsync();
             authState = authEnabled?"Enabled":"Disabled";
             avaible_Auth_Methods = (await CrossFingerprint.Current.GetAuthenticationTypeAsync()).ToString();
-            sha = "-";
             authResult = "Not performed";
         }
 
@@ -114,10 +103,8 @@ namespace DeviceTester.Content.Pages.Additionals
                 AllowAlternativeAuthentication = true
             });
             authResult = result.Status.ToString();
-            if (!result.Authenticated)
-                await DisplayAlert("Authentification failed!", result.ErrorMessage, "Ok");
+            await this.Navigation.PushModalAsync(new ResponseModal(result));
         }
-
     }
 
 

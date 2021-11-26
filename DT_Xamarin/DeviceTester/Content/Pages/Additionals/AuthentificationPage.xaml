@@ -14,21 +14,20 @@
                  <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="1">
-                <Grid>
+                <Grid Padding="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Frame Grid.Row="0" CornerRadius="10" BackgroundColor="Silver" Opacity="0.8" BorderColor="White">
                         <StackLayout>
-                            <Label x:Name="SHA" BindingContext="{x:Reference AuthPageObj}" Text="{Binding sha,StringFormat='SHA: {0}'}"/>
                             <Label x:Name="Auth_State" BindingContext="{x:Reference AuthPageObj}" Text="{Binding authState,StringFormat='Auth state: {0}'}"/>
                             <Label x:Name="Avaible_Auth_Methods" BindingContext="{x:Reference AuthPageObj}" Text="{Binding avaible_Auth_Methods,StringFormat='Auth method: {0}'}"/>
                             <Label x:Name="Auth_Result" BindingContext="{x:Reference AuthPageObj}" Text="{Binding authResult,StringFormat='Last authentification result: {0}'}"/>
                         </StackLayout>
                     </Frame>
-                    <Frame Grid.Row="1" CornerRadius="25" BackgroundColor="Silver" Opacity="0.8">
-                        <Button x:Name="Auth" Clicked="Auth_Clicked" BindingContext="{x:Reference AuthPageObj}" IsEnabled="{Binding authEnabled}" Text="Authentificate" TextColor="Black" FontSize="Subtitle" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                    <Frame Grid.Row="1" CornerRadius="25" BackgroundColor="Silver" Opacity="0.8" BorderColor="White">
+                        <Button x:Name="Auth" Clicked="Auth_Clicked" BindingContext="{x:Reference AuthPageObj}" IsEnabled="{Binding authEnabled}" Text="Authentificate" FontSize="Subtitle" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" TextColor="White"/>
                     </Frame>
                 </Grid>
             </StackLayout>
