@@ -1,9 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="DeviceTester.Content.Pages.SystemF.DeviceInfoPage">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
+    x:Class="DeviceTester.Content.Pages.SystemF.DeviceInfoPage"
+    Style="{StaticResource WindowContainer}">
     <ContentPage.Content>
-        
+            <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+                <Frame CornerRadius="10" Padding="10" BackgroundColor="DimGray" Opacity="0.8" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
+                        <Label x:Name="DeviceType"/>
+                        <Label x:Name="Idiom" />
+                        <Label x:Name="Manufacturer"/>
+                        <Label x:Name="Model" />
+                        <Label x:Name="Name" />
+                        <Label x:Name="Platform" />
+                        <Label x:Name="OSVerion" />
+                    </StackLayout>
+                </Frame>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+         </Grid>
     </ContentPage.Content>
 </ContentPage>

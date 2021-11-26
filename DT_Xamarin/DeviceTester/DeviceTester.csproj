@@ -98,6 +98,7 @@
     <None Remove="Resources\Images\ApproveIcon.png" />
     <None Remove="Resources\Images\DeniedIcon.png" />
     <None Remove="Resources\Images\Close.png" />
+    <None Remove="Resources\Images\Information.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
@@ -118,6 +119,7 @@
     <EmbeddedResource Include="Resources\Images\ApproveIcon.png" />
     <EmbeddedResource Include="Resources\Images\DeniedIcon.png" />
     <EmbeddedResource Include="Resources\Images\Close.png" />
+    <EmbeddedResource Include="Resources\Images\Information.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Content\Pages\Pheripheries\SettingsListPage.xaml.cs">
