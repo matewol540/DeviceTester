@@ -7,7 +7,7 @@ using DeviceTester.Interfaces;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DeviceTester.Content.Pages
+namespace DeviceTester.Content.Pages.SystemF
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsListPage : ContentPage

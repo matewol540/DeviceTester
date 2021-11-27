@@ -38,7 +38,6 @@
     <Folder Include="Content\Pages\Pheripheries\" />
     <Folder Include="Content\Pages\SystemF\" />
     <Folder Include="Content\Pages\Additionals\" />
-    <Folder Include="MarkupExtension\" />
     <Folder Include="Helper\" />
     <Folder Include="Resources\Fonts\" />
     <Folder Include="Resources\Images\" />
@@ -51,7 +50,6 @@
     <None Remove="RedCorners" />
     <None Remove="RedCorners.Forms" />
     <None Remove="Newtonsoft.Json" />
-    <None Remove="MarkupExtension\" />
     <None Remove="Helper\" />
     <None Remove="Resources\Fonts\" />
     <None Remove="Resources\Images\" />
@@ -99,6 +97,7 @@
     <None Remove="Resources\Images\DeniedIcon.png" />
     <None Remove="Resources\Images\Close.png" />
     <None Remove="Resources\Images\Information.png" />
+    <None Remove="Resources\Images\SharingIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
@@ -120,11 +119,6 @@
     <EmbeddedResource Include="Resources\Images\DeniedIcon.png" />
     <EmbeddedResource Include="Resources\Images\Close.png" />
     <EmbeddedResource Include="Resources\Images\Information.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Content\Pages\Pheripheries\SettingsListPage.xaml.cs">
-      <DependentUpon>SettingsListPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <EmbeddedResource Include="Resources\Images\SharingIcon.png" />
   </ItemGroup>
 </Project>

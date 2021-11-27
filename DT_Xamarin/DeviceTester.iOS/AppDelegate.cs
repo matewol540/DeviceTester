@@ -9,6 +9,7 @@ using Xamarin.Forms.Platform.iOS;
 using Plugin.Segmented.Control.iOS;
 using AVFoundation;
 using DeviceTester.Content.Views;
+using DeviceTester.Interfaces;
 
 namespace DeviceTester.iOS
 {
@@ -40,6 +41,7 @@ namespace DeviceTester.iOS
             Xamarin.FormsMaps.Init();
             Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
             LoadApplication(new App());
+            DependencyService.Register<IPhotoPicker, PhotoPicker>();
             app.StatusBarStyle = UIStatusBarStyle.DarkContent;
             return base.FinishedLaunching(app, options);
         }

@@ -25,12 +25,11 @@ namespace DeviceTester.Resources
             new Tuple<PageFactory,Color,Color,String>(new MagnetometerPageFactory(),Color.Navy,Color.PowderBlue,"DeviceTester.Resources.Images.Magnetometer.png"),
         };
         public static readonly List<Tuple<PageFactory, Color, Color, String>> System = new List<Tuple<PageFactory, Color, Color, String>>() {
-            new Tuple<PageFactory,Color,Color,String>(new AuthentificationPageFactory(),Color.RoyalBlue,Color.LavenderBlush,"DeviceTester.Resources.Images.Fingerprint2.png"),
+            new Tuple<PageFactory,Color,Color,String>(new AuthentificationPageFactory(),Color.Navy,Color.SkyBlue,"DeviceTester.Resources.Images.Fingerprint2.png"),
             new Tuple<PageFactory,Color,Color,String>(new DeviceInfoPageFactory(),Color.LightSlateGray,Color.DarkSlateGray,"DeviceTester.Resources.Images.Information.png"),
             new Tuple<PageFactory,Color,Color,String>(new SettingsPageFactory(),Color.DimGray,Color.Gainsboro,"DeviceTester.Resources.Images.Settings.png"),
             new Tuple<PageFactory,Color,Color,String>(new StepsPageFactory(),Color.DarkViolet,Color.Plum,"DeviceTester.Resources.Images.Steps.png"),
-            new Tuple<PageFactory,Color,Color,String>(new SharingPageFactory(),Color.Silver,Color.Silver,""),
-            new Tuple<PageFactory,Color,Color,String>(new PhonePageFactory(),Color.Silver,Color.Silver,"")
+            new Tuple<PageFactory,Color,Color,String>(new SharingPageFactory(),Color.DarkViolet,Color.MistyRose,"DeviceTester.Resources.Images.SharingIcon.png"),
         };
         public static List<List<Tuple<PageFactory, Color, Color, String>>> GetFunctions { get {
                 return new List<List<Tuple<PageFactory, Color, Color, String>>> {
