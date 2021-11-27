@@ -21,7 +21,7 @@ namespace DeviceTester.Content.Pages.Additionals
             InitializeComponent();
             var tmpComp = new ViewTittleLabel("Text recognition", Constants.LoremTemp, this);
 
-            var tempTuple = Constants.System.Find(x => x.Item1.GetType() == typeof(SharingPageFactory));
+            var tempTuple = Constants.System.Find(x => x.Item1.GetType() == typeof(TextSpeechPageFactory));
 
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
