@@ -23,6 +23,9 @@ namespace DeviceTester.Content.Pages.Pheripheries
         private Xamarin.Forms.Animation _animation;
         RotationModel urhoApp;
         ViewTittleLabel LabelTittle;
+        private bool Disabled = false;
+        private bool AlertDisplayed = false;
+
         public AccelerometerPage()
         {
             InitializeComponent();
@@ -63,9 +66,11 @@ namespace DeviceTester.Content.Pages.Pheripheries
                 if (!state)
                 {
                     Accelerometer.ReadingChanged -= Accelerometer_ReadingChanged;
+                    Accelerometer.ShakeDetected -= Accelerometer_ShakeDetectedAsync;
                     Accelerometer.Stop();
                     return;
                 }
+                Accelerometer.ShakeDetected += Accelerometer_ShakeDetectedAsync;
                 Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
                 SensorSpeed sensor = (SensorSpeed)(SpeedPicker as Picker).SelectedItem;
 
@@ -75,6 +80,16 @@ namespace DeviceTester.Content.Pages.Pheripheries
             {
                 await DisplayAlert("Feature not supported", "Sorry, but your device does not support selected feature", "Return");
                 await Navigation.PopModalAsync();
+            }
+        }
+
+        private async void Accelerometer_ShakeDetectedAsync(object sender, EventArgs e)
+        {
+            if (!AlertDisplayed && !Disabled)
+            {
+                AlertDisplayed = true;
+                Disabled = await DisplayAlert("Important", "Detected shaking", "Disable alerts","Understood");
+                AlertDisplayed = false;
             }
         }
 
