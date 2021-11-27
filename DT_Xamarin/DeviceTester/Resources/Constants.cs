@@ -30,7 +30,8 @@ namespace DeviceTester.Resources
             new Tuple<PageFactory,Color,Color,String>(new SettingsPageFactory(),Color.DimGray,Color.Gainsboro,"DeviceTester.Resources.Images.Settings.png"),
             new Tuple<PageFactory,Color,Color,String>(new StepsPageFactory(),Color.DarkViolet,Color.Plum,"DeviceTester.Resources.Images.Steps.png"),
             new Tuple<PageFactory,Color,Color,String>(new SharingPageFactory(),Color.DarkViolet,Color.MistyRose,"DeviceTester.Resources.Images.SharingIcon.png"),
-        };
+            new Tuple<PageFactory,Color,Color,String>(new TextSpeechPageFactory(),Color.SteelBlue,Color.LightSteelBlue,"DeviceTester.Resources.Images.Speaking.png"),
+        }; 
         public static List<List<Tuple<PageFactory, Color, Color, String>>> GetFunctions { get {
                 return new List<List<Tuple<PageFactory, Color, Color, String>>> {
                     Pheriphery,
