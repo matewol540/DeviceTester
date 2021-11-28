@@ -14,23 +14,23 @@
             </Grid.RowDefinitions>
                 <Frame CornerRadius="10" Padding="10" BackgroundColor="DimGray" Opacity="0.8" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
                     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
-                        <Label x:Name="DeviceType"/>
-                        <Label x:Name="Idiom" />
-                        <Label x:Name="Manufacturer"/>
-                        <Label x:Name="Model" />
-                        <Label x:Name="Name" />
-                        <Label x:Name="Platform" />
-                        <Label x:Name="OSVerion" />
+                        <Label TextColor="White" x:Name="DeviceType" />
+                        <Label TextColor="White" x:Name="Idiom" />
+                        <Label TextColor="White" x:Name="Manufacturer"/>
+                        <Label TextColor="White" x:Name="Model" />
+                        <Label TextColor="White" x:Name="Name" />
+                        <Label TextColor="White" x:Name="Platform" />
+                        <Label TextColor="White" x:Name="OSVerion" />
                     </StackLayout>
                 </Frame>
-                <Frame CornerRadius="10" Padding="10" BackgroundColor="DimGray" Opacity="0.8" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+                <Frame CornerRadius="10" Padding="10" BackgroundColor="DimGray" Opacity="0.8" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center">
                     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
-                        <Label x:Name="BatteryLoad"/>
-                        <Label x:Name="State" />
-                        <Label x:Name="Source"/>
+                        <Label TextColor="White" x:Name="BatteryLoad"/>
+                        <Label TextColor="White" x:Name="State" />
+                        <Label TextColor="White" x:Name="Source"/>
                     </StackLayout>
                 </Frame>
-            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="3"/>
          </Grid>
     </ContentPage.Content>
 </ContentPage>
