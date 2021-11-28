@@ -28,6 +28,7 @@ namespace DeviceTester.Resources
             new Tuple<PageFactory,Color,Color,String>(new AuthentificationPageFactory(),Color.Navy,Color.SkyBlue,"DeviceTester.Resources.Images.Fingerprint2.png"),
             new Tuple<PageFactory,Color,Color,String>(new DeviceInfoPageFactory(),Color.LightSlateGray,Color.DarkSlateGray,"DeviceTester.Resources.Images.Information.png"),
             new Tuple<PageFactory,Color,Color,String>(new NetworkingPageFactory(),Color.DarkOliveGreen,Color.GreenYellow,"DeviceTester.Resources.Images.Connection.png"),
+            new Tuple<PageFactory,Color,Color,String>(new NotificationPageFactory(),Color.PaleVioletRed,Color.MistyRose,"DeviceTester.Resources.Images.Notification.png"),
             new Tuple<PageFactory,Color,Color,String>(new SettingsPageFactory(),Color.DimGray,Color.Gainsboro,"DeviceTester.Resources.Images.Settings.png"),
             new Tuple<PageFactory,Color,Color,String>(new StepsPageFactory(),Color.DarkViolet,Color.Plum,"DeviceTester.Resources.Images.Steps.png"),
             new Tuple<PageFactory,Color,Color,String>(new SharingPageFactory(),Color.DarkViolet,Color.MistyRose,"DeviceTester.Resources.Images.SharingIcon.png"),

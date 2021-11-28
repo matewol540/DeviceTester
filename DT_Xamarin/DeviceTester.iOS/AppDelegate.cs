@@ -10,6 +10,7 @@ using Plugin.Segmented.Control.iOS;
 using AVFoundation;
 using DeviceTester.Content.Views;
 using DeviceTester.Interfaces;
+using UserNotifications;
 
 namespace DeviceTester.iOS
 {
@@ -40,7 +41,10 @@ namespace DeviceTester.iOS
             SegmentedControlRenderer.Initialize();
             Xamarin.FormsMaps.Init();
             Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
+            UNUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
+
             LoadApplication(new App());
+            DependencyService.Register<INotification, Notification>();
             DependencyService.Register<IPhotoPicker, PhotoPicker>();
             app.StatusBarStyle = UIStatusBarStyle.DarkContent;
             return base.FinishedLaunching(app, options);

@@ -61,5 +61,9 @@
 	<string>Always usage of bluetooth</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>FaceID usage</string>
+	<key>UNNotificationExtensionInitialContentSizeRatio</key>
+	<array>
+		<string></string>
+	</array>
 </dict>
 </plist>

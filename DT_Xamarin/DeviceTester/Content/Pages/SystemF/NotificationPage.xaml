@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
+    x:Class="DeviceTester.Content.Pages.SystemF.NotificationPage"
+    Style="{StaticResource WindowContainer}">
+    <ContentPage.Content>
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <StackLayout Margin="0,35,0,0"
+                         Grid.Row="1"
+                         x:Name="stackLayout">
+                 <Label Text="Click the button below to create a local notification."
+                        TextColor="Red"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Start" />
+                 <Button Text="Create Notification"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Start"
+                         Clicked="OnSendClick" />
+                 <Label Text="Click the button below to schedule a local notification for in 10 seconds time."
+                        TextColor="Red"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Start" />
+                 <Button Text="Create Notification"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Start"
+                         Clicked="OnScheduleClick" />
+            </StackLayout>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+         </Grid>
+    </ContentPage.Content>
+</ContentPage>
