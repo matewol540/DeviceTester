@@ -23,6 +23,8 @@ namespace DeviceTester.Content.Pages.SystemF
             BackButton.LinearGradientBrush.GradientStops[0].Color = tempTuple.Item2;
             BackButton.LinearGradientBrush.GradientStops[1].Color = tempTuple.Item3;
             this.MainGrid.Children.Add(tmpComp, 0, 0);
+
+            Battery.BatteryInfoChanged += Battery_BatteryInfoChanged;
         }
 
         protected override void OnAppearing()
@@ -35,8 +37,18 @@ namespace DeviceTester.Content.Pages.SystemF
             this.Name.Text = $"Device name: {DeviceInfo.Name}";
             this.Platform.Text = $"OS type: {DeviceInfo.Platform}";
             this.OSVerion.Text = $"OS version: {DeviceInfo.Version}";
+
+            this.BatteryLoad.Text = $"Charge [%]: {Battery.ChargeLevel * 100}";
+            this.State.Text = $"State: {Battery.State}";
+            this.Source.Text = $"Source: {Battery.PowerSource}";
         }
 
+        void Battery_BatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
+        {
+            BatteryLoad.Text = $"Charge [%]: {e.ChargeLevel*100}";
+            State.Text = $"State: {e.State}";
+            Source.Text = $"Source: {e.PowerSource}";
+        }
         public void ChangeDescriptionState(bool State)
         {
             GridLength HeightValue = new GridLength(50, GridUnitType.Absolute);
