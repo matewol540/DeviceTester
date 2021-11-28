@@ -99,6 +99,7 @@
     <None Remove="Resources\Images\Information.png" />
     <None Remove="Resources\Images\SharingIcon.png" />
     <None Remove="Resources\Images\Speaking.png" />
+    <None Remove="Resources\Images\Connection.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
@@ -122,5 +123,6 @@
     <EmbeddedResource Include="Resources\Images\Information.png" />
     <EmbeddedResource Include="Resources\Images\SharingIcon.png" />
     <EmbeddedResource Include="Resources\Images\Speaking.png" />
+    <EmbeddedResource Include="Resources\Images\Connection.png" />
   </ItemGroup>
 </Project>
