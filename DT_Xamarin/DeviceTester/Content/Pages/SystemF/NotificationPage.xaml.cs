@@ -11,8 +11,32 @@ namespace DeviceTester.Content.Pages.SystemF
     {
         private Animation _animation;
         INotification notificationManager;
-        int notificationNumber = 0;
 
+        private String _Tittle;
+        public String Tittle { get => _Tittle; set
+            {
+                this._Tittle = value;
+                OnPropertyChanged(nameof(Tittle));
+            }
+        }
+
+        private String _Message;
+        public String Message
+        {
+            get => _Message; set
+            {
+                this._Message = value;
+                OnPropertyChanged(nameof(Message));
+            }
+        }
+
+        private int _Delay;
+        public int Delay { get => _Delay;set
+            {
+                this._Delay = value;
+                OnPropertyChanged(nameof(Delay));
+            }
+        }
 
         public NotificationPage()
         {
@@ -53,36 +77,38 @@ namespace DeviceTester.Content.Pages.SystemF
         }
 
 
-
-
         void OnSendClick(object sender, EventArgs e)
         {
-            notificationNumber++;
-            string title = $"Local Notification #{notificationNumber}";
-            string message = $"You have now received {notificationNumber} notifications!";
-            notificationManager.SendNotification(title, message);
+            if (Delay == 0)
+                notificationManager.SendNotification(Tittle, Message);
+            else
+                notificationManager.SendNotification(Tittle, Message, DateTime.Now.AddSeconds(Delay));
         }
 
-        void OnScheduleClick(object sender, EventArgs e)
+        void OnSendRemoteClick(object sender,EventArgs e)
         {
-            notificationNumber++;
-            string title = $"Local Notification #{notificationNumber}";
-            string message = $"You have now received {notificationNumber} notifications!";
-            notificationManager.SendNotification(title, message, DateTime.Now.AddSeconds(10));
+            throw new NotImplementedException();
         }
 
         void ShowNotification(string title, string message)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                var msg = new Label()
+                var frame = new Frame()
                 {
-                    Text = $"Notification Received:\nTitle: {title}\nMessage: {message}"
+                    CornerRadius = 10,
+                    BackgroundColor = Color.FromHex("#333333"),
+                    Content = new Label()
+                    {
+                        VerticalOptions = LayoutOptions.FillAndExpand,
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        TextColor = Color.White,
+                        Text = $"Title: {title}\nMessage: {message}"
+                    }
                 };
-                stackLayout.Children.Add(msg);
+                stackLayout.Children.Add(frame);
             });
         }
-
     }
 
     public class NotificationEventArgs : EventArgs

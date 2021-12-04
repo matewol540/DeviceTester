@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
     x:Class="DeviceTester.Content.Pages.SystemF.NotificationPage"
-    Style="{StaticResource WindowContainer}">
+    Style="{StaticResource WindowContainer}"
+    x:Name="NotificationObject">
     <ContentPage.Content>
         <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
@@ -12,25 +13,40 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <StackLayout Margin="0,35,0,0"
-                         Grid.Row="1"
-                         x:Name="stackLayout">
-                 <Label Text="Click the button below to create a local notification."
-                        TextColor="Red"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Start" />
-                 <Button Text="Create Notification"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Start"
-                         Clicked="OnSendClick" />
-                 <Label Text="Click the button below to schedule a local notification for in 10 seconds time."
-                        TextColor="Red"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Start" />
-                 <Button Text="Create Notification"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Start"
-                         Clicked="OnScheduleClick" />
+            <StackLayout Grid.Row="1" Margin="0,35,0,0">
+                <Frame CornerRadius="10" BackgroundColor="Silver" Opacity="0.8" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Tittle"  Grid.Column="0" Grid.Row="0"  TextColor="White" FontFamily="Sans" />
+                        <Label Text="Message" Grid.Column="0" Grid.Row="1" TextColor="White" FontFamily="Sans" />
+                        <Label BindingContext="{x:Reference DelaySlider}" Text="{Binding Value,StringFormat='Delay: [{0}s]'}"   Grid.Column="0" Grid.Row="2"   TextColor="White" FontFamily="Sans" />
+
+
+                        <Entry Grid.Column="1" Grid.Row="0" BindingContext="{x:Reference NotificationObject}" Text="{Binding Tittle}" Placeholder="..." BackgroundColor="Black" TextColor="White"/>
+                        <Editor Grid.Column="1" Grid.Row="1" BindingContext="{x:Reference NotificationObject}" Text="{Binding Message}" Placeholder="..." BackgroundColor="Black" TextColor="White" />
+                        <Slider x:Name="DelaySlider" Grid.Column="1" Grid.Row="2" BindingContext="{x:Reference NotificationObject}" Value="{Binding Delay}" Maximum="30" Minimum="0"/>
+                        <Button Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="0" Clicked="OnSendClick" Text="Send Notification" TextColor="White" FontFamily="Sans" BackgroundColor="Black" FontSize="Medium"/>
+                        <Button Grid.ColumnSpan="2" Grid.Row="4" Grid.Column="0" Clicked="OnSendRemoteClick" Text="Send remote notification" TextColor="White" FontFamily="Sans" BackgroundColor="Black" FontSize="Medium"/>
+                    </Grid>
+                </Frame>
+                <Frame CornerRadius="10" BackgroundColor="Silver" Opacity="0.8" >
+                    <StackLayout>
+                        <Label Text="Received Notifications" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
+                        <ScrollView>
+                            <StackLayout x:Name="stackLayout" Background="Silver" Opacity="0.7"/>
+                        </ScrollView>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
             <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
          </Grid>
