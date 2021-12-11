@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DeviceTester.Content.Views;
 using DeviceTester.Interfaces;
 using DeviceTester.Resources;
+using Plugin.FirebasePushNotification;
 using Xamarin.Forms;
 
 namespace DeviceTester.Content.Pages.SystemF
@@ -57,7 +58,6 @@ namespace DeviceTester.Content.Pages.SystemF
                 ShowNotification(evtData.Title, evtData.Message);
             };
             notificationManager.Initialize();
-
         }
         public void ChangeDescriptionState(bool State)
         {
@@ -87,6 +87,9 @@ namespace DeviceTester.Content.Pages.SystemF
 
         void OnSendRemoteClick(object sender,EventArgs e)
         {
+            var fcmCurrent = CrossFirebasePushNotification.Current;
+
+
             throw new NotImplementedException();
         }
 

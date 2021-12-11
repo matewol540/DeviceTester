@@ -34,14 +34,14 @@ namespace DeviceTester.Resources
             new Tuple<PageFactory,Color,Color,String>(new SharingPageFactory(),Color.DarkViolet,Color.MistyRose,"DeviceTester.Resources.Images.SharingIcon.png"),
             new Tuple<PageFactory,Color,Color,String>(new TextSpeechPageFactory(),Color.SteelBlue,Color.LightSteelBlue,"DeviceTester.Resources.Images.Speaking.png"),
         }; 
-        public static List<List<Tuple<PageFactory, Color, Color, String>>> GetFunctions { get {
-                return new List<List<Tuple<PageFactory, Color, Color, String>>> {
-                    Pheriphery,
-                    System,
-                };
+        public static List<Tuple<PageFactory, Color, Color, String>> GetFunctions {
+            get {
+                var tempList = new List<Tuple<PageFactory, Color, Color, String>>();
+                tempList.AddRange(Pheriphery);
+                tempList.AddRange(System);
+                return tempList;
             }
         }
-
 
         public static String LoremTemp = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tincidunt congue tortor, nec dapibus lectus convallis quis. Nulla lorem neque, aliquam non luctus et, scelerisque quis enim. Quisque vitae turpis ut nulla placerat rutrum eget id orci. Fusce tempor accumsan nisl, ornare dignissim ante ullamcorper sit amet. Sed volutpat justo enim, quis aliquam purus ultrices tincidunt. Sed scelerisque rutrum neque, quis rutrum lacus convallis id. Aliquam et nunc aliquet, venenatis purus id, eleifend eros. In ac lectus placerat, sagittis urna sed, condimentum lorem. Mauris volutpat sem sem, nec aliquam velit imperdiet quis.
 
