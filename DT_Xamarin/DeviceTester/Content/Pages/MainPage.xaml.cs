@@ -77,11 +77,15 @@ namespace DeviceTester.Content.Pages
 
         void SearchBox_TextChanged(Object sender, TextChangedEventArgs e)
         {
+            var CurrentVisibleCount = 0;
+            if (!String.IsNullOrEmpty(e.NewTextValue))
+                CurrentVisibleCount = FeatureViews.Keys.Count(x => x.IsVisible);
             FeatureViews.Keys.ToList().ForEach(x =>
             {
                 x.IsVisible = x.page.getPageName().StartsWith(e.NewTextValue);
             });
-            DisplayList(FeatureViews);
+            if (CurrentVisibleCount != FeatureViews.Keys.Count(x => x.IsVisible))
+                DisplayList(FeatureViews);
         }
     }
 }
