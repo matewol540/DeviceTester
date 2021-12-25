@@ -28,7 +28,7 @@ namespace DeviceTester.Content.Pages
         private Dictionary<MyView, RowDefinition> LoadFeatures()
         {
             var tempDictionary = new Dictionary<MyView, RowDefinition>();
-            Constants.GetFunctions.ForEach(function =>
+            Constants.GetFunctions.OrderBy(x => x.Item1.getPageName()).ToList().ForEach(function =>
             {
                 var functionIndex = Constants.GetFunctions.IndexOf(function);
 
@@ -86,6 +86,12 @@ namespace DeviceTester.Content.Pages
             });
             if (CurrentVisibleCount != FeatureViews.Keys.Count(x => x.IsVisible))
                 DisplayList(FeatureViews);
+        }
+
+        void ScrollPage_Scrolled(System.Object sender, Xamarin.Forms.ScrolledEventArgs e)
+        {
+            if (this.SearchBox.IsFocused)
+                this.SearchBox.Unfocus();
         }
     }
 }

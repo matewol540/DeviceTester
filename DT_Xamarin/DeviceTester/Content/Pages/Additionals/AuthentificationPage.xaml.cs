@@ -58,9 +58,9 @@ namespace DeviceTester.Content.Pages.Additionals
         public AuthentificationPage()
         {
             InitializeComponent();
-            var tmpComp = new ViewTittleLabel("Authentification", Constants.LoremTemp, this);
+            var tmpComp = new ViewTittleLabel("Authentification", Constants.Authentification, this);
 
-            var tempTuple = Constants.System.Find(x => x.Item1.GetType() == typeof(AuthentificationPageFactory));
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(AuthentificationPageFactory));
 
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;

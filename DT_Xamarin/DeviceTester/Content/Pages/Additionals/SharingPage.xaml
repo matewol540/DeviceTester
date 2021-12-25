@@ -15,11 +15,13 @@
                  <RowDefinition Height="*"/>
                  <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <StackLayout HorizontalOptions="FillAndExpand" Grid.Row="1" Orientation="Horizontal" Padding="10" >
-                <Button x:Name="SelectImage" Clicked="SelectImage_Clicked"  Text="Select Image" TextColor="White" HorizontalOptions="StartAndExpand" />
-                <Button x:Name="ShareImage" Clicked="ShareImage_Clicked" Text="Share file" TextColor="White" HorizontalOptions="EndAndExpand"/>
-            </StackLayout>
-             <Frame CornerRadius="10" Grid.Row="2" BackgroundColor="Transparent" IsClippedToBounds="True">
+             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand"   Padding="10">
+                 <Button x:Name="SelectImage" Style="{StaticResource BasicButton}"
+                         Clicked="SelectImage_Clicked"  Text="Select Image" HorizontalOptions="StartAndExpand" />
+                 <Button x:Name="ShareImage" Style="{StaticResource BasicButton}"
+                         Clicked="ShareImage_Clicked" Text="Share file" HorizontalOptions="EndAndExpand"/>
+             </StackLayout>
+             <Frame Grid.Row="2" Style="{x:StaticResource RoundingContainer}">
                 <Image x:Name="SelectedImage" />
              </Frame>
             <Components:CustomButton x:Name="BackButton" Grid.Row="3"/>

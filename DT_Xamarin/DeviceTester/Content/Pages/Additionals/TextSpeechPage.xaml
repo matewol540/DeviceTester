@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
     x:Class="DeviceTester.Content.Pages.Additionals.TextSpeechPage"
     x:Name="textSpechObj"
     Style="{StaticResource WindowContainer}">
@@ -10,27 +11,34 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
-             <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10">
-                 <Picker Grid.Row="5" x:Name="LocalePicker" HorizontalTextAlignment="Center" BindingContext="{x:Reference textSpechObj}" ItemsSource="{Binding localesColl}"  ItemDisplayBinding="{Binding Country}"/>
-
-                 <Entry x:Name="UserText" HorizontalOptions="FillAndExpand" Placeholder="Enter here text to be readen..."/>
-
-                 <StackLayout Orientation="Horizontal" Padding="5">
-                    <Label Text="Pitch" HorizontalOptions="Start"/>
-                    <Slider x:Name="Pitch" HorizontalOptions="FillAndExpand" Minimum="0" Maximum="2" Value="1" WidthRequest="300"/>
-                 </StackLayout>
-
-                 <StackLayout Orientation="Horizontal" Padding="5">
-                    <Label Text="Volume" HorizontalOptions="Start"/>
-                    <Slider x:Name="Volume" HorizontalOptions="FillAndExpand" Minimum="0" Maximum="1" Value="0.5" WidthRequest="300"/>
-                 </StackLayout>
-
-                 <Button x:Name="ReadText" Clicked="ReadText_Clicked" Text="Read" FontFamily="Sans" TextColor="White"/>
-
-             </StackLayout>
-            <Components:CustomButton x:Name="BackButton"  Grid.Row="2"/>
+             <Frame Style="{StaticResource OuterTextContainer}" Grid.Row="1" Padding="15">
+                <StackLayout  HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" >
+                    <Picker Grid.Row="5" x:Name="LocalePicker" Style="{StaticResource BasicPicker}"
+                            BindingContext="{x:Reference textSpechObj}"
+                            ItemsSource="{Binding localesColl}" ItemDisplayBinding="{Binding Country}"
+                            HorizontalTextAlignment="Center"/>
+                    <Editor x:Name="UserText" Style="{StaticResource BasicEditor}" Placeholder="Enter here text to be readen..." VerticalOptions="FillAndExpand"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                       <Label Style="{StaticResource ValueLabelStyle}" Text="Pitch" Grid.Column="0" Grid.Row="0"/>
+                       <Slider x:Name="Pitch" Minimum="0" Maximum="2" Value="1" Grid.Column="1" Grid.Row="0"/>
+                       <Label Style="{StaticResource ValueLabelStyle}" Text="Volume" Grid.Column="0" Grid.Row="1"/>
+                       <Slider x:Name="Volume"  Minimum="0" Maximum="1" Value="0.5" Grid.Column="1" Grid.Row="1" />
+                    </Grid>
+                    <Button x:Name="ReadText" VerticalOptions="End" Clicked="ReadText_Clicked" Text="Read" Style="{StaticResource BasicButton}"/>
+                </StackLayout>
+             </Frame>
+            <Components:CustomButton x:Name="BackButton"  Grid.Row="3"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

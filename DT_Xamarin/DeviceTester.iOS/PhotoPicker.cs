@@ -24,7 +24,6 @@ namespace DeviceTester.iOS
             };
             imagePicker.FinishedPickingMedia += OnImagePickerFinishedPickingMedia;
             imagePicker.Canceled += OnImagePickerCancelled;
-
             UIWindow window = UIApplication.SharedApplication.KeyWindow;
             var vc = window.RootViewController;
 

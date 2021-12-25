@@ -111,7 +111,7 @@ namespace CustomRenderer.iOS
 
         private void SetupControls()
         {
-			headerLabel = new ViewTittleLabel("Camera", Constants.LoremTemp, CameraBasePage);
+			headerLabel = new ViewTittleLabel("Camera", Constants.Camera, CameraBasePage);
 			custButton = new CustomButton();
 			liveCameraStream = new UIView();
 			takePhotoButton = new ImageButton();
@@ -183,7 +183,7 @@ namespace CustomRenderer.iOS
 				mainGrid.Children.Add(custButton, 0, 4);
 				Grid.SetColumnSpan(custButton, 5);
 
-				var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(CameraPageFactory));
+				var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(CameraPageFactory));
 
 				headerLabel.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
 				headerLabel.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;

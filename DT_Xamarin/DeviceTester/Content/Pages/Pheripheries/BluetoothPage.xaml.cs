@@ -26,8 +26,8 @@ namespace DeviceTester.Content.Pages.Pheripheries
             InitializeComponent();
 
             NavigationPage.SetHasBackButton(this, false);
-            var tmpComp = new ViewTittleLabel("Bluetooth", Constants.LoremTemp, this);
-            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(BluetoothPageFactory));
+            var tmpComp = new ViewTittleLabel("Bluetooth", Constants.Bluetooth, this);
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(BluetoothPageFactory));
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
             this.MainGrid.Children.Add(tmpComp, 0, 0);

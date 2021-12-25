@@ -5,32 +5,34 @@
     x:Class="DeviceTester.Content.Pages.SystemF.DeviceInfoPage"
     Style="{StaticResource WindowContainer}">
     <ContentPage.Content>
-            <Grid x:Name="MainGrid">
+        <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-                <Frame CornerRadius="10" Padding="10" BackgroundColor="DimGray" Opacity="0.8" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+
+            <AbsoluteLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                <Frame Style="{StaticResource OuterTextContainer}" AbsoluteLayout.LayoutBounds="0.5,0.1,0.7,0.4" AbsoluteLayout.LayoutFlags="All">
                     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
-                        <Label TextColor="White" x:Name="DeviceType" />
-                        <Label TextColor="White" x:Name="Idiom" />
-                        <Label TextColor="White" x:Name="Manufacturer"/>
-                        <Label TextColor="White" x:Name="Model" />
-                        <Label TextColor="White" x:Name="Name" />
-                        <Label TextColor="White" x:Name="Platform" />
-                        <Label TextColor="White" x:Name="OSVerion" />
+                        <Label Style="{StaticResource DescriptionLabelStyle}"  x:Name="DeviceType" />
+                        <Label Style="{StaticResource DescriptionLabelStyle}"  x:Name="Idiom" />
+                        <Label Style="{StaticResource DescriptionLabelStyle}"  x:Name="Manufacturer"/>
+                        <Label Style="{StaticResource DescriptionLabelStyle}"  x:Name="Model" />
+                        <Label Style="{StaticResource DescriptionLabelStyle}"  x:Name="Name" />
+                        <Label Style="{StaticResource DescriptionLabelStyle}"  x:Name="Platform" />
+                        <Label Style="{StaticResource DescriptionLabelStyle}"  x:Name="OSVerion" />
                     </StackLayout>
                 </Frame>
-                <Frame CornerRadius="10" Padding="10" BackgroundColor="DimGray" Opacity="0.8" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center">
+                <Frame Style="{StaticResource OuterTextContainer}"  AbsoluteLayout.LayoutBounds="0.5,0.7,0.7,0.25" AbsoluteLayout.LayoutFlags="All">
                     <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
-                        <Label TextColor="White" x:Name="BatteryLoad"/>
-                        <Label TextColor="White" x:Name="State" />
-                        <Label TextColor="White" x:Name="Source"/>
+                        <Label Style="{StaticResource DescriptionLabelStyle}" x:Name="BatteryLoad"/>
+                        <Label Style="{StaticResource DescriptionLabelStyle}" x:Name="State" />
+                        <Label Style="{StaticResource DescriptionLabelStyle}" x:Name="Source"/>
                     </StackLayout>
                 </Frame>
-            <Components:CustomButton x:Name="BackButton" Grid.Row="3"/>
-         </Grid>
+            </AbsoluteLayout>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

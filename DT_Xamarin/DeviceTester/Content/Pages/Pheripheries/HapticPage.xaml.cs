@@ -18,14 +18,15 @@ namespace DeviceTester.Content.Pages.Pheripheries
         private Animation _animation;
         public enum WorkMode { Haptic,Vibration }
         private bool _isReleased;
+
         public HapticPage()
         {
             InitializeComponent();
             
             NavigationPage.SetHasBackButton(this, false);
-            var tmpComp = new ViewTittleLabel("Haptics", Constants.LoremTemp, this);
+            var tmpComp = new ViewTittleLabel("Haptics", Constants.Haptic, this);
 
-            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(HapticPageFactory));
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(HapticPageFactory));
 
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
@@ -133,6 +134,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
             }
         }
     }
+
     public class HapticPageFactory : PageFactory
     {
         public override string getPageName() => "Haptics";
@@ -164,18 +166,12 @@ namespace DeviceTester.Content.Pages.Behaviors
         public static readonly BindableProperty CommandParameterProperty =
             BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(LongPressBehavior));
 
-        /// <summary>
-        /// Gets or sets the command parameter.
-        /// </summary>
         public object CommandParameter
         {
             get => GetValue(CommandParameterProperty);
             set => SetValue(CommandParameterProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets the command.
-        /// </summary>
         public ICommand Command
         {
             get => (ICommand)GetValue(CommandProperty);
@@ -209,9 +205,6 @@ namespace DeviceTester.Content.Pages.Behaviors
             button.Released -= Button_Released;
         }
 
-        /// <summary>
-        /// DeInitializes and disposes the timer.
-        /// </summary>
         private void DeInitializeTimer()
         {
             lock (_syncObject)
@@ -226,9 +219,6 @@ namespace DeviceTester.Content.Pages.Behaviors
             }
         }
 
-        /// <summary>
-        /// Initializes the timer.
-        /// </summary>
         private void InitializeTimer()
         {
             lock (_syncObject)

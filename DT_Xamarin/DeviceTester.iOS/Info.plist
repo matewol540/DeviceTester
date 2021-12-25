@@ -65,5 +65,33 @@
 	<array>
 		<string></string>
 	</array>
+		<key>CLIENT_ID</key>
+	<string>344795898474-uvk9belnvkp0824cgvd7di632occrssp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.344795898474-uvk9belnvkp0824cgvd7di632occrssp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDCHkjmCs81y40kcTMqGgfxDixf4w_Z99s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>344795898474</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.MWolski.app</string>
+	<key>PROJECT_ID</key>
+	<string>devicetester-8d683</string>
+	<key>STORAGE_BUCKET</key>
+	<string>devicetester-8d683.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:344795898474:ios:fa501ce9f80b16cd3b6013</string>
 </dict>
 </plist>

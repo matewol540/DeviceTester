@@ -18,9 +18,9 @@ namespace DeviceTester.Content.Pages.Additionals
         public SharingPage()
         {
             InitializeComponent();
-            var tmpComp = new ViewTittleLabel("Sharing", Constants.LoremTemp, this);
+            var tmpComp = new ViewTittleLabel("Sharing", Constants.Sharing, this);
 
-            var tempTuple = Constants.System.Find(x => x.Item1.GetType() == typeof(SharingPageFactory));
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(SharingPageFactory));
 
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;

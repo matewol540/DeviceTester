@@ -17,8 +17,8 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Entry x:Name="SearchBox" TextChanged="SearchBox_TextChanged" Grid.Row="0" Placeholder="Search.." ClearButtonVisibility="WhileEditing"/>
-                    <ScrollView x:Name="ScrollPage" Grid.Row="1">
+                    <Entry x:Name="SearchBox" TextChanged="SearchBox_TextChanged" Grid.Row="0" Placeholder="Search.." ClearButtonVisibility="WhileEditing" Style="{StaticResource BasicEntry}"/>
+                    <ScrollView x:Name="ScrollPage" Grid.Row="1" Scrolled="ScrollPage_Scrolled">
                         <Grid x:Name="FunctionsGrid" ColumnSpacing="20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>

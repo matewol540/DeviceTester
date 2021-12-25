@@ -43,8 +43,8 @@ namespace DeviceTester.Content.Pages.SystemF
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
-            var tmpComp = new ViewTittleLabel("Notification", Constants.LoremTemp, this);
-            var tempTuple = Constants.System.Find(x => x.Item1.GetType() == typeof(DeviceInfoPageFactory));
+            var tmpComp = new ViewTittleLabel("Notification", Constants.Notification, this);
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(DeviceInfoPageFactory));
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
             BackButton.LinearGradientBrush.GradientStops[0].Color = tempTuple.Item2;

@@ -19,15 +19,17 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <Frame Grid.Row="0" CornerRadius="10" BackgroundColor="Silver" Opacity="0.8" BorderColor="White">
+                    <Frame Grid.Row="0" Style="{StaticResource OuterTextContainer}">
                         <StackLayout>
-                            <Label x:Name="Auth_State" BindingContext="{x:Reference AuthPageObj}" Text="{Binding authState,StringFormat='Auth state: {0}'}"/>
-                            <Label x:Name="Avaible_Auth_Methods" BindingContext="{x:Reference AuthPageObj}" Text="{Binding avaible_Auth_Methods,StringFormat='Auth method: {0}'}"/>
-                            <Label x:Name="Auth_Result" BindingContext="{x:Reference AuthPageObj}" Text="{Binding authResult,StringFormat='Last authentification result: {0}'}"/>
+                            <Label Style="{StaticResource HeadingLabelStyle}" Text="Authentification Status"/>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
+                            <Label Style="{StaticResource ValueLabelStyle}" x:Name="Auth_State" BindingContext="{x:Reference AuthPageObj}" Text="{Binding authState,StringFormat='Auth state: {0}'}"/>
+                            <Label Style="{StaticResource ValueLabelStyle}" x:Name="Avaible_Auth_Methods" BindingContext="{x:Reference AuthPageObj}" Text="{Binding avaible_Auth_Methods,StringFormat='Auth method: {0}'}"/>
+                            <Label Style="{StaticResource ValueLabelStyle}" x:Name="Auth_Result" BindingContext="{x:Reference AuthPageObj}" Text="{Binding authResult,StringFormat='Last authentification result: {0}'}"/>
                         </StackLayout>
                     </Frame>
-                    <Frame Grid.Row="1" CornerRadius="25" BackgroundColor="Silver" Opacity="0.8" BorderColor="White">
-                        <Button x:Name="Auth" Clicked="Auth_Clicked" BindingContext="{x:Reference AuthPageObj}" IsEnabled="{Binding authEnabled}" Text="Authentificate" FontSize="Subtitle" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" TextColor="White"/>
+                    <Frame Grid.Row="1" Style="{StaticResource OuterTextContainer}"  >
+                        <Button x:Name="Auth" Style="{StaticResource BasicButton}" Clicked="Auth_Clicked" BindingContext="{x:Reference AuthPageObj}" IsEnabled="{Binding authEnabled}" Text="Authentificate" />
                     </Frame>
                 </Grid>
             </StackLayout>

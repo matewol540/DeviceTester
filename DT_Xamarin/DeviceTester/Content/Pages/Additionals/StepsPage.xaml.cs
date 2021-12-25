@@ -19,7 +19,7 @@ namespace DeviceTester.Content.Pages.Additionals
             NavigationPage.SetHasBackButton(this, false);
             LabelTittle = new ViewTittleLabel("Steps", Constants.LoremTemp, this);
 
-            var tempTuple = Constants.System.Find(x => x.Item1.GetType() == typeof(StepsPageFactory));
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(StepsPageFactory));
 
             LabelTittle.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             LabelTittle.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;

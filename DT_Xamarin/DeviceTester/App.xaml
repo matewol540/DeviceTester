@@ -16,6 +16,22 @@
             <Setter Property="BackgroundColor" Value="Black"/>
             <Setter Property="Padding" Value="{OnPlatform iOS={StaticResource iOSThickness}}"/>
         </Style>
+        <Style x:Key="OuterTextContainer" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BackgroundColor" Value="#4D5157"/>
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+        <Style x:Key="InnerTextContainer" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BackgroundColor" Value="#868C96"/>
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+        <Style x:Key="RoundingContainer" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="IsClippedToBounds" Value="true"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
 
         <!-- Grid Styles-->
         <Style x:Key="CoordsStyles" TargetType="Label">
@@ -34,7 +50,18 @@
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="TextColor" Value="Honeydew"/>
         </Style>
-        <!-- Description label-->
+        <Style x:Key="HeadingLabelStyle" TargetType="Label">
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Sans"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Honeydew"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
         <Style x:Key="DescriptionLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="Medium"/>
             <Setter Property="HorizontalTextAlignment" Value="Start"/>
@@ -42,17 +69,67 @@
             <Setter Property="FontFamily" Value="Sans"/>
             <Setter Property="TextColor" Value="Honeydew"/>
         </Style>
-
-        <!--Display Values label-->
         <Style x:Key="ValueLabelStyle" TargetType="Label">
             <Setter Property="VerticalOptions" Value="FillAndExpand"/>
             <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="17"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
             <Setter Property="FontFamily" Value="Sans"/>
             <Setter Property="TextColor" Value="Honeydew"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Opacity" Value="1"/>
         </Style>
+
+        <!--Custom patern-->
+        <Style x:Key="HorizontalLine" TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="2"/>
+            <Setter Property="Color" Value="Silver"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        </Style>
+
+        <!--Buttons-->
+        <Style x:Key="BasicButton" TargetType="Button">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontFamily" Value="Sans"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            <Setter Property="TextColor" Value="Honeydew"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
+
+        <!-- Editor -->
+        <Style x:Key="BasicEditor" TargetType="Editor">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Sans"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="TextColor" Value="Honeydew"/>
+            <Setter Property="BackgroundColor" Value="#868C96"/>
+        </Style>
+        <!-- Entry -->
+        <Style x:Key="BasicEntry" TargetType="Entry">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Sans"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="TextColor" Value="Honeydew"/>
+            <Setter Property="BackgroundColor" Value="#868C96"/>
+        </Style>
+        <!-- Picker -->
+        <Style x:Key="BasicPicker" TargetType="Picker">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Sans"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="TextColor" Value="Honeydew"/>
+            <Setter Property="BackgroundColor" Value="#868C96"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+        <!-- Checkbox -->
+        <Style x:Key="BasicCheckbox" TargetType="CheckBox">
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Color" Value="#2D3033" />
+        </Style>
+
     </Application.Resources>
 </Application>

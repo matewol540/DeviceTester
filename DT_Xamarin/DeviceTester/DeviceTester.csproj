@@ -28,6 +28,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.3.0.53" />
     <PackageReference Include="Plugin.Fingerprint" Version="2.1.4" />
     <PackageReference Include="Plugin.FirebasePushNotification" Version="3.3.10" />
+    <PackageReference Include="Plugin.CloudFirestore" Version="4.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -43,6 +44,7 @@
     <Folder Include="Resources\Fonts\" />
     <Folder Include="Resources\Images\" />
     <Folder Include="Content\CustomComponent\" />
+    <Folder Include="Resources\UsersData\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\Pages\Pheripheries\" />
@@ -103,6 +105,11 @@
     <None Remove="Resources\Images\Connection.png" />
     <None Remove="Resources\Images\Notification.png" />
     <None Remove="Plugin.FirebasePushNotification" />
+    <None Remove="FirebaseDatabase.net" />
+    <None Remove="Resources\Images\APIConnection.png" />
+    <None Remove="Resources\UsersData\" />
+    <None Remove="Resources\UsersData\InitialLoad.json" />
+    <None Remove="Plugin.CloudFirestore" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
@@ -128,5 +135,7 @@
     <EmbeddedResource Include="Resources\Images\Speaking.png" />
     <EmbeddedResource Include="Resources\Images\Connection.png" />
     <EmbeddedResource Include="Resources\Images\Notification.png" />
+    <EmbeddedResource Include="Resources\Images\APIConnection.png" />
+    <EmbeddedResource Include="Resources\UsersData\InitialLoad.json" />
   </ItemGroup>
 </Project>

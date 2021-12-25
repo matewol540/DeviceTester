@@ -20,8 +20,8 @@ namespace DeviceTester.Content.Pages
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
-            var tmpComp = new ViewTittleLabel("Gyroscope", Constants.LoremTemp,this);
-            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(GyroscopePageFactory));
+            var tmpComp = new ViewTittleLabel("Gyroscope", Constants.Gyroscope,this);
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(GyroscopePageFactory));
 
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;

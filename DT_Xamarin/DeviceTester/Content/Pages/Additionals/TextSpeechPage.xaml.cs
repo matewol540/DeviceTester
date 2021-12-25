@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Collections.ObjectModel;
 using DeviceTester.Content.Views;
 using DeviceTester.Interfaces;
@@ -19,9 +20,9 @@ namespace DeviceTester.Content.Pages.Additionals
         public TextSpeechPage()
         {
             InitializeComponent();
-            var tmpComp = new ViewTittleLabel("Text recognition", Constants.LoremTemp, this);
+            var tmpComp = new ViewTittleLabel("Text recognition", Constants.TextSpeech, this);
 
-            var tempTuple = Constants.System.Find(x => x.Item1.GetType() == typeof(TextSpeechPageFactory));
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(TextSpeechPageFactory));
 
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
@@ -36,7 +37,7 @@ namespace DeviceTester.Content.Pages.Additionals
             var tempList = await TextToSpeech.GetLocalesAsync();
             tempList.ForEach<Locale>(x => _localesColl.Add(new OwnLocale(x)));
             LocalePicker.ItemDisplayBinding = new Binding("Country");
-            LocalePicker.SelectedIndex = 0;
+            LocalePicker.SelectedItem = _localesColl.ToList().Find(x => x.Country.ToLower() == "en-gb");
         }
         public void ChangeDescriptionState(bool State)
         {
@@ -64,7 +65,10 @@ namespace DeviceTester.Content.Pages.Additionals
                 Pitch = (float?)Pitch.Value,
                 Locale = selectedLocal.locale
             };
-            await TextToSpeech.SpeakAsync(UserText.Text, SpeechOptions);
+            var tempRead = UserText.Text;
+            if (String.IsNullOrEmpty(UserText.Text))
+                tempRead = "Please write message to proper box";
+            await TextToSpeech.SpeakAsync(tempRead, SpeechOptions);
         }
     }
 

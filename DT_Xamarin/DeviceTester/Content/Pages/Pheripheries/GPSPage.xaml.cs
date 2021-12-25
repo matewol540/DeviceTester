@@ -42,9 +42,9 @@ namespace DeviceTester.Content.Pages.Pheripheries
             NavigationPage.SetHasBackButton(this, false);
 
 
-            var tmpComp = new ViewTittleLabel("GPS", Constants.LoremTemp,this);
+            var tmpComp = new ViewTittleLabel("GPS", Constants.GPS,this);
 
-            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(GPSPageFactory));
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(GPSPageFactory));
 
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;

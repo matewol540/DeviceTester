@@ -30,8 +30,8 @@ namespace DeviceTester.Content.Pages.Pheripheries
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
-            LabelTittle = new ViewTittleLabel("Accelerometer",Constants.LoremTemp,this);
-            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(AccelerometerFactory));
+            LabelTittle = new ViewTittleLabel("Accelerometer", Constants.Accelerometer, this);
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(AccelerometerFactory));
 
             LabelTittle.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             LabelTittle.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
@@ -88,7 +88,7 @@ namespace DeviceTester.Content.Pages.Pheripheries
             if (!AlertDisplayed && !Disabled)
             {
                 AlertDisplayed = true;
-                Disabled = await DisplayAlert("Important", "Detected shaking", "Disable alerts","Understood");
+                Disabled = await DisplayAlert("Important", "Detected shaking", "Disable alerts", "Understood");
                 AlertDisplayed = false;
             }
         }
@@ -129,14 +129,12 @@ namespace DeviceTester.Content.Pages.Pheripheries
                 coordY_min.Text = String.Format("Min y: {0:0.00}", data.Y);
             if (String.IsNullOrEmpty(coordZ_min.Text) || Double.Parse(coordZ_min.Text.Split(':')[1]) > data.Z)
                 coordZ_min.Text = String.Format("Min z: {0:0.00}", data.Z);
-
-             RotateObject(data);
+            RotateObject(data);
         }
 
         private void RotateObject(System.Numerics.Vector3 data)
         {
-            //if (IsRotationCompleted == null || IsRotationCompleted.IsCompleted)
-                _ = urhoApp?.RotateAsync(data);
+            _ = urhoApp?.RotateAsync(data);
         }
 
         public void ChangeDescriptionState(Boolean State)
