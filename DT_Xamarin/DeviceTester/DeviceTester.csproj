@@ -24,6 +24,11 @@
     <PackageReference Include="Plugin.SegmentedControl.Netstandard" Version="5.4.5" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Plugin.BluetoothLE" Version="6.3.0.19" />
+    <PackageReference Include="Plugin.BLE" Version="2.1.2" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.3.0.53" />
+    <PackageReference Include="Plugin.Fingerprint" Version="2.1.4" />
+    <PackageReference Include="Plugin.FirebasePushNotification" Version="3.3.10" />
+    <PackageReference Include="Plugin.CloudFirestore" Version="4.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -35,11 +40,11 @@
     <Folder Include="Content\Pages\Pheripheries\" />
     <Folder Include="Content\Pages\SystemF\" />
     <Folder Include="Content\Pages\Additionals\" />
-    <Folder Include="MarkupExtension\" />
     <Folder Include="Helper\" />
     <Folder Include="Resources\Fonts\" />
     <Folder Include="Resources\Images\" />
     <Folder Include="Content\CustomComponent\" />
+    <Folder Include="Resources\UsersData\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\Pages\Pheripheries\" />
@@ -48,7 +53,6 @@
     <None Remove="RedCorners" />
     <None Remove="RedCorners.Forms" />
     <None Remove="Newtonsoft.Json" />
-    <None Remove="MarkupExtension\" />
     <None Remove="Helper\" />
     <None Remove="Resources\Fonts\" />
     <None Remove="Resources\Images\" />
@@ -87,6 +91,25 @@
     <None Remove="Resources\Images\MissingFunctionIcon.png" />
     <None Remove="Xam.Plugin.Geolocator" />
     <None Remove="Plugin.BluetoothLE" />
+    <None Remove="Plugin.BLE" />
+    <None Remove="Syncfusion.Xamarin.SfListView" />
+    <None Remove="Plugin.Fingerprint" />
+    <None Remove="Resources\Images\Fingerprint.png" />
+    <None Remove="Resources\Images\Fingerprint2.png" />
+    <None Remove="Resources\Images\ApproveIcon.png" />
+    <None Remove="Resources\Images\DeniedIcon.png" />
+    <None Remove="Resources\Images\Close.png" />
+    <None Remove="Resources\Images\Information.png" />
+    <None Remove="Resources\Images\SharingIcon.png" />
+    <None Remove="Resources\Images\Speaking.png" />
+    <None Remove="Resources\Images\Connection.png" />
+    <None Remove="Resources\Images\Notification.png" />
+    <None Remove="Plugin.FirebasePushNotification" />
+    <None Remove="FirebaseDatabase.net" />
+    <None Remove="Resources\Images\APIConnection.png" />
+    <None Remove="Resources\UsersData\" />
+    <None Remove="Resources\UsersData\InitialLoad.json" />
+    <None Remove="Plugin.CloudFirestore" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\EncodeSansSC-VariableFont_wdth,wght.ttf" />
@@ -102,11 +125,17 @@
     <EmbeddedResource Include="Resources\Images\Settings.png" />
     <EmbeddedResource Include="Resources\Images\Steps.png" />
     <EmbeddedResource Include="Resources\Images\MissingFunctionIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Content\Pages\Pheripheries\SettingsListPage.xaml.cs">
-      <DependentUpon>SettingsListPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <EmbeddedResource Include="Resources\Images\Fingerprint.png" />
+    <EmbeddedResource Include="Resources\Images\Fingerprint2.png" />
+    <EmbeddedResource Include="Resources\Images\ApproveIcon.png" />
+    <EmbeddedResource Include="Resources\Images\DeniedIcon.png" />
+    <EmbeddedResource Include="Resources\Images\Close.png" />
+    <EmbeddedResource Include="Resources\Images\Information.png" />
+    <EmbeddedResource Include="Resources\Images\SharingIcon.png" />
+    <EmbeddedResource Include="Resources\Images\Speaking.png" />
+    <EmbeddedResource Include="Resources\Images\Connection.png" />
+    <EmbeddedResource Include="Resources\Images\Notification.png" />
+    <EmbeddedResource Include="Resources\Images\APIConnection.png" />
+    <EmbeddedResource Include="Resources\UsersData\InitialLoad.json" />
   </ItemGroup>
 </Project>

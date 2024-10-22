@@ -18,6 +18,14 @@ namespace DeviceTester.Content.Pages.Additionals
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
             LabelTittle = new ViewTittleLabel("Steps", Constants.LoremTemp, this);
+
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(StepsPageFactory));
+
+            LabelTittle.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
+            LabelTittle.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;
+            BackButton.LinearGradientBrush.GradientStops[0].Color = tempTuple.Item2;
+            BackButton.LinearGradientBrush.GradientStops[1].Color = tempTuple.Item3;
+
             this.MainGrid.Children.Add(LabelTittle, 0, 0);
         }
 

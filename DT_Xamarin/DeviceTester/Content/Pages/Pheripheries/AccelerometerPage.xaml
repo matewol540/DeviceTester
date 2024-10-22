@@ -10,95 +10,94 @@
     >
     <ContentPage.Content>
         <StackLayout x:Name="MainContainer">
-
-        <Grid x:Name="MainGrid">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="6*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="100"/>
-                    </Grid.RowDefinitions>
-                    <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <urho:UrhoSurface x:Name="RotationModelSurface" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="300" WidthRequest="300"/>
-                    </StackLayout>
-                    <Grid Grid.Row="2">
+            <Grid x:Name="MainGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <urho:UrhoSurface x:Name="RotationModelSurface" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="300" WidthRequest="300"/>
+                </StackLayout>
+                <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Frame Grid.Column="0">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Track X" FontSize="Small"/>
-                            <CheckBox x:Name="Track_X"/>
+                    <Frame Grid.Column="0" Style="{StaticResource InnerTextContainer}" Padding="5">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="Track X" Style="{StaticResource ValueLabelStyle}"/>
+                            <CheckBox x:Name="Track_X" Style="{StaticResource BasicCheckbox}"/>
                         </StackLayout>
                     </Frame>
-                    <Frame Grid.Column="1">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Track Y" FontSize="Small"/>
-                            <CheckBox x:Name="Track_Y"/>
+                    <Frame Grid.Column="1" Style="{StaticResource InnerTextContainer}" Padding="5">
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                            <Label Text="Track Y" Style="{StaticResource ValueLabelStyle}"/>
+                            <CheckBox x:Name="Track_Y" Style="{StaticResource BasicCheckbox}"/>
                         </StackLayout>
                     </Frame>
-                    <Frame Grid.Column="2">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Track Z" FontSize="Small"/>
-                            <CheckBox x:Name="Track_Z"/>
+                    <Frame Grid.Column="2" Style="{StaticResource InnerTextContainer}" Padding="5">
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                            <Label Text="Track Z" Style="{StaticResource ValueLabelStyle}"/>
+                            <CheckBox x:Name="Track_Z" Style="{StaticResource BasicCheckbox}"/>
                         </StackLayout>
                     </Frame>
                 </Grid>
-                    <Picker Grid.Row="3" x:Name="SpeedPicker" SelectedIndexChanged="SpeedPicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
-                    <Grid Grid.Row="4">
-                        <Grid.RowDefinitions>
+                <Picker Grid.Row="1" x:Name="SpeedPicker" Style="{StaticResource BasicPicker} " SelectedIndexChanged="SpeedPicker_SelectedIndexChanged"/>
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label x:Name="coordX"
+                    <Label x:Name="coordX"
                             Grid.Column="0"
                             Grid.Row="0"
                             Style="{StaticResource CoordsStyles}"/>
-                        <Label x:Name="coordY"
+                    <Label x:Name="coordY"
                             Grid.Column="1"
                             Grid.Row="0"
                             Style="{StaticResource CoordsStyles}"/>
-                        <Label x:Name="coordZ"
+                    <Label x:Name="coordZ"
                             Grid.Column="2"
                             Grid.Row="0"
                             Style="{StaticResource CoordsStyles}"/>
-                        <Label x:Name="coordX_max"
+                    <Label x:Name="coordX_max"
                             Grid.Column="0"
                             Grid.Row="1"
                             Style="{StaticResource CoordsStyles}"/>
-                        <Label x:Name="coordY_max"
+                    <Label x:Name="coordY_max"
                             Grid.Column="1"
                             Grid.Row="1"
                             Style="{StaticResource CoordsStyles}"/>
-                        <Label x:Name="coordZ_max"
+                    <Label x:Name="coordZ_max"
                             Grid.Column="2"
                             Grid.Row="1"
                             Style="{StaticResource CoordsStyles}"/>
-                        <Label x:Name="coordX_min"
+                    <Label x:Name="coordX_min"
                             Grid.Column="0"
                             Grid.Row="2"
                             Style="{StaticResource CoordsStyles}"/>
-                        <Label x:Name="coordY_min"
+                    <Label x:Name="coordY_min"
                             Grid.Column="1"
                             Grid.Row="2"
                             Style="{StaticResource CoordsStyles}"/>
-                        <Label x:Name="coordZ_min"
+                    <Label x:Name="coordZ_min"
                             Grid.Column="2"
                             Grid.Row="2"
                             Style="{StaticResource CoordsStyles}"/>
-                    </Grid>
-                    <Components:CustomButton x:Name="BackButton" Grid.Row="5"/>
                 </Grid>
+                <Components:CustomButton x:Name="BackButton" Grid.Row="5"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

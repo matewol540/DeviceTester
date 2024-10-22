@@ -11,39 +11,39 @@
                 <Grid x:Name="MainGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
-                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="60"/>
                         <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
-                    <Views:GyroscopeView x:Name="gyroView" Grid.Row="1"/>
-                    <Grid Grid.Row="2">
+                    <Picker Grid.Row="1" Style="{StaticResource BasicPicker} " x:Name="SpeedPicker" SelectedIndexChanged="SpeedPicker_SelectedIndexChanged"/>
+                    <Views:GyroscopeView x:Name="gyroView" Grid.Row="2"/>
+                    <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Frame Grid.Column="0">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Track X" FontSize="Small"/>
-                            <CheckBox x:Name="Track_X"/>
+                    <Frame Grid.Column="0" Style="{StaticResource InnerTextContainer}" Padding="5">
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand"> 
+                            <Label Text="Track X" Style="{StaticResource ValueLabelStyle}"/>
+                            <CheckBox x:Name="Track_X" Style="{StaticResource BasicCheckbox}"/>
                         </StackLayout>
                     </Frame>
-                    <Frame Grid.Column="1">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Track Y" FontSize="Small"/>
-                            <CheckBox x:Name="Track_Y"/>
+                    <Frame Grid.Column="1" Style="{StaticResource InnerTextContainer}" Padding="5">
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                            <Label Text="Track Y" Style="{StaticResource ValueLabelStyle}"/>
+                            <CheckBox x:Name="Track_Y" Style="{StaticResource BasicCheckbox}"/>
                         </StackLayout>
                     </Frame>
-                    <Frame Grid.Column="2">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Track Z" FontSize="Small"/>
-                            <CheckBox x:Name="Track_Z"/>
+                    <Frame Grid.Column="2" Style="{StaticResource InnerTextContainer}" Padding="5">
+                        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                            <Label Text="Track Z" Style="{StaticResource ValueLabelStyle}"/>
+                            <CheckBox x:Name="Track_Z" Style="{StaticResource BasicCheckbox}"/>
                         </StackLayout>
                     </Frame>
                 </Grid>
-                    <Picker Grid.Row="3" x:Name="SpeedPicker" SelectedIndexChanged="SpeedPicker_SelectedIndexChanged" HorizontalTextAlignment="Center"/>
                     <Grid Grid.Row="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

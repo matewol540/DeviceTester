@@ -56,9 +56,9 @@ namespace DeviceTester.Content.Pages.Pheripheries
             CurrentValue = 0;
 
             NavigationPage.SetHasBackButton(this, false);
-            var tmpComp = new ViewTittleLabel("Barometer", Constants.LoremTemp, this);
+            var tmpComp = new ViewTittleLabel("Barometer", Constants.Barometer, this);
 
-            var tempTuple = Constants.Pheriphery.Find(x => x.Item1.GetType() == typeof(BarometerPageFactory));
+            var tempTuple = Constants.Functions.Find(x => x.Item1.GetType() == typeof(BarometerPageFactory));
 
             tmpComp.LineraGradientBck.GradientStops[0].Color = tempTuple.Item2;
             tmpComp.LineraGradientBck.GradientStops[1].Color = tempTuple.Item3;

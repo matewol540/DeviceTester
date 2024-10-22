@@ -2,8 +2,32 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="DeviceTester.Content.Pages.Pheripheries.HapticPage">
+    xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
+    xmlns:behaviors="clr-namespace:DeviceTester.Content.Pages.Behaviors"
+    xmlns:control="clr-namespace:Plugin.Segmented.Control;assembly=Plugin.Segmented"
+    x:Class="DeviceTester.Content.Pages.Pheripheries.HapticPage"
+    Style="{StaticResource WindowContainer}">
     <ContentPage.Content>
-        
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+                                                        
+            <Frame Grid.Row="2" Style="{StaticResource OuterTextContainer}" Padding="10" Margin="30,0,30,0" VerticalOptions="Center" >
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" > 
+                    <control:SegmentedControl  x:Name="ChangeMode" HorizontalOptions="CenterAndExpand" />
+                    <ImageButton x:Name="Haptic_Image" Aspect="AspectFit"  Pressed="Haptic_Image_Pressed" Released="Haptic_Image_Released" HeightRequest="150">
+                        <ImageButton.Behaviors>
+                            <behaviors:LongPressBehavior LongPressed="LongPressBehavior_LongPressed" Clicked="ButtonClicked_Behavior"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                </StackLayout>
+            </Frame>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="4"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -1,9 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="DeviceTester.Content.Pages.Pheripheries.MagnetometerPage">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
+    x:Class="DeviceTester.Content.Pages.Pheripheries.MagnetometerPage"
+    Style="{StaticResource WindowContainer}">
     <ContentPage.Content>
-        
+         <Grid x:Name="MainGrid" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <AbsoluteLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Ellipse Fill="Gray" WidthRequest="200" HeightRequest="200"  HorizontalOptions="Start"  AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                <Label x:Name="Value" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,130,130" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="FloralWhite" FontSize="Body" FontFamily="Sans"/>
+            </AbsoluteLayout>
+            <Picker Grid.Row="2" x:Name="SpeedPicker" SelectedIndexChanged="SpeedPicker_SelectedIndexChanged" Style="{StaticResource BasicPicker}" Margin="10,0,10,0"/>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="4"/>
+         </Grid>
     </ContentPage.Content>
 </ContentPage>

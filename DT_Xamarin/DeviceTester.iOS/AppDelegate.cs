@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
@@ -9,6 +8,9 @@ using Xamarin.Forms.Platform.iOS;
 using Plugin.Segmented.Control.iOS;
 using AVFoundation;
 using DeviceTester.Content.Views;
+using DeviceTester.Interfaces;
+using UserNotifications;
+using Firebase.Analytics;
 
 namespace DeviceTester.iOS
 {
@@ -37,9 +39,14 @@ namespace DeviceTester.iOS
 #endif
             global::Xamarin.Forms.Forms.Init();
             SegmentedControlRenderer.Initialize();
+            //var type = typeof(Analytics);
+            Firebase.Core.App.Configure();
             Xamarin.FormsMaps.Init();
             Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
+            UNUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
             LoadApplication(new App());
+            DependencyService.Register<INotification, Notification>();
+            DependencyService.Register<IPhotoPicker, PhotoPicker>();
             app.StatusBarStyle = UIStatusBarStyle.DarkContent;
             return base.FinishedLaunching(app, options);
         }

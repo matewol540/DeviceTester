@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DeviceTester.Content.Pages.Additionals.SharingPage"
+    xmlns:Components = "clr-namespace:DeviceTester.Content.CustomComponent"
+    x:Name="SharingObj"
+    Style="{StaticResource WindowContainer}">
+
+    <ContentPage.Content>
+         <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                 <RowDefinition Height="50"/>
+                 <RowDefinition Height="40"/>
+                 <RowDefinition Height="*"/>
+                 <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand"   Padding="10">
+                 <Button x:Name="SelectImage" Style="{StaticResource BasicButton}"
+                         Clicked="SelectImage_Clicked"  Text="Select Image" HorizontalOptions="StartAndExpand" />
+                 <Button x:Name="ShareImage" Style="{StaticResource BasicButton}"
+                         Clicked="ShareImage_Clicked" Text="Share file" HorizontalOptions="EndAndExpand"/>
+             </StackLayout>
+             <Frame Grid.Row="2" Style="{x:StaticResource RoundingContainer}">
+                <Image x:Name="SelectedImage" />
+             </Frame>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="3"/>
+         </Grid>
+    </ContentPage.Content>
+</ContentPage>

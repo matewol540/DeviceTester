@@ -8,12 +8,14 @@ namespace DeviceTester.Content.Views
 {
     public class MyView : ContentView2
     {
-        private PageFactory page;
-        public MyView(PageFactory childPage,Color StartColor,Color StopColor,String ImageSourceString) => this.SetScene(childPage,StartColor,StopColor,ImageSourceString);
+        public PageFactory page;
+        public int DefaultHeight;
 
-        private void SetScene(PageFactory childPage, Color StartColor, Color StopColor, string ImageSourceString)
+        public MyView(PageFactory childPage,Color StartColor,Color StopColor,String ImageSourceString,int DefaultHeight) => this.SetScene(childPage,StartColor,StopColor,ImageSourceString, DefaultHeight);
+
+        private void SetScene(PageFactory childPage, Color StartColor, Color StopColor, string ImageSourceString,int DefaultHeight)
         {
-
+            this.DefaultHeight = DefaultHeight;
             var tempGrid = new Grid();
             tempGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1,GridUnitType.Star) });
             tempGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(34, GridUnitType.Absolute) });
@@ -48,10 +50,9 @@ namespace DeviceTester.Content.Views
             try
             {
                 Console.Out.WriteLine($"Function enter: {nameof(getInsideImage)} with arg {ImageSourceString}");
-                var tmp_ImageSource = ImageSourceString == "" ? ImageSource.FromResource("DeviceTester.Resources.Images.Satellite.png") : ImageSource.FromResource(ImageSourceString);
+                var tmp_ImageSource = ImageSourceString == "" ? ImageSource.FromResource("DeviceTester.Resources.Images.MissingFunctionIcon.png") : ImageSource.FromResource(ImageSourceString);
                 var InsideImage = new Image
                 {
-                    //Source = ImageSource.FromResource()
                     Source = tmp_ImageSource
                 };
 
@@ -68,7 +69,6 @@ namespace DeviceTester.Content.Views
             }
             return null;
         }
-
 
         private async void OpenView(object sender,EventArgs e)
         {

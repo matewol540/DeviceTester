@@ -2,8 +2,53 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="DeviceTester.Content.Pages.SystemF.NotificationPage">
+    xmlns:Components="clr-namespace:DeviceTester.Content.CustomComponent"
+    x:Class="DeviceTester.Content.Pages.SystemF.NotificationPage"
+    Style="{StaticResource WindowContainer}"
+    x:Name="NotificationObject">
     <ContentPage.Content>
-        
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="1" Margin="0,35,0,0">
+                <Frame Style="{StaticResource OuterTextContainer}" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Style="{StaticResource DescriptionLabelStyle}" Text="Tittle"  Grid.Column="0" Grid.Row="0"   />
+                        <Label Style="{StaticResource DescriptionLabelStyle}" Text="Message" Grid.Column="0" Grid.Row="1"  />
+                        <Label  Style="{StaticResource DescriptionLabelStyle}" BindingContext="{x:Reference DelaySlider}" Text="{Binding Value,StringFormat='Delay: [{0}s]'}"   Grid.Column="0" Grid.Row="2" />
+                        <Frame Style="{StaticResource RoundingContainer}" Grid.Column="1" Grid.Row="0">
+                            <Entry Style="{StaticResource BasicEntry}" BindingContext="{x:Reference NotificationObject}" Text="{Binding Tittle}" Placeholder="..." />
+                        </Frame>
+                        <Frame Style="{StaticResource RoundingContainer}" Grid.Column="1" Grid.Row="1">
+                            <Editor Style="{StaticResource BasicEditor}"  BindingContext="{x:Reference NotificationObject}" Text="{Binding Message}" Placeholder="..."  />
+                        </Frame>
+                        <Slider x:Name="DelaySlider" Grid.Column="1" Grid.Row="2" BindingContext="{x:Reference NotificationObject}" Value="{Binding Delay}" Maximum="30" Minimum="0"/>
+                        <Button Style="{StaticResource BasicButton}" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="0" Clicked="OnSendClick" Text="Send Notification" />
+                    </Grid>
+                </Frame>
+                <Frame CornerRadius="10" BackgroundColor="Silver" Opacity="0.8" >
+                    <StackLayout>
+                        <Label Style="{StaticResource HeadingLabelStyle}" Text="Received Notifications" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
+                        <ScrollView>
+                            <StackLayout x:Name="stackLayout" Background="Silver" Opacity="0.7"/>
+                        </ScrollView>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <Components:CustomButton x:Name="BackButton" Grid.Row="2"/>
+         </Grid>
     </ContentPage.Content>
 </ContentPage>
